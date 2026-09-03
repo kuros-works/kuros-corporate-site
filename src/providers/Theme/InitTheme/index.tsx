@@ -1,12 +1,13 @@
-import Script from 'next/script'
 import React from 'react'
 
 import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types'
 
 export const InitTheme: React.FC = () => {
   return (
-    // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
-    <Script
+    // Plain inline script (not next/script). Rendered verbatim into the SSR
+    // <head> and executed synchronously before first paint, so `data-theme` is
+    // always set before the page becomes visible — in dev and in production.
+    <script
       dangerouslySetInnerHTML={{
         __html: `
   (function () {
@@ -44,7 +45,6 @@ export const InitTheme: React.FC = () => {
   `,
       }}
       id="theme-script"
-      strategy="beforeInteractive"
     />
   )
 }
