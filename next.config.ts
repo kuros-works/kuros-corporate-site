@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
           protocol: url.protocol.replace(':', '') as 'http' | 'https',
         }
       }),
+      // Vercel Blob storage (@payloadcms/storage-vercel-blob) serves media from
+      // https://<store-id>.public.blob.vercel-storage.com/<filename>
+      {
+        hostname: '*.public.blob.vercel-storage.com',
+        protocol: 'https',
+      },
     ],
   },
   webpack: (webpackConfig) => {

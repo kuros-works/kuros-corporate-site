@@ -1,6 +1,7 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -20,6 +21,17 @@ const generateURL: GenerateURL<Page | Work> = ({ doc }) => {
 }
 
 export const plugins: Plugin[] = [
+  // Stores uploaded media in Vercel Blob storage instead of the local filesystem.
+  // Vercel's serverless functions have an ephemeral, read-only filesystem, so
+  // local disk storage (public/media) does not survive across deploys/invocations.
+  // If BLOB_READ_WRITE_TOKEN is unset (e.g. local dev), this plugin disables itself
+  // and Media falls back to local disk storage (see Media.ts `upload.staticDir`).
+  vercelBlobStorage({
+    collections: {
+      media: true,
+    },
+    token: process.env.BLOB_READ_WRITE_TOKEN,
+  }),
   redirectsPlugin({
     collections: ['pages', 'works'],
     overrides: {
