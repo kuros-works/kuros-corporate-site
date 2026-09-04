@@ -5,7 +5,7 @@ import React, { createContext, useCallback, use, useEffect, useState } from 'rea
 import type { Theme, ThemeContextType } from './types'
 
 import canUseDOM from '@/utilities/canUseDOM'
-import { defaultTheme, getImplicitPreference, themeLocalStorageKey } from './shared'
+import { getImplicitPreference, themeLocalStorageKey } from './shared'
 import { themeIsValid } from './types'
 
 const initialContext: ThemeContextType = {
@@ -34,21 +34,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   useEffect(() => {
-    let themeToSet: Theme = defaultTheme
-    const preference = window.localStorage.getItem(themeLocalStorageKey)
-
-    if (themeIsValid(preference)) {
-      themeToSet = preference
-    } else {
-      const implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
+    // InitTheme (sync <head> script) already set the correct value pre-paint.
+    // Just mirror it into React state — never re-derive or rewrite it here,
+    // or we clobber InitTheme's result after hydration.
+    const current = document.documentElement.getAttribute('data-theme')
+    if (themeIsValid(current)) {
+      setThemeState(current)
     }
-
-    document.documentElement.setAttribute('data-theme', themeToSet)
-    setThemeState(themeToSet)
   }, [])
 
   return <ThemeContext value={{ setTheme, theme }}>{children}</ThemeContext>
