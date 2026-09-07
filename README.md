@@ -75,7 +75,9 @@ pnpm dev
 
 本プロジェクトの構築過程で得られた技術的な知見は、記事として順次公開予定です。
 
-- Coming soon
+- 技術選定の基準はひとつです。「Gitでバージョン管理ができるか」。それだけです。
+  - Qiita: https://qiita.com/kuros-works/items/b792be1d4130d0dd903c
+  - Zenn: https://zenn.dev/kuros_works/articles/33df3fcae05388
 
 ---
 
