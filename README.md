@@ -78,6 +78,9 @@ pnpm dev
 - 技術選定の基準はひとつです。「Gitでバージョン管理ができるか」。それだけです。
   - Qiita: https://qiita.com/kuros-works/items/b792be1d4130d0dd903c
   - Zenn: https://zenn.dev/kuros_works/articles/33df3fcae05388
+- Payload CMSを使う時、ほとんどの人が遭遇する難所の回避ポイント
+  - Qiita: https://qiita.com/kuros-works/items/228e3096e3ed09222cc7
+  - Zenn: https://zenn.dev/kuros_works/articles/8b4c2b018ccda4
 
 ---
 
