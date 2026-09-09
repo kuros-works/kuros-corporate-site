@@ -9,6 +9,7 @@ import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/
 
 import { Page, Work } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { forwardSubmissionToN8n } from './forwardSubmissionToN8n'
 
 const generateTitle: GenerateTitle<Page | Work> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Kuro's Works` : `Kuro's Works`
@@ -61,6 +62,12 @@ export const plugins: Plugin[] = [
   formBuilderPlugin({
     fields: {
       payment: false,
+    },
+    formSubmissionOverrides: {
+      hooks: {
+        // Appended after the plugin's own `sendEmail` afterChange hook.
+        afterChange: [forwardSubmissionToN8n],
+      },
     },
     formOverrides: {
       fields: ({ defaultFields }) => {
