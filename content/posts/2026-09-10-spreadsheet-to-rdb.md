@@ -1,12 +1,12 @@
 ---
-title: スプレッドシートで壊れた設計を、リレーションで組み直した話
-date: 2026-09-10
-summary: 業務システムの技術選定基準は、コーポレートサイトと同じでした。
+title: "スプレッドシートで壊れた設計を、リレーションで組み直した話"
+date: "2026-09-10"
+summary: "業務システムの技術選定基準は、コーポレートサイトと同じでした。"
 externalLinks:
-  - platform: Qiita
-    url: https://qiita.com/kuros-works/items/f5c7358111fe4784ed77
-  - platform: Zenn
-    url: https://zenn.dev/kuros_works/articles/d83ef4575dcb62
+  - platform: "Qiita"
+    url: "https://qiita.com/kuros-works/items/f5c7358111fe4784ed77"
+  - platform: "Zenn"
+    url: "https://zenn.dev/kuros_works/articles/d83ef4575dcb62"
 ---
 
 受注管理システムを、個人開発・2ヶ月で構築しました。
