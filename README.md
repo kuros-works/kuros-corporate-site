@@ -81,6 +81,9 @@ pnpm dev
 - Payload CMSを使う時、ほとんどの人が遭遇する難所の回避ポイント
   - Qiita: https://qiita.com/kuros-works/items/228e3096e3ed09222cc7
   - Zenn: https://zenn.dev/kuros_works/articles/8b4c2b018ccda4
+  - Payload CMS 拡張ログ #1 — SMTPを使わず、n8n × Slackで通知を一元管理する
+  - Qiita: https://qiita.com/kuros-works/items/1ac744267bf4ca7827f3
+  - Zenn: https://zenn.dev/kuros_works/articles/7cafbd6b9b35ea
 
 ---
 
