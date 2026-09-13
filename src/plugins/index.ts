@@ -64,6 +64,29 @@ export const plugins: Plugin[] = [
       payment: false,
     },
     formSubmissionOverrides: {
+      // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
+      fields: ({ defaultFields }) => {
+        return defaultFields.map((field) => {
+          if ('name' in field && field.name === 'submissionData' && field.type === 'array') {
+            return {
+              ...field,
+              fields: field.fields.map((subField) => {
+                if ('name' in subField && (subField.name === 'field' || subField.name === 'value')) {
+                  return {
+                    ...subField,
+                    admin: {
+                      ...subField.admin,
+                      className: 'form-submission-value',
+                    },
+                  }
+                }
+                return subField
+              }),
+            }
+          }
+          return field
+        })
+      },
       hooks: {
         // Appended after the plugin's own `sendEmail` afterChange hook.
         afterChange: [forwardSubmissionToN8n],

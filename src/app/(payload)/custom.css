@@ -1,0 +1,8 @@
+/* Form Submissions: the collection is create/read-only (no update access), so Payload
+   renders every field as a disabled input and grays out the text via
+   `color: var(--theme-elevation-400)`. Darken just the field/value pairs so past
+   submissions stay legible in the admin list. */
+.form-submission-value input:disabled,
+.form-submission-value textarea:disabled {
+  color: #1a1a1a;
+}
