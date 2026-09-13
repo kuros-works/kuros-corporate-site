@@ -1,21 +1,37 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
 /**
- * Forwards each new form submission to an external n8n webhook.
+ * Forwards each new form submission to a form-specific external webhook (n8n).
  *
  * Runs after the submission row is already persisted, so a webhook failure is
  * logged and swallowed — it must never turn into a 500 for the visitor. The
  * submission is always retrievable in the admin panel regardless.
  *
+ * Each form is routed to its own webhook URL via the table below. A form
+ * whose ID has no entry (or whose entry's URL env var is unset) is a no-op —
+ * nothing is sent for it.
+ *
  * Config via env:
- *   N8N_WEBHOOK_URL     - required; if unset the hook is a no-op
- *   N8N_WEBHOOK_SECRET  - optional; sent as the `X-Webhook-Secret` header for
- *                         the n8n Webhook node's Header Auth check
+ *   CONTACT_FORM_ID              - "forms" collection ID of the contact form
+ *   N8N_WEBHOOK_URL_CONTACT_FORM - webhook URL for the contact form
+ *   N8N_WEBHOOK_SECRET           - optional; sent as `X-Webhook-Secret` for
+ *                                  every webhook below (n8n Header Auth check)
  */
+
+// Add one entry per form as new notification destinations are needed.
+const FORM_WEBHOOKS: { formID?: string; url?: string }[] = [
+  { formID: process.env.CONTACT_FORM_ID, url: process.env.N8N_WEBHOOK_URL_CONTACT_FORM },
+]
+
+const getWebhookUrlForForm = (formID: string | number): string | undefined =>
+  FORM_WEBHOOKS.find((entry) => entry.formID && entry.formID === String(formID))?.url
+
 export const forwardSubmissionToN8n: CollectionAfterChangeHook = async ({ doc, operation, req }) => {
   if (operation !== 'create') return doc
 
-  const url = process.env.N8N_WEBHOOK_URL
+  const formID = typeof doc.form === 'object' ? doc.form?.id : doc.form
+  const url = formID != null ? getWebhookUrlForForm(formID) : undefined
+
   if (!url) return doc
 
   // submissionData: [{ field, value }] -> { field: value }
@@ -34,7 +50,7 @@ export const forwardSubmissionToN8n: CollectionAfterChangeHook = async ({ doc, o
       },
       body: JSON.stringify({
         submissionId: doc.id,
-        formId: typeof doc.form === 'object' ? doc.form?.id : doc.form,
+        formId: formID,
         createdAt: doc.createdAt,
         values,
       }),
