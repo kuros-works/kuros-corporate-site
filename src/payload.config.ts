@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Works } from './collections/Works'
 import { Footer } from './Footer/config'
@@ -78,6 +79,7 @@ export default buildConfig({
       ],
     },
     Pages,
+    Posts,
     Works,
     Media,
     Users,
