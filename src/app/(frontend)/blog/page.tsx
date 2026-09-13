@@ -1,16 +1,33 @@
 import type { Metadata } from 'next/types'
 
+import configPromise from '@payload-config'
 import Link from 'next/link'
+import { getPayload } from 'payload'
 import React from 'react'
 
-import { getAllPosts } from '@/utilities/posts'
+import { formatPostDate } from '@/utilities/formatPostDate'
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
+export const revalidate = 600
 
-// Posts are read from `content/posts/*.md` at build time (see src/utilities/posts.ts).
-export default function Page() {
-  const posts = getAllPosts()
+// Posts are fetched from the `posts` collection via Payload's Local API.
+export default async function Page() {
+  const payload = await getPayload({ config: configPromise })
+
+  const { docs: posts } = await payload.find({
+    collection: 'posts',
+    depth: 0,
+    limit: 100,
+    overrideAccess: false,
+    sort: '-publishedDate',
+    select: {
+      title: true,
+      slug: true,
+      excerpt: true,
+      publishedDate: true,
+    },
+  })
 
   return (
     <div className="pt-24 pb-24">
@@ -33,12 +50,14 @@ export default function Page() {
               <div className="col-span-4 lg:col-span-6" key={post.slug}>
                 <article className="h-full border border-border rounded-lg overflow-hidden bg-card transition-colors hover:bg-accent">
                   <Link className="block p-6 no-underline" href={`/blog/${post.slug}`}>
-                    <time className="text-sm text-muted-foreground" dateTime={post.date}>
-                      {post.date.replaceAll('-', '.')}
-                    </time>
+                    {post.publishedDate && (
+                      <time className="text-sm text-muted-foreground" dateTime={post.publishedDate}>
+                        {formatPostDate(post.publishedDate)}
+                      </time>
+                    )}
                     <h3 className="mt-2 text-lg font-medium">{post.title}</h3>
-                    {post.summary && (
-                      <p className="mt-2 text-sm text-muted-foreground">{post.summary}</p>
+                    {post.excerpt && (
+                      <p className="mt-2 text-sm text-muted-foreground">{post.excerpt}</p>
                     )}
                   </Link>
                 </article>

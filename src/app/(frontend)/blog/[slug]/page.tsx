@@ -1,23 +1,16 @@
 import type { Metadata } from 'next/types'
 
-import Link from 'next/link'
+import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
-import React from 'react'
-import ReactMarkdown from 'react-markdown'
+import { getPayload } from 'payload'
+import React, { cache } from 'react'
 
-import { Button } from '@/components/ui/button'
-import { getAllPosts, getPostBySlug } from '@/utilities/posts'
+import RichText from '@/components/RichText'
+import { formatPostDate } from '@/utilities/formatPostDate'
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
-
-const PLATFORM_LABELS: Record<string, string> = {
-  qiita: 'Qiita',
-  zenn: 'Zenn',
-}
-
-const platformLabel = (platform: string): string =>
-  PLATFORM_LABELS[platform] ?? platform.charAt(0).toUpperCase() + platform.slice(1)
+export const revalidate = 600
 
 type Args = {
   params: Promise<{
@@ -25,19 +18,48 @@ type Args = {
   }>
 }
 
-export function generateStaticParams() {
-  return getAllPosts().map(({ slug }) => ({ slug }))
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise })
+  const { docs } = await payload.find({
+    collection: 'posts',
+    depth: 0,
+    limit: 1000,
+    overrideAccess: false,
+    pagination: false,
+    select: {
+      slug: true,
+    },
+  })
+
+  return docs.map(({ slug }) => ({ slug }))
 }
+
+const queryPostBySlug = cache(async (slug: string) => {
+  const payload = await getPayload({ config: configPromise })
+  const { docs } = await payload.find({
+    collection: 'posts',
+    depth: 0,
+    limit: 1,
+    overrideAccess: false,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+
+  return docs[0] ?? null
+})
 
 export default async function Post({ params: paramsPromise }: Args) {
   const { slug } = await paramsPromise
-  const post = getPostBySlug(slug)
+  const post = await queryPostBySlug(slug)
 
   if (!post) {
     notFound()
   }
 
-  const { title, date, content, externalLinks } = post
+  const { title, publishedDate, content } = post
 
   return (
     <article className="pt-24 pb-24">
@@ -45,26 +67,14 @@ export default async function Post({ params: paramsPromise }: Args) {
       <div className="container max-w-3xl">
         <div className="prose dark:prose-invert max-w-none">
           <h1 className="mb-2">{title}</h1>
-          <time className="text-sm text-muted-foreground" dateTime={date}>
-            {date.replaceAll('-', '.')}
-          </time>
+          {publishedDate && (
+            <time className="text-sm text-muted-foreground" dateTime={publishedDate}>
+              {formatPostDate(publishedDate)}
+            </time>
+          )}
         </div>
 
-        <div className="prose dark:prose-invert max-w-none mt-8">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </div>
-
-        {externalLinks && externalLinks.length > 0 && (
-          <div className="mt-8 flex flex-wrap gap-3">
-            {externalLinks.map((link) => (
-              <Button asChild key={link.url} variant="outline">
-                <Link href={link.url} rel="noopener noreferrer" target="_blank">
-                  {platformLabel(link.platform)}で読む
-                </Link>
-              </Button>
-            ))}
-          </div>
-        )}
+        {content && <RichText className="mt-8" data={content} enableGutter={false} />}
       </div>
     </article>
   )
@@ -72,7 +82,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug } = await paramsPromise
-  const post = getPostBySlug(slug)
+  const post = await queryPostBySlug(slug)
 
   if (!post) {
     return {}
@@ -80,6 +90,6 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
   return {
     title: `${post.title} | Kuro's Works`,
-    description: post.summary || undefined,
+    description: post.excerpt || undefined,
   }
 }
