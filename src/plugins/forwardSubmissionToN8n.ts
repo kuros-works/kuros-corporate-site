@@ -35,8 +35,11 @@ export const forwardSubmissionToN8n: CollectionAfterChangeHook = async ({ doc, o
   if (!url) return doc
 
   // submissionData: [{ field, value }] -> { field: value }
+  // field is trimmed defensively: a stray leading/trailing space in a form
+  // field's Name (admin panel typo) would otherwise silently break key
+  // lookups on the receiving end (e.g. n8n's `values?.name`).
   const values = Object.fromEntries(
-    (doc.submissionData ?? []).map((f: { field: string; value: unknown }) => [f.field, f.value]),
+    (doc.submissionData ?? []).map((f: { field: string; value: unknown }) => [f.field.trim(), f.value]),
   )
 
   try {
