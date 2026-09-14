@@ -84,6 +84,9 @@ pnpm dev
   - Payload CMS 拡張ログ #1 — SMTPを使わず、n8n × Slackで通知を一元管理する
   - Qiita: https://qiita.com/kuros-works/items/1ac744267bf4ca7827f3
   - Zenn: https://zenn.dev/kuros_works/articles/7cafbd6b9b35ea
+  - Payload CMS 拡張ログ #2 — PayloadテンプレートをやめてReactコンポーネントにしたら、コンテンツが資産になった
+  - Qiita: https://qiita.com/kuros-works/items/29e3a31c8b669c6921e5
+  - Zenn: https://zenn.dev/kuros_works/articles/79e3fd720280a3
 
 ---
 
