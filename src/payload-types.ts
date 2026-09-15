@@ -1570,7 +1570,7 @@ export interface Footer {
         /**
          * 選択肢を増やす場合はコード側（Footer/config.ts）にも追加する。
          */
-        platform: 'line' | 'x' | 'wantedly';
+        platform: 'line' | 'x' | 'wantedly' | 'zenn' | 'github';
         url: string;
         id?: string | null;
       }[]

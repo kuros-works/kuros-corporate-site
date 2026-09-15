@@ -75,6 +75,8 @@ export const Footer: GlobalConfig = {
             { label: 'LINE', value: 'line' },
             { label: 'X', value: 'x' },
             { label: 'Wantedly', value: 'wantedly' },
+            { label: 'Zenn', value: 'zenn' },
+            { label: 'GitHub', value: 'github' },
           ],
           admin: {
             description: '選択肢を増やす場合はコード側（Footer/config.ts）にも追加する。',
