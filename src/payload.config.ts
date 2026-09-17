@@ -4,6 +4,7 @@ import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { LandingPages } from './collections/LandingPages'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -81,6 +82,7 @@ export default buildConfig({
     Pages,
     Posts,
     Works,
+    LandingPages,
     Media,
     Users,
   ],

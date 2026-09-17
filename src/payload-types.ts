@@ -71,6 +71,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     works: Work;
+    'landing-pages': LandingPage;
     media: Media;
     users: User;
     redirects: Redirect;
@@ -93,6 +94,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
+    'landing-pages': LandingPagesSelect<false> | LandingPagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -711,6 +713,131 @@ export interface Work {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-pages".
+ */
+export interface LandingPage {
+  id: number;
+  title: string;
+  hero: {
+    schoolPhoto: number | Media;
+    logo: number | Media;
+    taglines?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: number | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    tuition?: string | null;
+    access?: string | null;
+  };
+  layout: FeatureBlock[];
+  closingCta?: {
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: number | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  footer: {
+    address: string;
+    tel: string;
+    email: string;
+    /**
+     * 校舎HP、Instagram等の外部リンク。
+     */
+    externalLinks?:
+      | {
+          label: string;
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * 公開URL: /lp/[slug]
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureBlock".
+ */
+export interface FeatureBlock {
+  heading: string;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image: number | Media;
+  imagePosition?: ('left' | 'right') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'feature';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -909,6 +1036,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'works';
         value: number | Work;
+      } | null)
+    | ({
+        relationTo: 'landing-pages';
+        value: number | LandingPage;
       } | null)
     | ({
         relationTo: 'media';
@@ -1149,6 +1280,97 @@ export interface WorksSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing-pages_select".
+ */
+export interface LandingPagesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
+    | T
+    | {
+        schoolPhoto?: T;
+        logo?: T;
+        taglines?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        tuition?: T;
+        access?: T;
+      };
+  layout?:
+    | T
+    | {
+        feature?: T | FeatureBlockSelect<T>;
+      };
+  closingCta?:
+    | T
+    | {
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+      };
+  footer?:
+    | T
+    | {
+        address?: T;
+        tel?: T;
+        email?: T;
+        externalLinks?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureBlock_select".
+ */
+export interface FeatureBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  image?: T;
+  imagePosition?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1664,6 +1886,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'works';
           value: number | Work;
+        } | null)
+      | ({
+          relationTo: 'landing-pages';
+          value: number | LandingPage;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

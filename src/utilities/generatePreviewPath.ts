@@ -3,6 +3,7 @@ import { PayloadRequest, CollectionSlug } from 'payload'
 
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   pages: '',
+  'landing-pages': '/lp',
 }
 
 type Props = {
