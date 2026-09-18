@@ -27,7 +27,11 @@ export const LandingPageHero: React.FC<NonNullable<LandingPage['hero']>> = ({
       <div className="absolute inset-0 flex items-center">
         <div className="container flex flex-col items-start gap-6 text-white">
           {logo && typeof logo === 'object' && (
-            <Media className="w-28" imgClassName="w-full h-auto" resource={logo} />
+            <Media
+              className="w-96"
+              imgClassName="w-full h-auto drop-shadow-lg"
+              resource={logo}
+            />
           )}
 
           <div className="flex flex-col gap-1">
