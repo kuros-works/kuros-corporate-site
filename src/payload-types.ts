@@ -800,6 +800,10 @@ export interface LandingPage {
           id?: string | null;
         }[]
       | null;
+    /**
+     * 架空ブランドを使ったデモページである旨の免責文言などを入力
+     */
+    disclaimer?: string | null;
   };
   /**
    * 公開URL: /lp/[slug]
@@ -1354,6 +1358,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
               url?: T;
               id?: T;
             };
+        disclaimer?: T;
       };
   slug?: T;
   updatedAt?: T;

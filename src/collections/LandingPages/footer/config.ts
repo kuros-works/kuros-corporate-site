@@ -57,5 +57,14 @@ export const landingPageFooter: Field = {
         },
       ],
     },
+    {
+      name: 'disclaimer',
+      type: 'textarea',
+      required: false,
+      label: '注記',
+      admin: {
+        description: '架空ブランドを使ったデモページである旨の免責文言などを入力',
+      },
+    },
   ],
 }
