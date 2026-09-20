@@ -90,6 +90,9 @@ pnpm dev
   - Payload CMS × n8n 拡張ログ #3 — SaaSを1つ増やすたびに、時間を溶かすリスクも増える
   - Qiita: https://qiita.com/kuros-works/items/53cbb8a7d2a0c03d17e1
   - Zenn: https://zenn.dev/kuros_works/articles/7dd55106545a0b
+  - Payload バックエンド型録 #1 — フロントにコンポーネントがあるなら、バックエンドにあってもいい
+  - Zenn: https://zenn.dev/kuros_works/articles/0d18e089dbc3c5
+  - Qiita: https://qiita.com/kuros-works/items/20ff39dd3f22de96dee6
 
 ---
 
