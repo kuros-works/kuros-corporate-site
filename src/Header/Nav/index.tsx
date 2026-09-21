@@ -34,7 +34,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
 
       <button
         type="button"
-        className="md:hidden relative z-30"
+        className="md:hidden relative z-30 text-foreground"
         aria-label={open ? 'メニューを閉じる' : 'メニューを開く'}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
