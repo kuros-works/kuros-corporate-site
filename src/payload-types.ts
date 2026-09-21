@@ -72,6 +72,7 @@ export interface Config {
     posts: Post;
     works: Work;
     'landing-pages': LandingPage;
+    showcases: Showcase;
     media: Media;
     users: User;
     redirects: Redirect;
@@ -95,6 +96,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
     'landing-pages': LandingPagesSelect<false> | LandingPagesSelect<true>;
+    showcases: ShowcasesSelect<false> | ShowcasesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -842,6 +844,54 @@ export interface FeatureBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showcases".
+ */
+export interface Showcase {
+  id: number;
+  title: string;
+  /**
+   * 空欄で保存するとタイトルから自動生成されます。
+   */
+  slug: string;
+  summary?: string | null;
+  thumbnail?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * 本実績で使用したコレクション。
+   */
+  usedCollection?: 'landing-pages' | null;
+  publicUrl?: string | null;
+  /**
+   * Zenn / Qiita などの関連記事へのリンク。
+   */
+  relatedLinks?:
+    | {
+        label?: string | null;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  publishedDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1044,6 +1094,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'landing-pages';
         value: number | LandingPage;
+      } | null)
+    | ({
+        relationTo: 'showcases';
+        value: number | Showcase;
       } | null)
     | ({
         relationTo: 'media';
@@ -1376,6 +1430,30 @@ export interface FeatureBlockSelect<T extends boolean = true> {
   imagePosition?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showcases_select".
+ */
+export interface ShowcasesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  summary?: T;
+  thumbnail?: T;
+  content?: T;
+  usedCollection?: T;
+  publicUrl?: T;
+  relatedLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  publishedDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1895,6 +1973,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'landing-pages';
           value: number | LandingPage;
+        } | null)
+      | ({
+          relationTo: 'showcases';
+          value: number | Showcase;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

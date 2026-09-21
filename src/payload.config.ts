@@ -8,6 +8,7 @@ import { LandingPages } from './collections/LandingPages'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Showcases } from './collections/Showcases'
 import { Users } from './collections/Users'
 import { Works } from './collections/Works'
 import { Footer } from './Footer/config'
@@ -83,6 +84,7 @@ export default buildConfig({
     Posts,
     Works,
     LandingPages,
+    Showcases,
     Media,
     Users,
   ],
