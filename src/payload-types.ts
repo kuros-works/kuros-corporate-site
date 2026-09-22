@@ -643,7 +643,7 @@ export interface Post {
   id: number;
   title: string;
   /**
-   * 空欄で保存するとタイトルから自動生成されます。
+   * 一意になるよう手動で入力してください。
    */
   slug: string;
   excerpt?: string | null;
@@ -676,7 +676,7 @@ export interface News {
   id: number;
   title: string;
   /**
-   * 空欄で保存するとタイトルから自動生成されます。
+   * 一意になるよう手動で入力してください。
    */
   slug: string;
   excerpt?: string | null;
@@ -885,7 +885,7 @@ export interface Showcase {
   id: number;
   title: string;
   /**
-   * 空欄で保存するとタイトルから自動生成されます。
+   * 一意になるよう手動で入力してください。
    */
   slug: string;
   summary?: string | null;

@@ -9,7 +9,6 @@ import {
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { toKebabCase } from '../../utilities/toKebabCase'
 
 export const News: CollectionConfig = {
   slug: 'news',
@@ -49,17 +48,8 @@ export const News: CollectionConfig = {
       index: true,
       label: 'スラッグ',
       admin: {
-        description: '空欄で保存するとタイトルから自動生成されます。',
+        description: '一意になるよう手動で入力してください。',
         position: 'sidebar',
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, siblingData }) => {
-            if (value) return value
-            const title = (siblingData as { title?: string })?.title
-            return title ? toKebabCase(title) : value
-          },
-        ],
       },
     },
     {
