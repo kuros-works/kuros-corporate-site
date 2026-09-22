@@ -93,6 +93,9 @@ pnpm dev
   - Payload バックエンド型録 #1 — フロントにコンポーネントがあるなら、バックエンドにあってもいい
   - Zenn: https://zenn.dev/kuros_works/articles/0d18e089dbc3c5
   - Qiita: https://qiita.com/kuros-works/items/20ff39dd3f22de96dee6
+  - Payload バックエンド型録 #2 — コーポレートサイトの型は、有限である
+  - Qiita: https://qiita.com/kuros-works/items/0cf6dc70e75bac17a62d
+  - Zenn: https://zenn.dev/kuros_works/articles/0471e686df26cb
   - スプレッドシートで壊れた設計を、リレーションで組み直した話
   - Qiita: https://qiita.com/kuros-works/items/f5c7358111fe4784ed77
   - Zenn: https://zenn.dev/kuros_works/articles/d83ef4575dcb62
