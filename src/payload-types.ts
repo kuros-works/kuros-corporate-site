@@ -70,6 +70,7 @@ export interface Config {
     folders: Folder;
     pages: Page;
     posts: Post;
+    news: News;
     works: Work;
     'landing-pages': LandingPage;
     showcases: Showcase;
@@ -94,6 +95,7 @@ export interface Config {
     folders: FoldersSelect<false> | FoldersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
     'landing-pages': LandingPagesSelect<false> | LandingPagesSelect<true>;
     showcases: ShowcasesSelect<false> | ShowcasesSelect<true>;
@@ -668,6 +670,39 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  title: string;
+  /**
+   * 空欄で保存するとタイトルから自動生成されます。
+   */
+  slug: string;
+  excerpt?: string | null;
+  coverImage?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "works".
  */
 export interface Work {
@@ -1088,6 +1123,10 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'news';
+        value: number | News;
+      } | null)
+    | ({
         relationTo: 'works';
         value: number | Work;
       } | null)
@@ -1299,6 +1338,21 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  coverImage?: T;
+  content?: T;
+  publishedDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   excerpt?: T;
@@ -1965,6 +2019,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
+        } | null)
+      | ({
+          relationTo: 'news';
+          value: number | News;
         } | null)
       | ({
           relationTo: 'works';

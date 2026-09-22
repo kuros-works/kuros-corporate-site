@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 import { LandingPages } from './collections/LandingPages'
 import { Media } from './collections/Media'
+import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Showcases } from './collections/Showcases'
@@ -82,6 +83,7 @@ export default buildConfig({
     },
     Pages,
     Posts,
+    News,
     Works,
     LandingPages,
     Showcases,
