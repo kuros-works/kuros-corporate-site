@@ -99,6 +99,9 @@ pnpm dev
   - スプレッドシートで壊れた設計を、リレーションで組み直した話
   - Qiita: https://qiita.com/kuros-works/items/f5c7358111fe4784ed77
   - Zenn: https://zenn.dev/kuros_works/articles/d83ef4575dcb62
+  - Payload バックエンド型録 #3 — 棚は作った。読む場所が、まだない。
+  - Qiita: https://qiita.com/kuros-works/items/7653a1cebfd88e455567
+  - Zenn: https://zenn.dev/kuros_works/articles/2fe41ca51040d5
 
 ---
 
