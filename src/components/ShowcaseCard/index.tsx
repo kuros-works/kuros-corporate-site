@@ -1,5 +1,6 @@
 'use client'
 import { cn } from '@/utilities/ui'
+import Link from 'next/link'
 import React from 'react'
 
 import type { Showcase } from '@/payload-types'
@@ -17,7 +18,7 @@ export const ShowcaseCard: React.FC<{
 }> = (props) => {
   const { className, doc } = props
 
-  const { title, summary, thumbnail, publicUrl } = doc || {}
+  const { slug, title, summary, thumbnail } = doc || {}
 
   const content = (
     <article
@@ -47,11 +48,11 @@ export const ShowcaseCard: React.FC<{
     </article>
   )
 
-  if (publicUrl) {
+  if (slug) {
     return (
-      <a className="block h-full" href={publicUrl} rel="noopener noreferrer" target="_blank">
+      <Link className="block h-full" href={`/showcases/${slug}`}>
         {content}
-      </a>
+      </Link>
     )
   }
 
