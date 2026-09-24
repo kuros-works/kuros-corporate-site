@@ -2,6 +2,7 @@
 import React from 'react'
 
 import { dmSans, dmSansOpsz } from '@/components/SaasLp/fonts'
+import { SectionHeading } from '@/components/SaasLp/SectionHeading'
 import { cn } from '@/utilities/ui'
 
 // Figma: SaaS LP ポートフォリオ用 / node 9:722 (testmonials)
@@ -129,29 +130,21 @@ export const SaasTestimonials: React.FC<Props> = ({
       aria-labelledby="testimonials-heading"
       className={cn(dmSans.className, dmSansOpsz, 'flex flex-col items-center', className)}
     >
-      <div className="flex w-full max-w-[1067px] flex-col items-center gap-4 text-center">
-        <span className="inline-flex items-center gap-1 rounded-[32px] bg-[#171f05] px-3 py-2 text-sm leading-[16.8px] font-medium text-[#a3dc2f] ring-1 ring-[#364c09] ring-inset">
-          <span className="relative size-4 shrink-0">
-            <img
-              alt=""
-              className="absolute top-[2.75px] left-[1.25px]"
-              height={12.5}
-              src={asset('chat.svg')}
-              width={13.5}
-            />
-          </span>
-          Testimonials
-        </span>
-        <h2
-          className="max-w-[728px] text-[32px] leading-10 font-bold text-[#fbfbfb] md:text-[47.813px] md:leading-[48px]"
-          id="testimonials-heading"
-        >
-          What are people saying
-        </h2>
-        <p className="text-base leading-[26px] text-[#9b9ca1] md:text-lg md:leading-[30px] xl:flex xl:h-[92px] xl:items-center">
-          Real teams, real results. Here&apos;s what finance leaders are saying about Ledgerly.
-        </p>
-      </div>
+      <SectionHeading
+        icon={
+          <img
+            alt=""
+            className="absolute top-[2.75px] left-[1.25px]"
+            height={12.5}
+            src={asset('chat.svg')}
+            width={13.5}
+          />
+        }
+        id="testimonials-heading"
+        label="Testimonials"
+        lead="Real teams, real results. Here's what finance leaders are saying about Ledgerly."
+        title="What are people saying"
+      />
 
       {/* Full-bleed track: cancels the page gutter and starts at the 1536px
           content column (192px at 1920) so cards run off the right edge. */}
