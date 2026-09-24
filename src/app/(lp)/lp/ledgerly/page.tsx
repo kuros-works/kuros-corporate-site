@@ -9,6 +9,7 @@ import { HeroDashboard } from '@/components/SaasHeroHeading/HeroDashboard'
 import { HeroEmailForm } from '@/components/SaasHeroHeading/HeroEmailForm'
 import { HeroMenu } from '@/components/SaasHeroHeading/HeroMenu'
 import { HeroReview } from '@/components/SaasHeroHeading/HeroReview'
+import { SaasTestimonials } from '@/components/SaasTestimonials'
 
 // Static portfolio LP (Figma: SaaS LP ポートフォリオ用 / "Finance Dark").
 // Not CMS-driven — this static segment takes precedence over /lp/[slug],
@@ -27,6 +28,7 @@ export default function LedgerlyPage() {
         <HeroMenu />
       </div>
       <SaasBento className="mt-24 md:mt-32 xl:mt-[149px]" />
+      <SaasTestimonials className="mt-24 md:mt-32 xl:mt-[200px]" />
     </main>
   )
 }
