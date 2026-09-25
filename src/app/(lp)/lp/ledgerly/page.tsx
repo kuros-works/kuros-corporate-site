@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 import { SaasBento } from '@/components/SaasBento'
+import { SaasCta } from '@/components/SaasCta'
 import { SaasHeroHeading } from '@/components/SaasHeroHeading'
 import { HeroBadge } from '@/components/SaasHeroHeading/HeroBadge'
 import { HeroDashboard } from '@/components/SaasHeroHeading/HeroDashboard'
@@ -31,6 +32,7 @@ export default function LedgerlyPage() {
       <SaasBento className="mt-24 md:mt-32 xl:mt-[149px]" />
       <SaasTestimonials className="mt-24 md:mt-32 xl:mt-[200px]" />
       <SaasPricing className="mt-28 md:mt-40 xl:mt-[266px]" />
+      <SaasCta className="mt-24 md:mt-32 xl:mt-[235px]" />
     </main>
   )
 }
