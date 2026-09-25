@@ -5,6 +5,7 @@ import React from 'react'
 import { SaasBento } from '@/components/SaasBento'
 import { SaasCta } from '@/components/SaasCta'
 import { SaasFooter } from '@/components/SaasFooter'
+import { SaasHeader } from '@/components/SaasHeader'
 import { SaasHeroHeading } from '@/components/SaasHeroHeading'
 import { HeroBadge } from '@/components/SaasHeroHeading/HeroBadge'
 import { HeroDashboard } from '@/components/SaasHeroHeading/HeroDashboard'
@@ -20,7 +21,9 @@ import { SaasTestimonials } from '@/components/SaasTestimonials'
 export default function LedgerlyPage() {
   return (
     <>
-      <main className="min-h-screen bg-[#1d1c20] px-4 pt-12 pb-16 md:pt-28 md:pb-24 xl:pt-[200px] xl:pb-[115px]">
+      <SaasHeader />
+      {/* Figma puts the hero badge at y=200 under a 92px header, so xl:pt is 108 */}
+      <main className="min-h-screen bg-[#1d1c20] px-4 pt-10 pb-16 md:pt-20 md:pb-24 xl:pt-[108px] xl:pb-[115px]">
         <div className="mb-[14px] flex justify-center">
           <HeroBadge />
         </div>
