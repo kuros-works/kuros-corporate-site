@@ -786,7 +786,7 @@ export interface LandingPage {
     tuition?: string | null;
     access?: string | null;
   };
-  layout: FeatureBlock[];
+  layout: (FeatureBlock | TestimonialBlock | PricingBlock)[];
   closingCta?: {
     richText?: {
       root: {
@@ -876,6 +876,56 @@ export interface FeatureBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'feature';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  testimonials: {
+    name: string;
+    role?: string | null;
+    quote: string;
+    avatar: number | Media;
+    /**
+     * 任意。アバターの上に少し大きく重ねて表示されます。
+     */
+    avatarCover?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlock".
+ */
+export interface PricingBlock {
+  plans: {
+    name: string;
+    /**
+     * 例: $49 / Custom
+     */
+    price: string;
+    /**
+     * 例: /month（空欄なら非表示）
+     */
+    period?: string | null;
+    description: string;
+    features: {
+      feature: string;
+      id?: string | null;
+    }[];
+    popular?: boolean | null;
+    variant: 'basic' | 'pro' | 'enterprise';
+    cta: string;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1432,6 +1482,8 @@ export interface LandingPagesSelect<T extends boolean = true> {
     | T
     | {
         feature?: T | FeatureBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        pricing?: T | PricingBlockSelect<T>;
       };
   closingCta?:
     | T
@@ -1482,6 +1534,51 @@ export interface FeatureBlockSelect<T extends boolean = true> {
   body?: T;
   image?: T;
   imagePosition?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        quote?: T;
+        avatar?: T;
+        avatarCover?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlock_select".
+ */
+export interface PricingBlockSelect<T extends boolean = true> {
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        period?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        popular?: T;
+        variant?: T;
+        cta?: T;
+        ctaHref?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

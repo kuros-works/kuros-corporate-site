@@ -10,7 +10,7 @@ import { cn } from '@/utilities/ui'
 
 const asset = (name: string) => `/figma/saas-pricing/${name}`
 
-type Plan = {
+export type Plan = {
   cta: string
   ctaHref?: string
   description: string

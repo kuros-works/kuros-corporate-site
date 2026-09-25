@@ -11,13 +11,18 @@ import { cn } from '@/utilities/ui'
 
 const asset = (name: string) => `/figma/saas-testimonials/${name}`
 
-type Testimonial = {
+// Bare file names resolve to the bundled Figma assets; full URLs (Vercel Blob)
+// and root-relative paths (Payload's /api/media/file/...) are used as-is.
+const avatarSrc = (src: string) => (/^(https?:)?\/\/|^\//.test(src) ? src : asset(src))
+
+export type Testimonial = {
   // Avatar layers exactly as in Figma: a base image, plus an optional
   // oversized cover that sits on top of it.
   avatar: string
   avatarCover?: string
   name: string
   quote: string
+  role?: string
 }
 
 const defaultTestimonials: Testimonial[] = [
@@ -39,7 +44,7 @@ const defaultTestimonials: Testimonial[] = [
   },
 ]
 
-const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote }) => (
+const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote, role }) => (
   <figure className="relative flex min-h-[260px] w-[min(660px,calc(100vw-48px))] shrink-0 snap-start flex-col rounded-[20px] bg-[#161616] px-6 pt-8 pb-6 md:min-h-[313px] md:px-[39px] md:pt-[41px] md:pb-10">
     <blockquote className="text-xl leading-8 text-white md:text-[26px] md:leading-[42px]">
       <p>{quote}</p>
@@ -47,13 +52,13 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote }) => (
 
     <figcaption className="mt-auto flex items-start gap-[10px] pt-8 pr-20">
       <div className="relative mt-px size-[60px] shrink-0">
-        <img alt="" className="absolute inset-0 size-full" height={60} src={asset(avatar)} width={60} />
+        <img alt="" className="absolute inset-0 size-full" height={60} src={avatarSrc(avatar)} width={60} />
         {avatarCover && (
           <img
             alt=""
             className="absolute top-[-5.5px] left-[-4.5px] max-w-none"
             height={69}
-            src={asset(avatarCover)}
+            src={avatarSrc(avatarCover)}
             width={69}
           />
         )}
@@ -62,6 +67,7 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote }) => (
         <span className="text-[22px] leading-[34px] tracking-[-0.65px] text-white md:text-[26px]">
           {name}
         </span>
+        {role && <span className="text-base leading-6 text-[#9b9ca1]">{role}</span>}
         <img
           alt="5 out of 5 stars"
           className="mt-[6.81px]"

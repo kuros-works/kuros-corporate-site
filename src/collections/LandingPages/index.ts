@@ -10,6 +10,8 @@ import {
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Feature } from '@/blocks/Feature/config'
+import { Pricing } from '@/blocks/Pricing/config'
+import { Testimonial } from '@/blocks/Testimonial/config'
 import { linkGroup } from '@/fields/linkGroup'
 import { landingPageFooter } from './footer/config'
 import { landingPageHero } from './hero/config'
@@ -61,7 +63,7 @@ export const LandingPages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Feature],
+              blocks: [Feature, Testimonial, Pricing],
               required: true,
               admin: {
                 initCollapsed: true,
