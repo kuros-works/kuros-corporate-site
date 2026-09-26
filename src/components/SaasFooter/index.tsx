@@ -14,7 +14,9 @@ const asset = (name: string) => `/figma/saas-footer/${name}`
 
 type Link = { href?: string; label: string }
 
-const defaultColumns: { links: Link[]; title: string }[] = [
+export type FooterColumn = { links: Link[]; title: string }
+
+const defaultColumns: FooterColumn[] = [
   {
     links: [{ label: 'Service' }, { label: 'Resources' }, { label: 'About us' }],
     title: 'Company',
@@ -33,18 +35,44 @@ const defaultColumns: { links: Link[]; title: string }[] = [
 // shows Facebook on the blue background; here that blue is the hover/focus
 // state for every icon, and all four rest on gray.
 const socials = [
-  { h: 11.6129, icon: 'twitter.svg', label: 'Twitter', left: 11.62, top: 12.78, w: 14.3665 },
-  { h: 15.6534, icon: 'facebook.svg', label: 'Facebook', left: 13.94, top: 10.46, w: 8.12903 },
-  { h: 17.4202, icon: 'instagram.svg', label: 'Instagram', left: 9.29, top: 9.29, w: 17.4194 },
-  { h: 16.2581, icon: 'github.svg', label: 'GitHub', left: 10.45, top: 9.29, w: 16.6626 },
-]
+  { h: 11.6129, icon: 'twitter.svg', key: 'twitter', label: 'Twitter', left: 11.62, top: 12.78, w: 14.3665 },
+  { h: 15.6534, icon: 'facebook.svg', key: 'facebook', label: 'Facebook', left: 13.94, top: 10.46, w: 8.12903 },
+  { h: 17.4202, icon: 'instagram.svg', key: 'instagram', label: 'Instagram', left: 9.29, top: 9.29, w: 17.4194 },
+  { h: 16.2581, icon: 'github.svg', key: 'github', label: 'GitHub', left: 10.45, top: 9.29, w: 16.6626 },
+] as const
+
+export type SocialLinks = Partial<Record<(typeof socials)[number]['key'], string>>
 
 type Props = {
   className?: string
-  columns?: typeof defaultColumns
+  columns?: FooterColumn[]
+  copyright?: string
+  description?: string
+  disclaimer?: string
+  logoSrc?: string
+  logoText?: string
+  newsletterHeading?: string
+  // Omitted: every icon links to "#". Given: only icons with a URL are shown.
+  socialLinks?: SocialLinks
 }
 
-export const SaasFooter: React.FC<Props> = ({ className, columns = defaultColumns }) => {
+export const SaasFooter: React.FC<Props> = ({
+  className,
+  columns = defaultColumns,
+  copyright = '© Copyright 2026, All Reserved by Ledgerly',
+  description = 'Financial clarity for growing teams — track spend, automate approvals, and close the books faster.',
+  disclaimer = 'This page is a fictional product demo built to showcase a Payload CMS implementation. It is not affiliated with any real company or service.',
+  logoSrc = asset('logo.svg'),
+  logoText = 'Ledgerly',
+  newsletterHeading = 'Subscribe to Newsletter',
+  socialLinks,
+}) => {
+  const visibleSocials = socials.flatMap((social) => {
+    const href = socialLinks ? socialLinks[social.key] : '#'
+    return href ? [{ ...social, href }] : []
+  })
+
+
   return (
     <footer
       className={cn(
@@ -69,25 +97,26 @@ export const SaasFooter: React.FC<Props> = ({ className, columns = defaultColumn
           {/* brand */}
           <div className="col-span-2 flex min-w-0 flex-col gap-8 lg:max-w-[496px] lg:shrink">
             <a className="flex items-center gap-2" href="#">
-              <img alt="" height={24} src={asset('logo.svg')} width={24} />
+              <img alt="" height={24} src={logoSrc} width={24} />
               <span
                 className={cn(inter.className, 'text-2xl leading-[16.2px] font-semibold text-[#fbfbfb]')}
               >
-                Ledgerly
+                {logoText}
               </span>
             </a>
             <div className="flex flex-col gap-6">
-              <p className="text-lg leading-[1.6] text-[#b9b3b3] opacity-90 md:text-xl">
-                Financial clarity for growing teams — track spend, automate approvals, and close the
-                books faster.
-              </p>
+              {description && (
+                <p className="text-lg leading-[1.6] text-[#b9b3b3] opacity-90 md:text-xl">
+                  {description}
+                </p>
+              )}
               <ul className="flex gap-3">
-                {socials.map(({ h, icon, label, left, top, w }) => (
+                {visibleSocials.map(({ h, href, icon, label, left, top, w }) => (
                   <li key={label}>
                     <a
                       aria-label={label}
                       className="group relative block size-9 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                      href="#"
+                      href={href}
                     >
                       <img alt="" className="absolute inset-0" height={36} src={asset('social-bg.svg')} width={36} />
                       <img
@@ -129,18 +158,15 @@ export const SaasFooter: React.FC<Props> = ({ className, columns = defaultColumn
 
           {/* newsletter */}
           <div className="col-span-2 flex min-w-0 flex-col gap-8 lg:w-[487px] lg:shrink">
-            <p className="text-xl leading-none font-bold text-[#fafafa]">Subscribe to Newsletter</p>
+            <p className="text-xl leading-none font-bold text-[#fafafa]">{newsletterHeading}</p>
             <NewsletterForm />
           </div>
         </div>
 
         <div className="flex w-full max-w-[600px] flex-col gap-1 text-center text-sm leading-5 tracking-[0.5px] text-[#fafafa]">
-          <p>© Copyright 2026, All Reserved by Ledgerly</p>
+          {copyright && <p>{copyright}</p>}
           <p>Design template by sahin Alom via Figma Community</p>
-          <p>
-            This page is a fictional product demo built to showcase a Payload CMS implementation. It
-            is not affiliated with any real company or service.
-          </p>
+          {disclaimer && <p>{disclaimer}</p>}
         </div>
       </div>
     </footer>

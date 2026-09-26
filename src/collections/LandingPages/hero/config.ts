@@ -1,11 +1,14 @@
-import type { Field } from 'payload'
+import type { Block } from 'payload'
 
 import { linkGroup } from '@/fields/linkGroup'
 
-export const landingPageHero: Field = {
-  name: 'hero',
-  type: 'group',
-  label: 'ヒーロー',
+export const TypishHero: Block = {
+  slug: 'typishHero',
+  interfaceName: 'TypishHeroBlock',
+  labels: {
+    singular: 'Typish Hero',
+    plural: 'Typish Hero',
+  },
   fields: [
     {
       name: 'schoolPhoto',

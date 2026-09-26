@@ -1,4 +1,4 @@
-import type { Field, TextFieldSingleValidation } from 'payload'
+import type { Block, TextFieldSingleValidation } from 'payload'
 
 const validateURL: TextFieldSingleValidation = (value) => {
   if (!value) return 'URLを入力してください'
@@ -10,10 +10,13 @@ const validateURL: TextFieldSingleValidation = (value) => {
   }
 }
 
-export const landingPageFooter: Field = {
-  name: 'footer',
-  type: 'group',
-  label: 'フッター',
+export const TypishFooter: Block = {
+  slug: 'typishFooter',
+  interfaceName: 'TypishFooterBlock',
+  labels: {
+    singular: 'Typish Footer',
+    plural: 'Typish Footer',
+  },
   fields: [
     {
       name: 'address',

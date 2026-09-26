@@ -12,6 +12,9 @@ type Props = {
   className?: string
   demoHref?: string
   demoLabel?: string
+  heading?: string
+  // Optional line under the heading; not in the Figma, so hidden when empty.
+  lead?: string
   videoHref?: string
   videoLabel?: string
 }
@@ -23,6 +26,8 @@ export const SaasCta: React.FC<Props> = ({
   className,
   demoHref = '#',
   demoLabel = 'Request Demo',
+  heading = "Let's bring clarity to your finances with Ledgerly",
+  lead,
   videoHref = '#',
   videoLabel = 'Watch Video',
 }) => {
@@ -41,8 +46,13 @@ export const SaasCta: React.FC<Props> = ({
           className="max-w-[776px] text-[40px] leading-[48px] font-bold text-white md:text-[56px] md:leading-[68px] xl:text-[72px] xl:leading-[86px]"
           id="cta-heading"
         >
-          Let&apos;s bring clarity to your finances with Ledgerly
+          {heading}
         </h2>
+        {lead && (
+          <p className="mt-4 max-w-[776px] text-lg leading-[30px] text-[#9b9ca1] md:mt-6 md:text-[22px] md:leading-[36px]">
+            {lead}
+          </p>
+        )}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-[22px] xl:mt-14">
           <a className={cn(button, 'bg-[#a3dc2f]')} href={demoHref}>
             {demoLabel}

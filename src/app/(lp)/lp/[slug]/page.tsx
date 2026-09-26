@@ -6,9 +6,6 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import React, { cache } from 'react'
 
-import { LandingPageClosingCta } from '@/collections/LandingPages/closingCta/Component'
-import { LandingPageFooter } from '@/collections/LandingPages/footer/Component'
-import { LandingPageHero } from '@/collections/LandingPages/hero/Component'
 import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
@@ -46,21 +43,23 @@ export default async function Page({ params: paramsPromise }: Args) {
     notFound()
   }
 
-  const { hero, layout, closingCta, footer } = landingPage
+  const { header, hero, layout, closingCta, footer } = landingPage
 
   return (
     <article>
       {draft && <LivePreviewListener />}
 
-      {hero && <LandingPageHero {...hero} />}
+      <RenderLandingPageBlocks blocks={header || []} />
+
+      <RenderLandingPageBlocks blocks={hero || []} />
 
       <div className="pt-16 pb-16">
-        <RenderLandingPageBlocks blocks={layout || []} />
+        <RenderLandingPageBlocks blocks={layout || []} spaced />
       </div>
 
-      {closingCta && <LandingPageClosingCta {...closingCta} />}
+      <RenderLandingPageBlocks blocks={closingCta || []} />
 
-      {footer && <LandingPageFooter {...footer} />}
+      <RenderLandingPageBlocks blocks={footer || []} />
     </article>
   )
 }

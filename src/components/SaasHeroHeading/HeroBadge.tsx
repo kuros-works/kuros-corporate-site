@@ -33,7 +33,7 @@ export const HeroBadge: React.FC<Props> = ({
 
   const content = (
     <>
-      <span className="shrink-0 rounded-[64px] bg-[#a3dc2f] px-2 py-1 text-white">{tag}</span>
+      {tag && <span className="shrink-0 rounded-[64px] bg-[#a3dc2f] px-2 py-1 text-white">{tag}</span>}
       <span className="flex min-w-0 items-center gap-2 text-[#a3dc2f]">
         <span className="truncate">{label}</span>
         <span className="flex size-4 shrink-0 items-center justify-center">

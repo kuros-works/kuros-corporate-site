@@ -8,19 +8,29 @@ import { cn } from '@/utilities/ui'
 // cards and chart are illustration, not live data.
 
 type Props = {
+  alt?: string
   className?: string
+  height?: number
+  src?: string
+  width?: number
 }
 
-export const HeroDashboard: React.FC<Props> = ({ className }) => {
+export const HeroDashboard: React.FC<Props> = ({
+  alt = '',
+  className,
+  height = 747,
+  src = '/figma/saas-hero/dashboard.png',
+  width = 1536,
+}) => {
   return (
     <div className={cn('w-full max-w-[1536px]', className)}>
       <img
-        alt=""
+        alt={alt}
         className="h-auto w-full"
         decoding="async"
-        height={747}
-        src="/figma/saas-hero/dashboard.png"
-        width={1536}
+        height={height}
+        src={src}
+        width={width}
       />
     </div>
   )
