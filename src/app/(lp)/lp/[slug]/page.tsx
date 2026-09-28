@@ -8,6 +8,7 @@ import React, { cache } from 'react'
 
 import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { cn } from '@/utilities/ui'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -45,6 +46,10 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { header, hero, layout, closingCta, footer } = landingPage
 
+  // Ledgerly blocks assume the static /lp/ledgerly <main>'s dark background and
+  // 16px gutter (SaasTestimonials' -mx-4 track cancels it), so mirror them here.
+  const isLedgerly = hero?.[0]?.blockType === 'ledgerlyHero'
+
   return (
     <article>
       {draft && <LivePreviewListener />}
@@ -53,7 +58,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       <RenderLandingPageBlocks blocks={hero || []} />
 
-      <div className="pt-16 pb-16">
+      <div className={cn('pt-16 pb-16', isLedgerly && 'bg-[#1d1c20] px-4')}>
         <RenderLandingPageBlocks blocks={layout || []} spaced />
       </div>
 

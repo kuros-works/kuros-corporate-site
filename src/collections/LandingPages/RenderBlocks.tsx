@@ -9,6 +9,7 @@ import { TypishCtaBlock } from './closingCta/Component'
 import { TypishFooterBlock } from './footer/Component'
 import { TypishHeroBlock } from './hero/Component'
 import { LedgerlyCtaBlock } from './ledgerlyCta/Component'
+import { LedgerlyFeaturesBlock } from './ledgerlyFeatures/Component'
 import { LedgerlyFooterBlock } from './ledgerlyFooter/Component'
 import { LedgerlyHeaderBlock } from './ledgerlyHeader/Component'
 import { LedgerlyHeroBlock } from './ledgerlyHero/Component'
@@ -16,6 +17,7 @@ import { LedgerlyHeroBlock } from './ledgerlyHero/Component'
 const blockComponents = {
   feature: FeatureBlock,
   ledgerlyCta: LedgerlyCtaBlock,
+  ledgerlyFeatures: LedgerlyFeaturesBlock,
   ledgerlyFooter: LedgerlyFooterBlock,
   ledgerlyHeader: LedgerlyHeaderBlock,
   ledgerlyHero: LedgerlyHeroBlock,
