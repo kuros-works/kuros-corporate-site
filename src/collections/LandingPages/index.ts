@@ -10,6 +10,7 @@ import { TypishFooter } from './footer/config'
 import { TypishHero } from './hero/config'
 import { revalidateDelete, revalidateLandingPage } from './hooks/revalidateLandingPage'
 import { LedgerlyCta } from './ledgerlyCta/config'
+import { LedgerlyFeatures } from './ledgerlyFeatures/config'
 import { LedgerlyFooter } from './ledgerlyFooter/config'
 import { LedgerlyHeader } from './ledgerlyHeader/config'
 import { LedgerlyHero } from './ledgerlyHero/config'
@@ -77,7 +78,7 @@ export const LandingPages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Feature, Testimonial, Pricing],
+              blocks: [Feature, Testimonial, Pricing, LedgerlyFeatures],
               required: true,
               admin: {
                 initCollapsed: true,

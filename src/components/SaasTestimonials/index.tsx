@@ -27,18 +27,17 @@ export type Testimonial = {
 
 const defaultTestimonials: Testimonial[] = [
   {
-    avatar: 'avatar-1a.png',
-    avatarCover: 'avatar-1b.png',
+    avatar: 'avatar-rina.png',
     name: 'Rina Cortez',
     quote: '"Ledgerly cut our monthly close from five days to one."',
   },
   {
-    avatar: 'avatar-2.png',
+    avatar: 'avatar-marcus.png',
     name: 'Marcus Webb',
     quote: '"Finally, an expense tool our whole team actually uses."',
   },
   {
-    avatar: 'avatar-3.png',
+    avatar: 'avatar-priya.png',
     name: 'Priya Nandan',
     quote: '"We caught overspending in week one. It paid for itself immediately."',
   },

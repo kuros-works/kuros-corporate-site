@@ -757,7 +757,7 @@ export interface LandingPage {
   title: string;
   header?: LedgerlyHeaderBlock[] | null;
   hero?: (TypishHeroBlock | LedgerlyHeroBlock)[] | null;
-  layout: (FeatureBlock | TestimonialBlock | PricingBlock)[];
+  layout: (FeatureBlock | TestimonialBlock | PricingBlock | LedgerlyFeaturesBlock)[];
   closingCta?: (TypishCtaBlock | LedgerlyCtaBlock)[] | null;
   footer?: (TypishFooterBlock | LedgerlyFooterBlock)[] | null;
   /**
@@ -953,6 +953,55 @@ export interface PricingBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'pricing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyFeaturesBlock".
+ */
+export interface LedgerlyFeaturesBlock {
+  card1: {
+    heading: string;
+    /**
+     * 任意。空欄なら非表示。
+     */
+    description?: string | null;
+  };
+  card2: {
+    heading: string;
+    /**
+     * 任意。空欄なら非表示。
+     */
+    description?: string | null;
+  };
+  card3: {
+    heading: string;
+    /**
+     * 任意。空欄なら非表示。
+     */
+    description?: string | null;
+  };
+  card4: {
+    heading: string;
+    /**
+     * 任意。空欄なら非表示。
+     */
+    description?: string | null;
+  };
+  card5: {
+    heading: string;
+    /**
+     * 任意。空欄なら非表示。
+     */
+    description?: string | null;
+    ctaLabel: string;
+    /**
+     * 任意。空欄なら # 。
+     */
+    ctaHref?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ledgerlyFeatures';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1633,6 +1682,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
         feature?: T | FeatureBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
         pricing?: T | PricingBlockSelect<T>;
+        ledgerlyFeatures?: T | LedgerlyFeaturesBlockSelect<T>;
       };
   closingCta?:
     | T
@@ -1800,6 +1850,46 @@ export interface PricingBlockSelect<T extends boolean = true> {
         cta?: T;
         ctaHref?: T;
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyFeaturesBlock_select".
+ */
+export interface LedgerlyFeaturesBlockSelect<T extends boolean = true> {
+  card1?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  card2?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  card3?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  card4?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  card5?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
       };
   id?: T;
   blockName?: T;

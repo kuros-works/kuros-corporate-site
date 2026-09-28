@@ -4,6 +4,8 @@ import React from 'react'
 import { dmSans, dmSansOpsz, inter } from '@/components/SaasLp/fonts'
 import { cn } from '@/utilities/ui'
 
+import { type BentoCards, defaultCards } from './defaultCards'
+
 // Figma: SaaS LP ポートフォリオ用 / node 9:465 (bento-style)
 // The mock UI inside each card (charts, invoices, avatars) is illustration —
 // only the "Explore more" CTA is interactive.
@@ -30,7 +32,11 @@ const invoices = [
 
 const timeLabels = ['01:00PM', '02:00PM', '03:00PM', '04:00PM', '05:00PM']
 
-const SmallFeature: React.FC<{ children: React.ReactNode; lead: string; title: string }> = ({
+const SmallFeature: React.FC<{
+  children: React.ReactNode
+  lead?: string | null
+  title: string
+}> = ({
   children,
   lead,
   title,
@@ -39,7 +45,7 @@ const SmallFeature: React.FC<{ children: React.ReactNode; lead: string; title: s
     <div className="flex w-full max-w-[298.68px] flex-col gap-8">
       <div className="flex flex-col items-center gap-[10px] text-center">
         <h3 className="text-[17.859px] leading-[25.2px] font-bold text-[#fbfbfb]">{title}</h3>
-        <p className="text-base leading-[22.4px] text-[#9b9ca1]">{lead}</p>
+        {lead && <p className="text-base leading-[22.4px] text-[#9b9ca1]">{lead}</p>}
       </div>
       {children}
     </div>
@@ -47,16 +53,20 @@ const SmallFeature: React.FC<{ children: React.ReactNode; lead: string; title: s
 )
 
 type Props = {
+  cards?: BentoCards
   className?: string
   ctaHref?: string
   ctaLabel?: string
 }
 
 export const SaasBento: React.FC<Props> = ({
+  cards = defaultCards,
   className,
   ctaHref = '#',
   ctaLabel = 'Explore more',
 }) => {
+  const [spendCard, teamCard, collaborationCard, accountingCard, optimiseCard] = cards
+
   return (
     <div
       className={cn(
@@ -68,10 +78,7 @@ export const SaasBento: React.FC<Props> = ({
     >
       {/* top */}
       <div className="grid gap-[30px] md:grid-flow-dense md:grid-cols-2 xl:grid-cols-[352px_minmax(0,1fr)_352px] xl:gap-[31px]">
-        <SmallFeature
-          lead="See exactly where every dollar goes the moment it's spent, no end-of-month surprises."
-          title="Real-time spend tracking"
-        >
+        <SmallFeature lead={spendCard.description} title={spendCard.heading}>
           <div
             aria-hidden
             className="relative h-[264px] w-full overflow-hidden rounded-[12px] border border-[#242424] bg-[#1a1a1a]"
@@ -97,10 +104,12 @@ export const SaasBento: React.FC<Props> = ({
           )}
         >
           <div className="flex flex-col items-center gap-[10px] text-center">
-            <h3 className="text-[28px] leading-[42px] font-bold text-white">Team expense management</h3>
-            <p className="max-w-[495px] text-xl leading-[36px] text-[#828282]">
-              Set budgets by team, route approvals automatically, and keep everyone accountable.
-            </p>
+            <h3 className="text-[28px] leading-[42px] font-bold text-white">{teamCard.heading}</h3>
+            {teamCard.description && (
+              <p className="max-w-[495px] text-xl leading-[36px] text-[#828282]">
+                {teamCard.description}
+              </p>
+            )}
           </div>
           <div
             aria-hidden
@@ -126,10 +135,7 @@ export const SaasBento: React.FC<Props> = ({
           </div>
         </div>
 
-        <SmallFeature
-          lead="Finance, managers, and employees work from the same live numbers — no spreadsheets, no back-and-forth."
-          title="Effortless collaboration"
-        >
+        <SmallFeature lead={collaborationCard.description} title={collaborationCard.heading}>
           <div aria-hidden className="relative mx-auto h-[264px] w-[264px]">
             <div className="absolute inset-0 rounded-full border border-[#242424] bg-[#171717]" />
             <div className="absolute inset-[28px] rounded-full border border-[#242424] bg-[#1a1a1a]" />
@@ -159,12 +165,13 @@ export const SaasBento: React.FC<Props> = ({
         <div className={cn(card, 'flex flex-col px-6 pt-8 md:px-[36px] md:pt-[36px] xl:h-[496px]')}>
           <div className="flex flex-col gap-[10px]">
             <h3 className="text-[28px] leading-[42px] font-bold text-white">
-              Real-time accounting at your fingertips.
+              {accountingCard.heading}
             </h3>
-            <p className="max-w-[660px] text-xl leading-[36px] text-[#828282]">
-              Say goodbye to manual spreadsheets and endless email reminders. Ledgerly gives your
-              team a live view of every transaction, the moment it happens.
-            </p>
+            {accountingCard.description && (
+              <p className="max-w-[660px] text-xl leading-[36px] text-[#828282]">
+                {accountingCard.description}
+              </p>
+            )}
           </div>
 
           <div
@@ -257,12 +264,13 @@ export const SaasBento: React.FC<Props> = ({
           )}
         >
           <h3 className="text-[32px] leading-[44px] font-bold text-white md:text-5xl md:leading-[72px]">
-            Optimise team spend, together
+            {optimiseCard.heading}
           </h3>
-          <p className="mt-6 max-w-[631px] text-lg leading-[30px] text-[#828282] md:text-[22px] md:leading-[36px] xl:mt-auto">
-            Set budget limits, automate approvals, and give your staff the freedom to spend
-            responsibly. Peace of mind for finance, clarity for everyone.
-          </p>
+          {optimiseCard.description && (
+            <p className="mt-6 max-w-[631px] text-lg leading-[30px] text-[#828282] md:text-[22px] md:leading-[36px] xl:mt-auto">
+              {optimiseCard.description}
+            </p>
+          )}
           <a
             className={cn(
               inter.className,
