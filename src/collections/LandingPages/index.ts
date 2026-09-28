@@ -1,20 +1,31 @@
-import type { CollectionConfig } from 'payload'
-
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import type { Block, CollectionConfig, Field } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Feature } from '@/blocks/Feature/config'
-import { linkGroup } from '@/fields/linkGroup'
-import { landingPageFooter } from './footer/config'
-import { landingPageHero } from './hero/config'
+import { Pricing } from '@/blocks/Pricing/config'
+import { Testimonial } from '@/blocks/Testimonial/config'
+import { TypishCta } from './closingCta/config'
+import { TypishFooter } from './footer/config'
+import { TypishHero } from './hero/config'
 import { revalidateDelete, revalidateLandingPage } from './hooks/revalidateLandingPage'
+import { LedgerlyCta } from './ledgerlyCta/config'
+import { LedgerlyFooter } from './ledgerlyFooter/config'
+import { LedgerlyHeader } from './ledgerlyHeader/config'
+import { LedgerlyHero } from './ledgerlyHero/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+
+// A section that holds at most one block, so each LP picks its own design
+// (Typish / Ledgerly) for the header, hero, closing CTA and footer.
+const singleBlock = (name: string, blocks: Block[]): Field => ({
+  name,
+  type: 'blocks',
+  blocks,
+  maxRows: 1,
+  admin: {
+    initCollapsed: false,
+  },
+})
 
 export const LandingPages: CollectionConfig = {
   slug: 'landing-pages',
@@ -52,8 +63,13 @@ export const LandingPages: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
+          label: 'Header',
+          description: 'Typish LPではヘッダーを使わないため空のままで構いません。',
+          fields: [singleBlock('header', [LedgerlyHeader])],
+        },
+        {
           label: 'Hero',
-          fields: [landingPageHero],
+          fields: [singleBlock('hero', [TypishHero, LedgerlyHero])],
         },
         {
           label: '特徴セクション',
@@ -61,7 +77,7 @@ export const LandingPages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Feature],
+              blocks: [Feature, Testimonial, Pricing],
               required: true,
               admin: {
                 initCollapsed: true,
@@ -71,40 +87,11 @@ export const LandingPages: CollectionConfig = {
         },
         {
           label: 'クロージングCTA',
-          fields: [
-            {
-              name: 'closingCta',
-              type: 'group',
-              label: false,
-              fields: [
-                {
-                  name: 'richText',
-                  type: 'richText',
-                  editor: lexicalEditor({
-                    features: ({ rootFeatures }) => {
-                      return [
-                        ...rootFeatures,
-                        HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-                        FixedToolbarFeature(),
-                        InlineToolbarFeature(),
-                      ]
-                    },
-                  }),
-                  label: false,
-                },
-                linkGroup({
-                  appearances: ['default', 'outline'],
-                  overrides: {
-                    maxRows: 2,
-                  },
-                }),
-              ],
-            },
-          ],
+          fields: [singleBlock('closingCta', [TypishCta, LedgerlyCta])],
         },
         {
           label: 'Footer',
-          fields: [landingPageFooter],
+          fields: [singleBlock('footer', [TypishFooter, LedgerlyFooter])],
         },
       ],
     },

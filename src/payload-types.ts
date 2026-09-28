@@ -755,93 +755,11 @@ export interface Work {
 export interface LandingPage {
   id: number;
   title: string;
-  hero: {
-    schoolPhoto: number | Media;
-    logo: number | Media;
-    taglines?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: number | Page;
-            } | null;
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-    tuition?: string | null;
-    access?: string | null;
-  };
-  layout: FeatureBlock[];
-  closingCta?: {
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: number | Page;
-            } | null;
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-  };
-  footer: {
-    address: string;
-    tel: string;
-    email: string;
-    /**
-     * 校舎HP、Instagram等の外部リンク。
-     */
-    externalLinks?:
-      | {
-          label: string;
-          url: string;
-          id?: string | null;
-        }[]
-      | null;
-    /**
-     * 架空ブランドを使ったデモページである旨の免責文言などを入力
-     */
-    disclaimer?: string | null;
-  };
+  header?: LedgerlyHeaderBlock[] | null;
+  hero?: (TypishHeroBlock | LedgerlyHeroBlock)[] | null;
+  layout: (FeatureBlock | TestimonialBlock | PricingBlock)[];
+  closingCta?: (TypishCtaBlock | LedgerlyCtaBlock)[] | null;
+  footer?: (TypishFooterBlock | LedgerlyFooterBlock)[] | null;
   /**
    * 公開URL: /lp/[slug]
    */
@@ -849,6 +767,115 @@ export interface LandingPage {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyHeaderBlock".
+ */
+export interface LedgerlyHeaderBlock {
+  /**
+   * PC表示のみ（lg以上）で表示されます。
+   */
+  nav?:
+    | {
+        label: string;
+        href?: string | null;
+        dropdown?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  ctaLabel: string;
+  ctaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ledgerlyHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishHeroBlock".
+ */
+export interface TypishHeroBlock {
+  schoolPhoto: number | Media;
+  logo: number | Media;
+  taglines?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: number | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  tuition?: string | null;
+  access?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'typishHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyHeroBlock".
+ */
+export interface LedgerlyHeroBlock {
+  /**
+   * 文言が空欄ならバッジ自体を表示しません。
+   */
+  badge?: {
+    tag?: string | null;
+    label?: string | null;
+    href?: string | null;
+  };
+  heading: string;
+  lead?: string | null;
+  emailForm: {
+    placeholder: string;
+    buttonLabel: string;
+  };
+  review?: {
+    avatars?:
+      | {
+          avatar: number | Media;
+          /**
+           * 任意。アバターの上に同じサイズで重ねて表示されます。
+           */
+          avatarCover?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * 例: +2k（空欄なら非表示）。アバターの右端に丸いバッジで表示されます。
+     */
+    countBadge?: string | null;
+    caption?: string | null;
+  };
+  dashboard?: (number | null) | Media;
+  pillNav?:
+    | {
+        label: string;
+        href?: string | null;
+        active?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ledgerlyHero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -876,6 +903,196 @@ export interface FeatureBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'feature';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  testimonials: {
+    name: string;
+    role?: string | null;
+    quote: string;
+    avatar: number | Media;
+    /**
+     * 任意。アバターの上に少し大きく重ねて表示されます。
+     */
+    avatarCover?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlock".
+ */
+export interface PricingBlock {
+  plans: {
+    name: string;
+    /**
+     * 例: $49 / Custom
+     */
+    price: string;
+    /**
+     * 例: /month（空欄なら非表示）
+     */
+    period?: string | null;
+    description: string;
+    features: {
+      feature: string;
+      id?: string | null;
+    }[];
+    popular?: boolean | null;
+    variant: 'basic' | 'pro' | 'enterprise';
+    cta: string;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishCtaBlock".
+ */
+export interface TypishCtaBlock {
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: number | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'typishCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyCtaBlock".
+ */
+export interface LedgerlyCtaBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  lead?: string | null;
+  primaryButton: {
+    label: string;
+    href?: string | null;
+  };
+  secondaryButton: {
+    label: string;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ledgerlyCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishFooterBlock".
+ */
+export interface TypishFooterBlock {
+  address: string;
+  tel: string;
+  email: string;
+  /**
+   * 校舎HP、Instagram等の外部リンク。
+   */
+  externalLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * 架空ブランドを使ったデモページである旨の免責文言などを入力
+   */
+  disclaimer?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'typishFooter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyFooterBlock".
+ */
+export interface LedgerlyFooterBlock {
+  logo: {
+    /**
+     * 24×24で表示されます。空欄なら既定のロゴを使用。
+     */
+    image?: (number | null) | Media;
+    text: string;
+  };
+  description?: string | null;
+  /**
+   * URLが空欄のアイコンは表示されません。
+   */
+  socialLinks?: {
+    twitter?: string | null;
+    facebook?: string | null;
+    instagram?: string | null;
+    github?: string | null;
+  };
+  company: {
+    title: string;
+    links?:
+      | {
+          label: string;
+          href?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  help: {
+    title: string;
+    links?:
+      | {
+          label: string;
+          href?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  newsletterHeading: string;
+  copyright?: string | null;
+  disclaimer?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ledgerlyFooter';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1399,79 +1616,136 @@ export interface WorksSelect<T extends boolean = true> {
  */
 export interface LandingPagesSelect<T extends boolean = true> {
   title?: T;
+  header?:
+    | T
+    | {
+        ledgerlyHeader?: T | LedgerlyHeaderBlockSelect<T>;
+      };
   hero?:
     | T
     | {
-        schoolPhoto?: T;
-        logo?: T;
-        taglines?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        tuition?: T;
-        access?: T;
+        typishHero?: T | TypishHeroBlockSelect<T>;
+        ledgerlyHero?: T | LedgerlyHeroBlockSelect<T>;
       };
   layout?:
     | T
     | {
         feature?: T | FeatureBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        pricing?: T | PricingBlockSelect<T>;
       };
   closingCta?:
     | T
     | {
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
+        typishCta?: T | TypishCtaBlockSelect<T>;
+        ledgerlyCta?: T | LedgerlyCtaBlockSelect<T>;
       };
   footer?:
     | T
     | {
-        address?: T;
-        tel?: T;
-        email?: T;
-        externalLinks?:
-          | T
-          | {
-              label?: T;
-              url?: T;
-              id?: T;
-            };
-        disclaimer?: T;
+        typishFooter?: T | TypishFooterBlockSelect<T>;
+        ledgerlyFooter?: T | LedgerlyFooterBlockSelect<T>;
       };
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyHeaderBlock_select".
+ */
+export interface LedgerlyHeaderBlockSelect<T extends boolean = true> {
+  nav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        dropdown?: T;
+        id?: T;
+      };
+  ctaLabel?: T;
+  ctaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishHeroBlock_select".
+ */
+export interface TypishHeroBlockSelect<T extends boolean = true> {
+  schoolPhoto?: T;
+  logo?: T;
+  taglines?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  tuition?: T;
+  access?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyHeroBlock_select".
+ */
+export interface LedgerlyHeroBlockSelect<T extends boolean = true> {
+  badge?:
+    | T
+    | {
+        tag?: T;
+        label?: T;
+        href?: T;
+      };
+  heading?: T;
+  lead?: T;
+  emailForm?:
+    | T
+    | {
+        placeholder?: T;
+        buttonLabel?: T;
+      };
+  review?:
+    | T
+    | {
+        avatars?:
+          | T
+          | {
+              avatar?: T;
+              avatarCover?: T;
+              id?: T;
+            };
+        countBadge?: T;
+        caption?: T;
+      };
+  dashboard?: T;
+  pillNav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        active?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1482,6 +1756,166 @@ export interface FeatureBlockSelect<T extends boolean = true> {
   body?: T;
   image?: T;
   imagePosition?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        quote?: T;
+        avatar?: T;
+        avatarCover?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingBlock_select".
+ */
+export interface PricingBlockSelect<T extends boolean = true> {
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        period?: T;
+        description?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        popular?: T;
+        variant?: T;
+        cta?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishCtaBlock_select".
+ */
+export interface TypishCtaBlockSelect<T extends boolean = true> {
+  richText?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyCtaBlock_select".
+ */
+export interface LedgerlyCtaBlockSelect<T extends boolean = true> {
+  heading?: T;
+  lead?: T;
+  primaryButton?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondaryButton?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypishFooterBlock_select".
+ */
+export interface TypishFooterBlockSelect<T extends boolean = true> {
+  address?: T;
+  tel?: T;
+  email?: T;
+  externalLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  disclaimer?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LedgerlyFooterBlock_select".
+ */
+export interface LedgerlyFooterBlockSelect<T extends boolean = true> {
+  logo?:
+    | T
+    | {
+        image?: T;
+        text?: T;
+      };
+  description?: T;
+  socialLinks?:
+    | T
+    | {
+        twitter?: T;
+        facebook?: T;
+        instagram?: T;
+        github?: T;
+      };
+  company?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+      };
+  help?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+      };
+  newsletterHeading?: T;
+  copyright?: T;
+  disclaimer?: T;
   id?: T;
   blockName?: T;
 }

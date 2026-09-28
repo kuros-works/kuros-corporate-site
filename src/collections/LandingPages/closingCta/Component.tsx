@@ -1,11 +1,11 @@
 import React from 'react'
 
-import type { LandingPage } from '@/payload-types'
+import type { TypishCtaBlock as TypishCtaBlockProps } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
 
-export const LandingPageClosingCta: React.FC<NonNullable<LandingPage['closingCta']>> = ({
+export const TypishCtaBlock: React.FC<TypishCtaBlockProps> = ({
   richText,
   links,
 }) => {

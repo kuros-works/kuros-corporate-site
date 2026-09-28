@@ -1,11 +1,11 @@
 import React from 'react'
 
-import type { LandingPage } from '@/payload-types'
+import type { TypishHeroBlock as TypishHeroBlockProps } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 
-export const LandingPageHero: React.FC<NonNullable<LandingPage['hero']>> = ({
+export const TypishHeroBlock: React.FC<TypishHeroBlockProps> = ({
   schoolPhoto,
   logo,
   taglines,

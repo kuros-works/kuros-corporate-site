@@ -1,8 +1,8 @@
 import React from 'react'
 
-import type { LandingPage } from '@/payload-types'
+import type { TypishFooterBlock as TypishFooterBlockProps } from '@/payload-types'
 
-export const LandingPageFooter: React.FC<NonNullable<LandingPage['footer']>> = ({
+export const TypishFooterBlock: React.FC<TypishFooterBlockProps> = ({
   address,
   tel,
   email,
