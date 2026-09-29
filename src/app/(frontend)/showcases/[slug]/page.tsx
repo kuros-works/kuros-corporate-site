@@ -60,7 +60,7 @@ export default async function Showcase({ params: paramsPromise }: Args) {
     notFound()
   }
 
-  const { title, publishedDate, content, publicUrl } = showcase
+  const { title, publishedDate, content, publicUrl, relatedLinks } = showcase
 
   return (
     <article className="pt-24 pb-24">
@@ -84,6 +84,21 @@ export default async function Showcase({ params: paramsPromise }: Args) {
         )}
 
         {content && <RichText className="mt-8" data={content} enableGutter={false} />}
+
+        {relatedLinks && relatedLinks.length > 0 && (
+          <div className="prose dark:prose-invert max-w-none mt-12">
+            <h2>関連記事</h2>
+            <ul>
+              {relatedLinks.map(({ id, label, url }) => (
+                <li key={id ?? url}>
+                  <a href={url} rel="noopener noreferrer" target="_blank">
+                    {label || url}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </article>
   )
