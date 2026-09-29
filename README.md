@@ -102,6 +102,9 @@ pnpm dev
   - Payload バックエンド型録 #3 — 棚は作った。読む場所が、まだない。
   - Qiita: https://qiita.com/kuros-works/items/7653a1cebfd88e455567
   - Zenn: https://zenn.dev/kuros_works/articles/2fe41ca51040d5
+  - Payload バックエンド型録 #4 — Figmaの1枚を、Supabaseまで通した
+  - Qiita: https://qiita.com/kuros-works/items/9bba865da1c930b18cce
+  - Zenn: https://zenn.dev/kuros_works/articles/ee1010f70656a2
 
 ---
 
@@ -112,3 +115,12 @@ pnpm dev
 **Kuro's Works**
 代表者：西野大
 Email：info@kuros-works.com
+
+### 使用素材の帰属表示
+
+Ledgerly LP（`/lp/[slug]`）のデザインは、以下の Figma テンプレートをもとに改変して制作しています。
+
+- 元テンプレート："SaaS Landing Page - Bento UI" by sahin Alom（Figma Community）
+  https://www.figma.com/community/file/1360683197038417365/saas-landing-page-bento-ui
+- ライセンス：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- 改変：あり
