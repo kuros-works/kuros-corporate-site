@@ -165,7 +165,27 @@ export const SaasFooter: React.FC<Props> = ({
 
         <div className="flex w-full max-w-[600px] flex-col gap-1 text-center text-sm leading-5 tracking-[0.5px] text-[#fafafa]">
           {copyright && <p>{copyright}</p>}
-          <p>Design template by sahin Alom via Figma Community</p>
+          <p>
+            Design based on{' '}
+            <a
+              className="underline underline-offset-2 transition-colors hover:text-white"
+              href="https://www.figma.com/community/file/1360683197038417365/saas-landing-page-bento-ui"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              &quot;SaaS Landing Page - Bento UI&quot; by sahin Alom (Figma Community)
+            </a>
+            , licensed under{' '}
+            <a
+              className="underline underline-offset-2 transition-colors hover:text-white"
+              href="https://creativecommons.org/licenses/by/4.0/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              CC BY 4.0
+            </a>
+            . Modified.
+          </p>
           {disclaimer && <p>{disclaimer}</p>}
         </div>
       </div>
