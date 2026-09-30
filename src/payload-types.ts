@@ -73,6 +73,7 @@ export interface Config {
     news: News;
     works: Work;
     'landing-pages': LandingPage;
+    properties: Property;
     showcases: Showcase;
     media: Media;
     users: User;
@@ -98,6 +99,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     works: WorksSelect<false> | WorksSelect<true>;
     'landing-pages': LandingPagesSelect<false> | LandingPagesSelect<true>;
+    properties: PropertiesSelect<false> | PropertiesSelect<true>;
     showcases: ShowcasesSelect<false> | ShowcasesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -757,7 +759,7 @@ export interface LandingPage {
   title: string;
   header?: LedgerlyHeaderBlock[] | null;
   hero?: (TypishHeroBlock | LedgerlyHeroBlock)[] | null;
-  layout: (FeatureBlock | TestimonialBlock | PricingBlock | LedgerlyFeaturesBlock)[];
+  layout: (FeatureBlock | TestimonialBlock | PricingBlock | LedgerlyFeaturesBlock | PropertyListingsBlock)[];
   closingCta?: (TypishCtaBlock | LedgerlyCtaBlock)[] | null;
   footer?: (TypishFooterBlock | LedgerlyFooterBlock)[] | null;
   /**
@@ -1002,6 +1004,46 @@ export interface LedgerlyFeaturesBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'ledgerlyFeatures';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PropertyListingsBlock".
+ */
+export interface PropertyListingsBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  /**
+   * 最大6件。並び順がそのまま表示順になります。
+   */
+  properties?: (number | Property)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'propertyListings';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties".
+ */
+export interface Property {
+  id: number;
+  title: string;
+  /**
+   * 一意になるよう手動で入力してください。
+   */
+  slug: string;
+  image?: (number | null) | Media;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
+  size?: number | null;
+  location?: string | null;
+  price?: number | null;
+  listingType?: ('rent' | 'sale') | null;
+  propertyType?: ('house' | 'apartment' | 'condo') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1401,6 +1443,10 @@ export interface PayloadLockedDocument {
         value: number | LandingPage;
       } | null)
     | ({
+        relationTo: 'properties';
+        value: number | Property;
+      } | null)
+    | ({
         relationTo: 'showcases';
         value: number | Showcase;
       } | null)
@@ -1683,6 +1729,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
         testimonial?: T | TestimonialBlockSelect<T>;
         pricing?: T | PricingBlockSelect<T>;
         ledgerlyFeatures?: T | LedgerlyFeaturesBlockSelect<T>;
+        propertyListings?: T | PropertyListingsBlockSelect<T>;
       };
   closingCta?:
     | T
@@ -1896,6 +1943,17 @@ export interface LedgerlyFeaturesBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PropertyListingsBlock_select".
+ */
+export interface PropertyListingsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  properties?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TypishCtaBlock_select".
  */
 export interface TypishCtaBlockSelect<T extends boolean = true> {
@@ -2008,6 +2066,24 @@ export interface LedgerlyFooterBlockSelect<T extends boolean = true> {
   disclaimer?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties_select".
+ */
+export interface PropertiesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  image?: T;
+  bedrooms?: T;
+  bathrooms?: T;
+  size?: T;
+  location?: T;
+  price?: T;
+  listingType?: T;
+  propertyType?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

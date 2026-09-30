@@ -13,6 +13,7 @@ import { LedgerlyFeaturesBlock } from './ledgerlyFeatures/Component'
 import { LedgerlyFooterBlock } from './ledgerlyFooter/Component'
 import { LedgerlyHeaderBlock } from './ledgerlyHeader/Component'
 import { LedgerlyHeroBlock } from './ledgerlyHero/Component'
+import { PropertyListingsBlock } from './propertyListings/Component'
 
 const blockComponents = {
   feature: FeatureBlock,
@@ -22,6 +23,7 @@ const blockComponents = {
   ledgerlyHeader: LedgerlyHeaderBlock,
   ledgerlyHero: LedgerlyHeroBlock,
   pricing: PricingBlock,
+  propertyListings: PropertyListingsBlock,
   testimonial: TestimonialBlock,
   typishCta: TypishCtaBlock,
   typishFooter: TypishFooterBlock,

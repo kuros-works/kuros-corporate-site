@@ -9,6 +9,7 @@ import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Properties } from './collections/Properties'
 import { Showcases } from './collections/Showcases'
 import { Users } from './collections/Users'
 import { Works } from './collections/Works'
@@ -86,6 +87,7 @@ export default buildConfig({
     News,
     Works,
     LandingPages,
+    Properties,
     Showcases,
     Media,
     Users,

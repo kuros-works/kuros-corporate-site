@@ -14,6 +14,7 @@ import { LedgerlyFeatures } from './ledgerlyFeatures/config'
 import { LedgerlyFooter } from './ledgerlyFooter/config'
 import { LedgerlyHeader } from './ledgerlyHeader/config'
 import { LedgerlyHero } from './ledgerlyHero/config'
+import { PropertyListings } from './propertyListings/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 
 // A section that holds at most one block, so each LP picks its own design
@@ -78,7 +79,7 @@ export const LandingPages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Feature, Testimonial, Pricing, LedgerlyFeatures],
+              blocks: [Feature, Testimonial, Pricing, LedgerlyFeatures, PropertyListings],
               required: true,
               admin: {
                 initCollapsed: true,
