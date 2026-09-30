@@ -42,9 +42,9 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
         'flex flex-col overflow-hidden rounded-[25px] bg-white text-black shadow-[0_32px_34px_rgba(0,0,0,0.13)]',
       )}
     >
-      <div className="aspect-[336/266] bg-neutral-100">
+      <div className="relative aspect-[336/266] overflow-hidden bg-neutral-100">
         {imageSrc && (
-          <img alt={imageAlt || title} className="size-full object-cover" src={imageSrc} />
+          <img alt={imageAlt || title} className="absolute inset-0 size-full object-cover" src={imageSrc} />
         )}
       </div>
       <h3 className="p-[30px] text-2xl font-bold tracking-[-0.025em]">{title}</h3>
