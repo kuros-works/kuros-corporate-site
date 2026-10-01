@@ -15,10 +15,14 @@ import { LedgerlyFooter } from './ledgerlyFooter/config'
 import { LedgerlyHeader } from './ledgerlyHeader/config'
 import { LedgerlyHero } from './ledgerlyHero/config'
 import { PropertyListings } from './propertyListings/config'
+import { RealEstateCta } from './realEstateCta/config'
+import { RealEstateFooter } from './realEstateFooter/config'
+import { RealEstateHeader } from './realEstateHeader/config'
+import { RealEstateHero } from './realEstateHero/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 
 // A section that holds at most one block, so each LP picks its own design
-// (Typish / Ledgerly) for the header, hero, closing CTA and footer.
+// (Typish / Ledgerly / Real Estate) for the header, hero, closing CTA and footer.
 const singleBlock = (name: string, blocks: Block[]): Field => ({
   name,
   type: 'blocks',
@@ -67,11 +71,11 @@ export const LandingPages: CollectionConfig = {
         {
           label: 'Header',
           description: 'Typish LPではヘッダーを使わないため空のままで構いません。',
-          fields: [singleBlock('header', [LedgerlyHeader])],
+          fields: [singleBlock('header', [LedgerlyHeader, RealEstateHeader])],
         },
         {
           label: 'Hero',
-          fields: [singleBlock('hero', [TypishHero, LedgerlyHero])],
+          fields: [singleBlock('hero', [TypishHero, LedgerlyHero, RealEstateHero])],
         },
         {
           label: '特徴セクション',
@@ -89,11 +93,11 @@ export const LandingPages: CollectionConfig = {
         },
         {
           label: 'クロージングCTA',
-          fields: [singleBlock('closingCta', [TypishCta, LedgerlyCta])],
+          fields: [singleBlock('closingCta', [TypishCta, LedgerlyCta, RealEstateCta])],
         },
         {
           label: 'Footer',
-          fields: [singleBlock('footer', [TypishFooter, LedgerlyFooter])],
+          fields: [singleBlock('footer', [TypishFooter, LedgerlyFooter, RealEstateFooter])],
         },
       ],
     },

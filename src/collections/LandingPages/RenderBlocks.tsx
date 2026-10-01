@@ -16,6 +16,10 @@ import { LedgerlyHeroBlock } from './ledgerlyHero/Component'
 import { PropertyListingsBlock } from './propertyListings/Component'
 import { RealEstateFeatureBlock } from './realEstate/FeatureBlock'
 import { RealEstateTestimonialBlock } from './realEstate/TestimonialBlock'
+import { RealEstateCtaBlock } from './realEstateCta/Component'
+import { RealEstateFooterBlock } from './realEstateFooter/Component'
+import { RealEstateHeaderBlock } from './realEstateHeader/Component'
+import { RealEstateHeroBlock } from './realEstateHero/Component'
 import type { LandingPageTheme } from './theme'
 
 const blockComponents = {
@@ -27,6 +31,10 @@ const blockComponents = {
   ledgerlyHero: LedgerlyHeroBlock,
   pricing: PricingBlock,
   propertyListings: PropertyListingsBlock,
+  realEstateCta: RealEstateCtaBlock,
+  realEstateFooter: RealEstateFooterBlock,
+  realEstateHeader: RealEstateHeaderBlock,
+  realEstateHero: RealEstateHeroBlock,
   testimonial: TestimonialBlock,
   typishCta: TypishCtaBlock,
   typishFooter: TypishFooterBlock,

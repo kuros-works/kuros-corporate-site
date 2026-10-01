@@ -51,6 +51,30 @@ export const Feature: Block = {
       options: [
         { label: '左', value: 'left' },
         { label: '右', value: 'right' },
+        { label: '暗背景・中央寄せ', value: 'darkCentered' },
+      ],
+      admin: {
+        description: '「暗背景・中央寄せ」は不動産LP用。他のLPでは「左」と同じ表示になります。',
+      },
+    },
+    {
+      name: 'button',
+      type: 'group',
+      label: 'ボタン',
+      admin: {
+        description: '任意。文言が空欄なら非表示。',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          label: '文言',
+        },
+        {
+          name: 'href',
+          type: 'text',
+          label: 'リンク先',
+        },
       ],
     },
   ],
