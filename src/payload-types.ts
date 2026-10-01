@@ -943,7 +943,10 @@ export interface FeatureBlock {
     };
     [k: string]: unknown;
   } | null;
-  image: number | Media;
+  /**
+   * 画像位置が「左」「右」のときは必須。「暗背景・中央寄せ」では任意です。
+   */
+  image?: (number | null) | Media;
   /**
    * 「暗背景・中央寄せ」は不動産LP用。他のLPでは「左」と同じ表示になります。
    */
