@@ -62,7 +62,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <RenderLandingPageBlocks blocks={hero || []} />
 
       <div className={cn('pt-16 pb-16', theme === 'ledgerly' && 'bg-[#1d1c20] px-4')}>
-        <RenderLandingPageBlocks blocks={layout || []} spaced />
+        <RenderLandingPageBlocks blocks={layout || []} spaced theme={theme} />
       </div>
 
       <RenderLandingPageBlocks blocks={closingCta || []} />
