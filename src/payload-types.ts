@@ -757,11 +757,11 @@ export interface Work {
 export interface LandingPage {
   id: number;
   title: string;
-  header?: LedgerlyHeaderBlock[] | null;
-  hero?: (TypishHeroBlock | LedgerlyHeroBlock)[] | null;
+  header?: (LedgerlyHeaderBlock | RealEstateHeaderBlock)[] | null;
+  hero?: (TypishHeroBlock | LedgerlyHeroBlock | RealEstateHeroBlock)[] | null;
   layout: (FeatureBlock | TestimonialBlock | PricingBlock | LedgerlyFeaturesBlock | PropertyListingsBlock)[];
-  closingCta?: (TypishCtaBlock | LedgerlyCtaBlock)[] | null;
-  footer?: (TypishFooterBlock | LedgerlyFooterBlock)[] | null;
+  closingCta?: (TypishCtaBlock | LedgerlyCtaBlock | RealEstateCtaBlock)[] | null;
+  footer?: (TypishFooterBlock | LedgerlyFooterBlock | RealEstateFooterBlock)[] | null;
   /**
    * 公開URL: /lp/[slug]
    */
@@ -791,6 +791,27 @@ export interface LedgerlyHeaderBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'ledgerlyHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateHeaderBlock".
+ */
+export interface RealEstateHeaderBlock {
+  logo?: (number | null) | Media;
+  nav?:
+    | {
+        label: string;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta: {
+    label: string;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'realEstateHeader';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -881,6 +902,28 @@ export interface LedgerlyHeroBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateHeroBlock".
+ */
+export interface RealEstateHeroBlock {
+  backgroundImage: number | Media;
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  lead?: string | null;
+  /**
+   * ヒーロー下端の白いバーに表示されます。
+   */
+  listingsLink: {
+    label: string;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'realEstateHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FeatureBlock".
  */
 export interface FeatureBlock {
@@ -900,8 +943,21 @@ export interface FeatureBlock {
     };
     [k: string]: unknown;
   } | null;
-  image: number | Media;
-  imagePosition?: ('left' | 'right') | null;
+  /**
+   * 画像位置が「左」「右」のときは必須。「暗背景・中央寄せ」では任意です。
+   */
+  image?: (number | null) | Media;
+  /**
+   * 「暗背景・中央寄せ」は不動産LP用。他のLPでは「左」と同じ表示になります。
+   */
+  imagePosition?: ('left' | 'right' | 'darkCentered') | null;
+  /**
+   * 任意。文言が空欄なら非表示。
+   */
+  button?: {
+    label?: string | null;
+    href?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'feature';
@@ -1112,6 +1168,24 @@ export interface LedgerlyCtaBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateCtaBlock".
+ */
+export interface RealEstateCtaBlock {
+  heading: string;
+  /**
+   * 見出しの後ろに色付きで続けて表示されます。空欄なら非表示。
+   */
+  highlight?: string | null;
+  button: {
+    label: string;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'realEstateCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TypishFooterBlock".
  */
 export interface TypishFooterBlock {
@@ -1184,6 +1258,37 @@ export interface LedgerlyFooterBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'ledgerlyFooter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateFooterBlock".
+ */
+export interface RealEstateFooterBlock {
+  logo?: (number | null) | Media;
+  /**
+   * URLが空欄のアイコンは表示されません。
+   */
+  socialLinks?: {
+    facebook?: string | null;
+    twitter?: string | null;
+    instagram?: string | null;
+  };
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'realEstateFooter';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1715,12 +1820,14 @@ export interface LandingPagesSelect<T extends boolean = true> {
     | T
     | {
         ledgerlyHeader?: T | LedgerlyHeaderBlockSelect<T>;
+        realEstateHeader?: T | RealEstateHeaderBlockSelect<T>;
       };
   hero?:
     | T
     | {
         typishHero?: T | TypishHeroBlockSelect<T>;
         ledgerlyHero?: T | LedgerlyHeroBlockSelect<T>;
+        realEstateHero?: T | RealEstateHeroBlockSelect<T>;
       };
   layout?:
     | T
@@ -1736,12 +1843,14 @@ export interface LandingPagesSelect<T extends boolean = true> {
     | {
         typishCta?: T | TypishCtaBlockSelect<T>;
         ledgerlyCta?: T | LedgerlyCtaBlockSelect<T>;
+        realEstateCta?: T | RealEstateCtaBlockSelect<T>;
       };
   footer?:
     | T
     | {
         typishFooter?: T | TypishFooterBlockSelect<T>;
         ledgerlyFooter?: T | LedgerlyFooterBlockSelect<T>;
+        realEstateFooter?: T | RealEstateFooterBlockSelect<T>;
       };
   slug?: T;
   updatedAt?: T;
@@ -1763,6 +1872,28 @@ export interface LedgerlyHeaderBlockSelect<T extends boolean = true> {
       };
   ctaLabel?: T;
   ctaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateHeaderBlock_select".
+ */
+export interface RealEstateHeaderBlockSelect<T extends boolean = true> {
+  logo?: T;
+  nav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1846,6 +1977,23 @@ export interface LedgerlyHeroBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateHeroBlock_select".
+ */
+export interface RealEstateHeroBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  heading?: T;
+  lead?: T;
+  listingsLink?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FeatureBlock_select".
  */
 export interface FeatureBlockSelect<T extends boolean = true> {
@@ -1853,6 +2001,12 @@ export interface FeatureBlockSelect<T extends boolean = true> {
   body?: T;
   image?: T;
   imagePosition?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -2000,6 +2154,22 @@ export interface LedgerlyCtaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateCtaBlock_select".
+ */
+export interface RealEstateCtaBlockSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TypishFooterBlock_select".
  */
 export interface TypishFooterBlockSelect<T extends boolean = true> {
@@ -2064,6 +2234,35 @@ export interface LedgerlyFooterBlockSelect<T extends boolean = true> {
   newsletterHeading?: T;
   copyright?: T;
   disclaimer?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RealEstateFooterBlock_select".
+ */
+export interface RealEstateFooterBlockSelect<T extends boolean = true> {
+  logo?: T;
+  socialLinks?:
+    | T
+    | {
+        facebook?: T;
+        twitter?: T;
+        instagram?: T;
+      };
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
