@@ -7,6 +7,7 @@ import { getPayload } from 'payload'
 import React, { cache } from 'react'
 
 import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks'
+import { getLandingPageTheme } from '@/collections/LandingPages/theme'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { cn } from '@/utilities/ui'
 
@@ -48,17 +49,19 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   // Ledgerly blocks assume the static /lp/ledgerly <main>'s dark background and
   // 16px gutter (SaasTestimonials' -mx-4 track cancels it), so mirror them here.
-  const isLedgerly = hero?.[0]?.blockType === 'ledgerlyHero'
+  const theme = getLandingPageTheme(landingPage)
 
   return (
-    <article>
+    // Real-estate blocks are light-only, so pin the colors instead of following
+    // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
+    <article className={cn(theme === 'realEstate' && 'flex-1 bg-white text-black')}>
       {draft && <LivePreviewListener />}
 
       <RenderLandingPageBlocks blocks={header || []} />
 
       <RenderLandingPageBlocks blocks={hero || []} />
 
-      <div className={cn('pt-16 pb-16', isLedgerly && 'bg-[#1d1c20] px-4')}>
+      <div className={cn('pt-16 pb-16', theme === 'ledgerly' && 'bg-[#1d1c20] px-4')}>
         <RenderLandingPageBlocks blocks={layout || []} spaced />
       </div>
 
