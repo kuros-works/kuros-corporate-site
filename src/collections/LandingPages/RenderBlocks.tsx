@@ -14,6 +14,9 @@ import { LedgerlyFooterBlock } from './ledgerlyFooter/Component'
 import { LedgerlyHeaderBlock } from './ledgerlyHeader/Component'
 import { LedgerlyHeroBlock } from './ledgerlyHero/Component'
 import { PropertyListingsBlock } from './propertyListings/Component'
+import { RealEstateFeatureBlock } from './realEstate/FeatureBlock'
+import { RealEstateTestimonialBlock } from './realEstate/TestimonialBlock'
+import type { LandingPageTheme } from './theme'
 
 const blockComponents = {
   feature: FeatureBlock,
@@ -30,6 +33,15 @@ const blockComponents = {
   typishHero: TypishHeroBlock,
 }
 
+// Per-theme replacements for shared blocks: same fields (so no schema change),
+// different design. Blocks not listed here fall back to blockComponents.
+const themeOverrides: { [T in LandingPageTheme]?: Partial<typeof blockComponents> } = {
+  realEstate: {
+    feature: RealEstateFeatureBlock,
+    testimonial: RealEstateTestimonialBlock,
+  },
+}
+
 type LandingPageBlock = NonNullable<
   LandingPage['header' | 'hero' | 'layout' | 'closingCta' | 'footer']
 >[number]
@@ -39,7 +51,8 @@ export const RenderLandingPageBlocks: React.FC<{
   // Vertical gap around each block — used for the 特徴セクション list, not
   // for the single-block header/hero/CTA/footer sections.
   spaced?: boolean
-}> = ({ blocks, spaced = false }) => {
+  theme?: LandingPageTheme
+}> = ({ blocks, spaced = false, theme = 'default' }) => {
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
   if (!hasBlocks) return null
@@ -48,7 +61,8 @@ export const RenderLandingPageBlocks: React.FC<{
     <Fragment>
       {blocks.map((block, index) => {
         const { blockType } = block
-        const Block = blockComponents[blockType as keyof typeof blockComponents]
+        const key = blockType as keyof typeof blockComponents
+        const Block = themeOverrides[theme]?.[key] ?? blockComponents[key]
 
         if (!Block) return null
 
