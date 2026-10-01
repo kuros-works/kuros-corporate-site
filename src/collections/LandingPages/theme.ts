@@ -8,9 +8,10 @@ export const getLandingPageTheme = (
   landingPage: Pick<LandingPage, 'hero' | 'slug'>,
 ): LandingPageTheme => {
   if (landingPage.hero?.[0]?.blockType === 'ledgerlyHero') return 'ledgerly'
+  if (landingPage.hero?.[0]?.blockType === 'realEstateHero') return 'realEstate'
 
-  // Temporary: the real-estate LP has no hero block of its own yet, so match
-  // on the slug. Switch to the hero's blockType once realEstateHero exists.
+  // Temporary: keeps the real-estate LP themed until its hero is set to
+  // realEstateHero in the admin. Remove once that's done (PR5).
   if (landingPage.slug.startsWith('real-estate')) return 'realEstate'
 
   return 'default'

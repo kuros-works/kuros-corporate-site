@@ -51,15 +51,37 @@ export default async function Page({ params: paramsPromise }: Args) {
   // 16px gutter (SaasTestimonials' -mx-4 track cancels it), so mirror them here.
   const theme = getLandingPageTheme(landingPage)
 
+  // The real-estate nav is transparent with white text, made to sit on the
+  // hero photo (Figma 0:111 over 0:110). Without that hero it gets a black strip.
+  const realEstateHeader = header?.[0]?.blockType === 'realEstateHeader'
+  const overlayHeader = realEstateHeader && hero?.[0]?.blockType === 'realEstateHero'
+
   return (
     // Real-estate blocks are light-only, so pin the colors instead of following
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
     <article className={cn(theme === 'realEstate' && 'flex-1 bg-white text-black')}>
       {draft && <LivePreviewListener />}
 
-      <RenderLandingPageBlocks blocks={header || []} />
+      {overlayHeader ? (
+        <div className="relative">
+          <div className="absolute inset-x-0 top-0 z-10">
+            <RenderLandingPageBlocks blocks={header || []} />
+          </div>
+          <RenderLandingPageBlocks blocks={hero || []} />
+        </div>
+      ) : (
+        <>
+          {realEstateHeader ? (
+            <div className="bg-black pb-8">
+              <RenderLandingPageBlocks blocks={header || []} />
+            </div>
+          ) : (
+            <RenderLandingPageBlocks blocks={header || []} />
+          )}
 
-      <RenderLandingPageBlocks blocks={hero || []} />
+          <RenderLandingPageBlocks blocks={hero || []} />
+        </>
+      )}
 
       <div className={cn('pt-16 pb-16', theme === 'ledgerly' && 'bg-[#1d1c20] px-4')}>
         <RenderLandingPageBlocks blocks={layout || []} spaced theme={theme} />
