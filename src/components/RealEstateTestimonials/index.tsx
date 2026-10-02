@@ -1,21 +1,18 @@
-/* eslint-disable @next/next/no-img-element -- CMS media URL, sized by the avatar */
 import React from 'react'
 
+import { RealEstateAccentBar } from '@/components/RealEstateAccentBar'
 import { dmSans } from '@/components/SaasLp/fonts'
 import { cn } from '@/utilities/ui'
 
+import { TestimonialTabs, type RealEstateTestimonial } from './TestimonialTabs'
+
 // 不動産LP「お客様の声」セクション。
-// Figma 未確認のため構造優先の仮スタイル — 細部は後でFigmaと見比べて調整する。
+// Figma: Real Estate Template / Quote (node 0:3) — 見出しはなく、中央の列に
+// アクセントバー（0:23, 336px）と大きな引用文1つ、その下に人物タブ3つ。
+// 切り替え部分（推測）は TestimonialTabs にまとめてある。
 // LP全体がライト固定なので、テーマ変数（bg-card 等）は使わず色を直接指定する。
 
-// Display shape for one card. Kept free of payload-types so the component
-// can be previewed with static data, same as RealEstateListings.
-export type RealEstateTestimonial = {
-  avatarSrc?: string | null
-  name: string
-  quote: string
-  role?: string | null
-}
+export type { RealEstateTestimonial }
 
 const defaultTestimonials: RealEstateTestimonial[] = [
   {
@@ -35,48 +32,21 @@ const defaultTestimonials: RealEstateTestimonial[] = [
   },
 ]
 
-const Card: React.FC<{ testimonial: RealEstateTestimonial }> = ({ testimonial }) => {
-  const { avatarSrc, name, quote, role } = testimonial
-
-  return (
-    <figure className="flex h-full flex-col gap-6 rounded-[25px] bg-white p-[30px] shadow-[0_32px_34px_rgba(0,0,0,0.13)]">
-      <blockquote className="text-lg leading-7 text-neutral-700">
-        <p>{quote}</p>
-      </blockquote>
-      <figcaption className="mt-auto flex items-center gap-3">
-        <div className="relative size-12 shrink-0 overflow-hidden rounded-full bg-neutral-200">
-          {avatarSrc && <img alt="" className="absolute inset-0 size-full object-cover" src={avatarSrc} />}
-        </div>
-        <div className="flex min-w-0 flex-col">
-          <span className="font-bold tracking-[-0.025em]">{name}</span>
-          {role && <span className="text-sm text-neutral-500">{role}</span>}
-        </div>
-      </figcaption>
-    </figure>
-  )
-}
-
 type Props = {
   className?: string
-  heading?: string
   testimonials?: RealEstateTestimonial[]
 }
 
 export const RealEstateTestimonials: React.FC<Props> = ({
   className,
-  heading = 'What our customers say',
   testimonials = defaultTestimonials,
-}) => (
-  <section className={cn(dmSans.className, 'container text-black', className)}>
-    <h2 className="mb-10 text-center text-3xl font-bold tracking-[-0.025em] md:text-4xl">{heading}</h2>
-    {testimonials.length > 0 && (
-      <ul className="grid gap-6 md:grid-cols-3">
-        {testimonials.map((testimonial, index) => (
-          <li key={index}>
-            <Card testimonial={testimonial} />
-          </li>
-        ))}
-      </ul>
-    )}
-  </section>
-)
+}) => {
+  if (testimonials.length === 0) return null
+
+  return (
+    <section className={cn(dmSans.className, 'mx-auto w-full max-w-[1101px] px-4', className)}>
+      <RealEstateAccentBar className="mx-auto w-full max-w-[336px]" />
+      <TestimonialTabs testimonials={testimonials} />
+    </section>
+  )
+}
