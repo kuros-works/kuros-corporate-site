@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { RealEstateAccentBar } from '@/components/RealEstateAccentBar'
 import { dmSans } from '@/components/SaasLp/fonts'
 import { cn } from '@/utilities/ui'
 
@@ -25,14 +26,18 @@ export const RealEstateListings: React.FC<Props> = ({
 }) => (
   <section className={cn('container', className)}>
     <div className="mb-[60px] flex flex-col gap-3">
-      <h2
-        className={cn(
-          dmSans.className,
-          'text-4xl font-bold tracking-[-0.025em] text-black md:text-[50px] md:leading-[65px]',
-        )}
-      >
-        {heading}
-      </h2>
+      {/* Figma: bar 0:193 (169×4) sits 17px above heading 0:192. */}
+      <div>
+        <RealEstateAccentBar />
+        <h2
+          className={cn(
+            dmSans.className,
+            'mt-[17px] text-4xl font-bold tracking-[-0.025em] text-black md:text-[50px] md:leading-[65px]',
+          )}
+        >
+          {heading}
+        </h2>
+      </div>
       {description && <p className="max-w-2xl text-base text-neutral-600">{description}</p>}
     </div>
     {/* Figma: heading ends 60px above the bar, cards start 76px below it. */}
