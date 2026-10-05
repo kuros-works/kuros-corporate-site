@@ -9,6 +9,7 @@ import React, { cache } from 'react'
 import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks'
 import { getLandingPageTheme } from '@/collections/LandingPages/theme'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { RealEstateFooterDivider, RealEstateFooterFrame } from '@/components/RealEstateFooter'
 import { cn } from '@/utilities/ui'
 
 export async function generateStaticParams() {
@@ -56,6 +57,13 @@ export default async function Page({ params: paramsPromise }: Args) {
   const realEstateHeader = header?.[0]?.blockType === 'realEstateHeader'
   const overlayHeader = realEstateHeader && hero?.[0]?.blockType === 'realEstateHero'
 
+  // The real-estate CTA sits inside the footer in Figma (0:63 in 0:24), sharing
+  // its backdrop with a divider between them. Each one alone still gets the backdrop.
+  const realEstateCta = closingCta?.[0]?.blockType === 'realEstateCta'
+  const realEstateFooter = footer?.[0]?.blockType === 'realEstateFooter'
+  const closingCtaBlocks = <RenderLandingPageBlocks blocks={closingCta || []} />
+  const footerBlocks = <RenderLandingPageBlocks blocks={footer || []} />
+
   return (
     // Real-estate blocks are light-only, so pin the colors instead of following
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
@@ -87,9 +95,26 @@ export default async function Page({ params: paramsPromise }: Args) {
         <RenderLandingPageBlocks blocks={layout || []} spaced theme={theme} />
       </div>
 
-      <RenderLandingPageBlocks blocks={closingCta || []} />
-
-      <RenderLandingPageBlocks blocks={footer || []} />
+      {realEstateCta && realEstateFooter ? (
+        <RealEstateFooterFrame>
+          {closingCtaBlocks}
+          <RealEstateFooterDivider />
+          {footerBlocks}
+        </RealEstateFooterFrame>
+      ) : (
+        <>
+          {realEstateCta ? (
+            <RealEstateFooterFrame>{closingCtaBlocks}</RealEstateFooterFrame>
+          ) : (
+            closingCtaBlocks
+          )}
+          {realEstateFooter ? (
+            <RealEstateFooterFrame>{footerBlocks}</RealEstateFooterFrame>
+          ) : (
+            footerBlocks
+          )}
+        </>
+      )}
     </article>
   )
 }
