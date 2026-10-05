@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 
 export const RealEstateHero: Block = {
   slug: 'realEstateHero',
+  dbName: 'lp_re_hero',
   interfaceName: 'RealEstateHeroBlock',
   labels: {
     singular: 'Real Estate Hero',

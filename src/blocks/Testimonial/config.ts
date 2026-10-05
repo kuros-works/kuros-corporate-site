@@ -11,6 +11,7 @@ export const Testimonial: Block = {
     {
       name: 'testimonials',
       type: 'array',
+      dbName: 'lp_testimonials',
       required: true,
       minRows: 1,
       label: '証言',

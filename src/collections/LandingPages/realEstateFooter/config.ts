@@ -30,6 +30,7 @@ export const RealEstateFooter: Block = {
     {
       name: 'columns',
       type: 'array',
+      dbName: 'lp_re_footer_columns',
       label: 'リンク列',
       maxRows: 3,
       labels: {

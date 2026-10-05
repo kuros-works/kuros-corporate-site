@@ -74,6 +74,7 @@ export const LedgerlyHero: Block = {
         {
           name: 'avatars',
           type: 'array',
+          dbName: 'lp_lh_review_avatars',
           label: 'アバター',
           labels: {
             singular: 'アバター',
