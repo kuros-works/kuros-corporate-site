@@ -8,6 +8,7 @@ import { cn } from '@/utilities/ui'
 // - 0:26 / 0:50: ロゴ（128×34）の30px下にSNSアイコン（間隔40px）。
 // - Group 11 ×3 (0:74, 0:80, 0:86): 幅115pxの列が274px間隔で、右端がコンテンツ幅の右端。
 // 背景と区切り線は RealEstateFooterFrame / RealEstateFooterDivider（CTAと共有）。
+// 最下部のテンプレートのクレジット行（CC BY 4.0）は Figma に無い追加。
 
 export { RealEstateFooterDivider, RealEstateFooterFrame } from './Frame'
 
@@ -84,42 +85,66 @@ export const RealEstateFooter: React.FC<Props> = ({
     <footer
       className={cn(
         dmSans.className,
-        'mx-auto flex w-full max-w-[1101px] flex-col gap-12 px-4 text-[15px] tracking-[-0.025em] text-white md:flex-row md:justify-between',
+        'mx-auto flex w-full max-w-[1101px] flex-col gap-16 px-4 text-[15px] tracking-[-0.025em] text-white lg:gap-20',
         className,
       )}
     >
-      <div className="flex flex-col gap-[30px]">
-        {logoSrc && (
-          <img alt={logoAlt || ''} className="h-[34px] w-auto self-start" src={logoSrc} />
-        )}
-        {socials.length > 0 && (
-          <ul className="flex h-[22px] items-center gap-10">
-            {socials.map(({ icon, key, label }) => (
-              <li className="flex" key={key}>
-                <a aria-label={label} href={socialLinks?.[key] || undefined}>
-                  {icon}
-                </a>
-              </li>
+      <div className="flex flex-col gap-12 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-[30px]">
+          {logoSrc && (
+            <img alt={logoAlt || ''} className="h-[34px] w-auto self-start" src={logoSrc} />
+          )}
+          {socials.length > 0 && (
+            <ul className="flex h-[22px] items-center gap-10">
+              {socials.map(({ icon, key, label }) => (
+                <li className="flex" key={key}>
+                  <a aria-label={label} href={socialLinks?.[key] || undefined}>
+                    {icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {columns.length > 0 && (
+          <div className="grid grid-cols-2 gap-x-12 gap-y-10 md:grid-cols-3 md:gap-x-16 lg:grid-cols-[repeat(3,minmax(115px,auto))] lg:gap-x-[159px]">
+            {columns.map(({ links, title }, index) => (
+              // 0:75–0:79: 20px lines, 10px apart.
+              <div className="flex flex-col gap-2.5 leading-5" key={index}>
+                <span className="font-bold">{title}</span>
+                {links.map(({ href, label }, linkIndex) => (
+                  <a className="text-[#979797]" href={href} key={linkIndex}>
+                    {label}
+                  </a>
+                ))}
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
-      {columns.length > 0 && (
-        <div className="grid grid-cols-2 gap-x-12 gap-y-10 md:grid-cols-3 md:gap-x-16 lg:grid-cols-[repeat(3,minmax(115px,auto))] lg:gap-x-[159px]">
-          {columns.map(({ links, title }, index) => (
-            // 0:75–0:79: 20px lines, 10px apart.
-            <div className="flex flex-col gap-2.5 leading-5" key={index}>
-              <span className="font-bold">{title}</span>
-              {links.map(({ href, label }, linkIndex) => (
-                <a className="text-[#979797]" href={href} key={linkIndex}>
-                  {label}
-                </a>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
+      <p className="text-[13px] leading-5 tracking-normal text-[#979797]">
+        Design based on{' '}
+        <a
+          className="underline underline-offset-2 transition-colors hover:text-white"
+          href="https://www.figma.com/community/file/877745249867825511/real-estate-template-by-flowbase-co"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          &quot;Real Estate Template by Flowbase.co&quot; by Flowbase (Figma Community)
+        </a>
+        , licensed under{' '}
+        <a
+          className="underline underline-offset-2 transition-colors hover:text-white"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CC BY 4.0
+        </a>
+        . Modified.
+      </p>
     </footer>
   )
 }
