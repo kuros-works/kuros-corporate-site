@@ -24,7 +24,7 @@ export const RealEstateListings: React.FC<Props> = ({
   heading,
   properties,
 }) => (
-  <section className={cn('container', className)}>
+  <section className={cn('container', className)} id="listings">
     <div className="mb-[60px] flex flex-col gap-3">
       {/* Figma: bar 0:193 (169×4) sits 17px above heading 0:192. */}
       <div>
