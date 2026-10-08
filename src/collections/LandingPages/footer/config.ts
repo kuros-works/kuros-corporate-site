@@ -39,6 +39,7 @@ export const TypishFooter: Block = {
     {
       name: 'externalLinks',
       type: 'array',
+      dbName: 'lp_typish_footer_links',
       label: '外部リンク',
       admin: {
         initCollapsed: true,

@@ -39,6 +39,7 @@ const linkColumn = (name: string, label: string, defaultTitle: string): Field =>
 
 export const LedgerlyFooter: Block = {
   slug: 'ledgerlyFooter',
+  dbName: 'lp_ledgerly_footer',
   interfaceName: 'LedgerlyFooterBlock',
   labels: {
     singular: 'Ledgerly Footer',
