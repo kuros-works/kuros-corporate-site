@@ -111,6 +111,9 @@ pnpm dev
   - Payload バックエンド型録 #4 — Figmaの1枚を、Supabaseまで通した
   - Qiita: https://qiita.com/kuros-works/items/9bba865da1c930b18cce
   - Zenn: https://zenn.dev/kuros_works/articles/ee1010f70656a2
+  - Payload バックエンド型録 #5 — 物件は、LPの中に書かない
+  - Qiita: https://qiita.com/kuros-works/items/5b81d0205e2b27c3fb6a
+  - Zenn: https://zenn.dev/kuros_works/articles/b97dd0e0346e82
 
 ---
 
