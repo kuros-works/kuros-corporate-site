@@ -1,6 +1,6 @@
 import type { LandingPage } from '@/payload-types'
 
-export type LandingPageTheme = 'default' | 'ledgerly' | 'realEstate'
+export type LandingPageTheme = 'default' | 'ledgerly' | 'realEstate' | 'travel'
 
 // Which design an LP renders with — decided in one place so page.tsx and the
 // block renderer agree.
@@ -9,6 +9,7 @@ export const getLandingPageTheme = (
 ): LandingPageTheme => {
   if (landingPage.hero?.[0]?.blockType === 'ledgerlyHero') return 'ledgerly'
   if (landingPage.hero?.[0]?.blockType === 'realEstateHero') return 'realEstate'
+  if (landingPage.hero?.[0]?.blockType === 'travelHero') return 'travel'
 
   // Temporary: keeps the real-estate LP themed until its hero is set to
   // realEstateHero in the admin. Remove once that's done (PR5).
