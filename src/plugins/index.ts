@@ -61,6 +61,7 @@ export const plugins: Plugin[] = [
   }),
   formBuilderPlugin({
     fields: {
+      date: true,
       payment: false,
     },
     formSubmissionOverrides: {
