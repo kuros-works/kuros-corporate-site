@@ -76,8 +76,9 @@ export default async function Page({ params: paramsPromise }: Args) {
     <article
       className={cn(
         theme === 'realEstate' && 'flex-1 bg-white text-black',
-        // Travel blocks are light-only as well.
-        theme === 'travel' && 'flex-1 bg-white text-[#172432]',
+        // Travel blocks are light-only as well. Chrome ignores preflight's
+        // -webkit-text-size-adjust, so its text autosizing is turned off here.
+        theme === 'travel' && 'flex-1 bg-white text-[#172432] [text-size-adjust:100%]',
       )}
     >
       {draft && <LivePreviewListener />}
@@ -107,8 +108,15 @@ export default async function Page({ params: paramsPromise }: Args) {
         </>
       )}
 
-      <div className={cn('pt-16 pb-16', theme === 'ledgerly' && 'bg-[#1d1c20] px-4')}>
-        <RenderLandingPageBlocks blocks={layout || []} spaced theme={theme} />
+      {/* Travel sections carry their own vertical padding and start right under
+          the hero (Figma 6:120 under 3:57), so they get no extra spacing here. */}
+      <div
+        className={cn(
+          theme !== 'travel' && 'pt-16 pb-16',
+          theme === 'ledgerly' && 'bg-[#1d1c20] px-4',
+        )}
+      >
+        <RenderLandingPageBlocks blocks={layout || []} spaced={theme !== 'travel'} theme={theme} />
       </div>
 
       {realEstateCta && realEstateFooter ? (
