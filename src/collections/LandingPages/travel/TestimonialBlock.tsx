@@ -8,7 +8,7 @@ import { mediaSrc } from '../mediaSrc'
 // The shared Testimonial block has no heading fields, so the travel design's
 // heading and description (Figma 9:547 / 9:549) are fixed here.
 const heading = 'Traveler’s Experiences'
-const description = 'Here some awesome feedback from our travelers'
+const description = 'Here is some awesome feedback from our travelers'
 
 // The shared Testimonial block's data, drawn with the travel design. Swapped
 // in by RenderLandingPageBlocks only when the LP's theme is travel.
