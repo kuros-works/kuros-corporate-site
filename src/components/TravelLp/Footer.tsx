@@ -24,8 +24,9 @@ const socialIcons = [
   { file: 'social-twitter.svg', label: 'Twitter' },
 ]
 
-const columnTitle = 'text-2xl leading-[normal] font-medium'
-const columnList = 'flex flex-col gap-3 text-lg leading-[normal]'
+const columnTitle = 'text-2xl leading-[normal] font-medium xl:text-[clamp(20px,1.25vw,24px)]'
+const columnList =
+  'flex flex-col gap-3 text-lg leading-[normal] xl:text-[clamp(15px,0.938vw,18px)]'
 const creditLink = 'underline underline-offset-2 transition-colors hover:text-white'
 
 export type TravelFooterColumn = {
@@ -68,10 +69,14 @@ export const TravelFooter: React.FC<Props> = ({
         className,
       )}
     >
-      <div className="flex flex-col gap-[60px] xl:flex-row xl:items-start xl:justify-between xl:gap-8">
+      <div className="flex flex-col gap-[60px] xl:flex-row xl:items-start xl:justify-between xl:gap-[clamp(16px,1.667vw,32px)]">
         <div className="flex min-w-0 flex-col gap-4">
           <p className="text-[28px] leading-none font-medium">{logoText}</p>
-          {copyright && <p className="text-sm leading-[normal]">{copyright}</p>}
+          {copyright && (
+            <p className="text-sm leading-[normal] xl:text-[clamp(12px,0.729vw,14px)]">
+              {copyright}
+            </p>
+          )}
         </div>
 
         {columns.map(({ links, title }, index) => (

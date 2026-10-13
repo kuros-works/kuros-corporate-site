@@ -9,6 +9,8 @@ import { cn } from '@/utilities/ui'
 // Figma: Travellian / Destinations (1920px: 6:120, 768px: 36:465, 320px: 38:851)
 // Section heading over a carousel of photo cards, each with a 10% coral layer
 // and the name and location at the bottom. The cards are not links.
+// The dark gradient behind the text is not in the Figma: it keeps the white
+// text readable on bright photos.
 // Below xl one card shows at a time, as in the Figma; its width stops at the
 // 768px frame's 728px, so on wider tablets the next card peeks in.
 // Desktop values shrink with the viewport between xl and 1920px.
@@ -71,6 +73,10 @@ export const TravelDestinations: React.FC<Props> = ({
               />
             )}
             <div aria-hidden className="absolute inset-0 bg-[#ff7757]/10" />
+            <div
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/55 to-transparent"
+            />
 
             <div className="relative flex flex-col gap-[17px]">
               <h3

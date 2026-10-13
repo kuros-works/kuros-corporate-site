@@ -52,7 +52,8 @@ export const TravelHero: React.FC<Props> = ({
       <h1
         className={cn(
           playfair.className,
-          'text-[40px] leading-[normal] font-normal md:text-[54px] xl:max-w-[min(52.08vw,1000px)] xl:text-[min(4.375vw,84px)]',
+          // text-balance: keeps a lone last word from dropping to its own line.
+          'text-[40px] leading-[normal] font-normal text-balance md:text-[54px] xl:max-w-[min(52.08vw,1000px)] xl:text-[min(4.375vw,84px)]',
         )}
       >
         {heading}

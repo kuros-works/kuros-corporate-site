@@ -11,6 +11,8 @@ import { cn } from '@/utilities/ui'
 // From xl four photos fill the row and the second of every four sits higher.
 // Below that the Figma stacks all four with the arrows underneath, so the row
 // becomes a grid of four-photo columns and the arrows move a column at a time.
+// From lg to xl (not in the Figma) the four sit two by two, so the photos
+// aren't cropped to wide strips.
 // Desktop values shrink with the viewport between xl and 1920px.
 
 export type TravelGalleryImage = {
@@ -49,7 +51,7 @@ export const TravelGallery: React.FC<Props> = ({ className, description, heading
           />
         }
         label={heading}
-        trackClassName="grid auto-cols-[100%] grid-flow-col grid-rows-4 xl:flex xl:items-center"
+        trackClassName="grid auto-cols-[100%] grid-flow-col grid-rows-4 lg:auto-cols-[calc((100%-32px)/2)] lg:grid-rows-2 xl:flex xl:items-center"
       >
         {images.map(({ imageAlt, imageSrc }, index) => (
           <li

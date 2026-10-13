@@ -12,7 +12,8 @@ import { cn } from '@/utilities/ui'
 // Section heading with a button on two offset squares, and the plan cards:
 // photo with a 20% black layer over category, price, title, stars and duration.
 // The button is a link-less dummy and there are no arrows at any size.
-// Below xl everything stacks and every card shows its text.
+// Below xl everything stacks and every card shows its text; from lg to xl
+// (not in the Figma) the cards sit two to a row.
 // From xl the heading sits left of a row that bleeds off the right edge and
 // scrolls sideways; only one card shows its text there (the second one in the
 // Figma) and hovering, focusing or tapping a card moves that to it. The other
@@ -84,11 +85,11 @@ export const TravelTripPlans: React.FC<Props> = ({
         {items.length > 0 && (
           <ul
             aria-label={heading}
-            className="flex min-w-0 flex-col gap-10 [scrollbar-width:none] xl:flex-1 xl:flex-row xl:items-center xl:gap-[clamp(20px,1.667vw,32px)] xl:overflow-x-auto xl:pr-[min(9.479vw,182px)] [&::-webkit-scrollbar]:hidden"
+            className="flex min-w-0 flex-col gap-10 [scrollbar-width:none] lg:grid lg:grid-cols-2 lg:gap-x-8 xl:flex xl:flex-1 xl:flex-row xl:items-center xl:gap-[clamp(20px,1.667vw,32px)] xl:overflow-x-auto xl:pr-[min(9.479vw,182px)] [&::-webkit-scrollbar]:hidden"
           >
             {items.map((item, index) => (
               <li
-                className="relative flex flex-col rounded-[26px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#ff7757] xl:w-[clamp(240px,15.625vw,300px)] xl:shrink-0"
+                className="relative flex flex-col rounded-[26px] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#ff7757] xl:w-[clamp(220px,15.625vw,300px)] xl:shrink-0"
                 key={index}
                 onClick={() => setActive(index)}
                 onFocus={() => setActive(index)}
