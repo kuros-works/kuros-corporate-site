@@ -23,9 +23,11 @@ import { RealEstateHeroBlock } from './realEstateHero/Component'
 import { TravelTestimonialBlock } from './travel/TestimonialBlock'
 import { TravelBlogBlock } from './travelBlog/Component'
 import { TravelDestinationsBlock } from './travelDestinations/Component'
+import { TravelFooterBlock } from './travelFooter/Component'
 import { TravelGalleryBlock } from './travelGallery/Component'
 import { TravelHeaderBlock } from './travelHeader/Component'
 import { TravelHeroBlock } from './travelHero/Component'
+import { TravelNewsletterBlock } from './travelNewsletter/Component'
 import { TravelOffersBlock } from './travelOffers/Component'
 import { TravelTripPlansBlock } from './travelTripPlans/Component'
 import type { LandingPageTheme } from './theme'
@@ -46,9 +48,11 @@ const blockComponents = {
   testimonial: TestimonialBlock,
   travelBlog: TravelBlogBlock,
   travelDestinations: TravelDestinationsBlock,
+  travelFooter: TravelFooterBlock,
   travelGallery: TravelGalleryBlock,
   travelHeader: TravelHeaderBlock,
   travelHero: TravelHeroBlock,
+  travelNewsletter: TravelNewsletterBlock,
   travelOffers: TravelOffersBlock,
   travelTripPlans: TravelTripPlansBlock,
   typishCta: TypishCtaBlock,
