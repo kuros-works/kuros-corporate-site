@@ -20,6 +20,8 @@ type Props = {
   // Overrides the description's size where a section differs, e.g. 'md:text-2xl'.
   descriptionClassName?: string
   heading: string
+  // Overrides the heading's size where a section differs, e.g. 'text-[48px]'.
+  headingClassName?: string
   id?: string
   // Width of the line, e.g. 'w-[227px] md:w-[365px]'.
   underlineClassName: string
@@ -31,6 +33,7 @@ export const TravelSectionHeading: React.FC<Props> = ({
   description,
   descriptionClassName,
   heading,
+  headingClassName,
   id,
   underlineClassName,
 }) => (
@@ -47,6 +50,7 @@ export const TravelSectionHeading: React.FC<Props> = ({
         className={cn(
           playfair.className,
           'text-[40px] leading-[normal] font-normal text-[#172432] md:text-[54px] xl:text-[clamp(54px,3.333vw,64px)]',
+          headingClassName,
         )}
         id={id}
       >

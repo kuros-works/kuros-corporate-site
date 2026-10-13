@@ -14,7 +14,7 @@ import { cn } from '@/utilities/ui'
 // The Figma has no disabled arrow: the side that can't move is faded.
 // Slides are `<li>`s passed as children; each sets its own width and `snap-start`.
 // `arrows="start"` is the Special Offer layout (6:190): from xl the arrows sit
-// at the left and the heading takes the right.
+// at the left and the heading takes the right. See `layouts` for 'below'.
 // Desktop values shrink with the viewport between xl and 1920px.
 
 const asset = (name: string) => `/figma/travel/${name}`
@@ -22,15 +22,43 @@ const asset = (name: string) => `/figma/travel/${name}`
 const arrowButton =
   'flex h-[60px] w-[66px] items-center justify-center rounded-[12px] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] aria-disabled:cursor-default aria-disabled:opacity-40'
 
+// Where the arrows go from xl up, as classes for the grid, the heading, the
+// arrows and the row. 'below' is the Testimonial layout (9:550): they stay
+// under the row, at its right end.
+const layouts = {
+  below: {
+    arrows: 'xl:justify-self-end xl:pr-[min(9.479vw,182px)]',
+    grid: '',
+    heading: 'xl:px-[min(9.479vw,182px)]',
+    track: '',
+  },
+  end: {
+    arrows:
+      'xl:col-start-2 xl:row-start-1 xl:self-end xl:justify-self-auto xl:pr-[min(9.479vw,182px)]',
+    grid: 'xl:grid-cols-[minmax(0,1fr)_auto]',
+    heading: 'xl:pr-0 xl:pl-[min(9.479vw,182px)]',
+    track: 'xl:col-span-2',
+  },
+  start: {
+    arrows:
+      'xl:col-start-1 xl:row-start-1 xl:self-end xl:justify-self-auto xl:pl-[min(9.479vw,182px)]',
+    grid: 'xl:grid-cols-[auto_minmax(0,1fr)]',
+    heading: 'xl:col-start-2 xl:pr-[min(9.479vw,182px)] xl:pl-0',
+    track: 'xl:col-span-2',
+  },
+}
+
 type Props = {
-  // Side of the heading the arrows take from xl up.
-  arrows?: 'end' | 'start'
+  // Where the arrows go from xl up: either side of the heading, or under the row.
+  arrows?: keyof typeof layouts
   children?: React.ReactNode
   className?: string
   // Rendered on the server and passed in (TravelSectionHeading).
   heading: React.ReactNode
   // Names the scrolling row for assistive tech.
   label: string
+  // Overrides for the scrolling row, e.g. room for content that sticks out of the slides.
+  trackClassName?: string
 }
 
 export const TravelCarousel: React.FC<Props> = ({
@@ -39,7 +67,10 @@ export const TravelCarousel: React.FC<Props> = ({
   className,
   heading,
   label,
+  trackClassName,
 }) => {
+  const layout = layouts[arrows]
+
   const trackRef = React.useRef<HTMLUListElement>(null)
   const [canPrev, setCanPrev] = React.useState(false)
   const [canNext, setCanNext] = React.useState(true)
@@ -81,32 +112,14 @@ export const TravelCarousel: React.FC<Props> = ({
     <div
       className={cn(
         'grid grid-cols-1 gap-y-[100px] xl:gap-x-8 xl:gap-y-[min(5.208vw,100px)]',
-        arrows === 'start'
-          ? 'xl:grid-cols-[auto_minmax(0,1fr)]'
-          : 'xl:grid-cols-[minmax(0,1fr)_auto]',
+        layout.grid,
         className,
       )}
     >
-      <div
-        className={cn(
-          'row-start-1 min-w-0 px-4 md:px-5',
-          arrows === 'start'
-            ? 'xl:col-start-2 xl:pr-[min(9.479vw,182px)] xl:pl-0'
-            : 'xl:pr-0 xl:pl-[min(9.479vw,182px)]',
-        )}
-      >
-        {heading}
-      </div>
+      <div className={cn('row-start-1 min-w-0 px-4 md:px-5', layout.heading)}>{heading}</div>
 
       {hasSlides && (
-        <div
-          className={cn(
-            'row-start-3 flex gap-10 justify-self-center xl:row-start-1 xl:self-end xl:justify-self-auto',
-            arrows === 'start'
-              ? 'xl:col-start-1 xl:pl-[min(9.479vw,182px)]'
-              : 'xl:col-start-2 xl:pr-[min(9.479vw,182px)]',
-          )}
-        >
+        <div className={cn('row-start-3 flex gap-10 justify-self-center', layout.arrows)}>
           <button
             aria-disabled={!canPrev}
             aria-label="Previous"
@@ -143,7 +156,11 @@ export const TravelCarousel: React.FC<Props> = ({
       {hasSlides && (
         <ul
           aria-label={label}
-          className="row-start-2 flex min-w-0 snap-x snap-mandatory scroll-pl-4 gap-8 overflow-x-auto px-4 [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-[#172432] md:scroll-pl-5 md:px-5 xl:col-span-2 xl:scroll-pl-[min(9.479vw,182px)] xl:gap-[clamp(20px,1.667vw,32px)] xl:px-[min(9.479vw,182px)] [&::-webkit-scrollbar]:hidden"
+          className={cn(
+            'row-start-2 flex min-w-0 snap-x snap-mandatory scroll-pl-4 gap-8 overflow-x-auto px-4 [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-[#172432] md:scroll-pl-5 md:px-5 xl:scroll-pl-[min(9.479vw,182px)] xl:gap-[clamp(20px,1.667vw,32px)] xl:px-[min(9.479vw,182px)] [&::-webkit-scrollbar]:hidden',
+            layout.track,
+            trackClassName,
+          )}
           onScroll={update}
           ref={trackRef}
           tabIndex={0}
