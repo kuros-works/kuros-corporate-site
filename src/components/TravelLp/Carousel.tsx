@@ -13,6 +13,8 @@ import { cn } from '@/utilities/ui'
 // Scrolling is the browser's own (scroll snap), the arrows move one slide.
 // The Figma has no disabled arrow: the side that can't move is faded.
 // Slides are `<li>`s passed as children; each sets its own width and `snap-start`.
+// `arrows="start"` is the Special Offer layout (6:190): from xl the arrows sit
+// at the left and the heading takes the right.
 // Desktop values shrink with the viewport between xl and 1920px.
 
 const asset = (name: string) => `/figma/travel/${name}`
@@ -21,6 +23,8 @@ const arrowButton =
   'flex h-[60px] w-[66px] items-center justify-center rounded-[12px] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] aria-disabled:cursor-default aria-disabled:opacity-40'
 
 type Props = {
+  // Side of the heading the arrows take from xl up.
+  arrows?: 'end' | 'start'
   children?: React.ReactNode
   className?: string
   // Rendered on the server and passed in (TravelSectionHeading).
@@ -29,7 +33,13 @@ type Props = {
   label: string
 }
 
-export const TravelCarousel: React.FC<Props> = ({ children, className, heading, label }) => {
+export const TravelCarousel: React.FC<Props> = ({
+  arrows = 'end',
+  children,
+  className,
+  heading,
+  label,
+}) => {
   const trackRef = React.useRef<HTMLUListElement>(null)
   const [canPrev, setCanPrev] = React.useState(false)
   const [canNext, setCanNext] = React.useState(true)
@@ -70,16 +80,33 @@ export const TravelCarousel: React.FC<Props> = ({ children, className, heading, 
   return (
     <div
       className={cn(
-        'grid grid-cols-1 gap-y-[100px] xl:grid-cols-[minmax(0,1fr)_auto] xl:gap-x-8 xl:gap-y-[min(5.208vw,100px)]',
+        'grid grid-cols-1 gap-y-[100px] xl:gap-x-8 xl:gap-y-[min(5.208vw,100px)]',
+        arrows === 'start'
+          ? 'xl:grid-cols-[auto_minmax(0,1fr)]'
+          : 'xl:grid-cols-[minmax(0,1fr)_auto]',
         className,
       )}
     >
-      <div className="row-start-1 min-w-0 px-4 md:px-5 xl:pr-0 xl:pl-[min(9.479vw,182px)]">
+      <div
+        className={cn(
+          'row-start-1 min-w-0 px-4 md:px-5',
+          arrows === 'start'
+            ? 'xl:col-start-2 xl:pr-[min(9.479vw,182px)] xl:pl-0'
+            : 'xl:pr-0 xl:pl-[min(9.479vw,182px)]',
+        )}
+      >
         {heading}
       </div>
 
       {hasSlides && (
-        <div className="row-start-3 flex gap-10 justify-self-center xl:col-start-2 xl:row-start-1 xl:self-end xl:justify-self-auto xl:pr-[min(9.479vw,182px)]">
+        <div
+          className={cn(
+            'row-start-3 flex gap-10 justify-self-center xl:row-start-1 xl:self-end xl:justify-self-auto',
+            arrows === 'start'
+              ? 'xl:col-start-1 xl:pl-[min(9.479vw,182px)]'
+              : 'xl:col-start-2 xl:pr-[min(9.479vw,182px)]',
+          )}
+        >
           <button
             aria-disabled={!canPrev}
             aria-label="Previous"

@@ -23,6 +23,8 @@ import { RealEstateHeroBlock } from './realEstateHero/Component'
 import { TravelDestinationsBlock } from './travelDestinations/Component'
 import { TravelHeaderBlock } from './travelHeader/Component'
 import { TravelHeroBlock } from './travelHero/Component'
+import { TravelOffersBlock } from './travelOffers/Component'
+import { TravelTripPlansBlock } from './travelTripPlans/Component'
 import type { LandingPageTheme } from './theme'
 
 const blockComponents = {
@@ -42,6 +44,8 @@ const blockComponents = {
   travelDestinations: TravelDestinationsBlock,
   travelHeader: TravelHeaderBlock,
   travelHero: TravelHeroBlock,
+  travelOffers: TravelOffersBlock,
+  travelTripPlans: TravelTripPlansBlock,
   typishCta: TypishCtaBlock,
   typishFooter: TypishFooterBlock,
   typishHero: TypishHeroBlock,

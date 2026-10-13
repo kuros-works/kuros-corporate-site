@@ -17,6 +17,8 @@ type Props = {
   align?: 'left' | 'right'
   className?: string
   description?: string | null
+  // Overrides the description's size where a section differs, e.g. 'md:text-2xl'.
+  descriptionClassName?: string
   heading: string
   id?: string
   // Width of the line, e.g. 'w-[227px] md:w-[365px]'.
@@ -27,6 +29,7 @@ export const TravelSectionHeading: React.FC<Props> = ({
   align = 'left',
   className,
   description,
+  descriptionClassName,
   heading,
   id,
   underlineClassName,
@@ -62,7 +65,12 @@ export const TravelSectionHeading: React.FC<Props> = ({
       />
     </div>
     {description && (
-      <p className="text-lg leading-[normal] text-[#767e86] md:text-xl xl:text-[clamp(20px,1.25vw,24px)]">
+      <p
+        className={cn(
+          'text-lg leading-[normal] text-[#767e86] md:text-xl xl:text-[clamp(20px,1.25vw,24px)]',
+          descriptionClassName,
+        )}
+      >
         {description}
       </p>
     )}
