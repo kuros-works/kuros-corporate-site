@@ -20,6 +20,16 @@ import { RealEstateCtaBlock } from './realEstateCta/Component'
 import { RealEstateFooterBlock } from './realEstateFooter/Component'
 import { RealEstateHeaderBlock } from './realEstateHeader/Component'
 import { RealEstateHeroBlock } from './realEstateHero/Component'
+import { TravelTestimonialBlock } from './travel/TestimonialBlock'
+import { TravelBlogBlock } from './travelBlog/Component'
+import { TravelDestinationsBlock } from './travelDestinations/Component'
+import { TravelFooterBlock } from './travelFooter/Component'
+import { TravelGalleryBlock } from './travelGallery/Component'
+import { TravelHeaderBlock } from './travelHeader/Component'
+import { TravelHeroBlock } from './travelHero/Component'
+import { TravelNewsletterBlock } from './travelNewsletter/Component'
+import { TravelOffersBlock } from './travelOffers/Component'
+import { TravelTripPlansBlock } from './travelTripPlans/Component'
 import type { LandingPageTheme } from './theme'
 
 const blockComponents = {
@@ -36,6 +46,15 @@ const blockComponents = {
   realEstateHeader: RealEstateHeaderBlock,
   realEstateHero: RealEstateHeroBlock,
   testimonial: TestimonialBlock,
+  travelBlog: TravelBlogBlock,
+  travelDestinations: TravelDestinationsBlock,
+  travelFooter: TravelFooterBlock,
+  travelGallery: TravelGalleryBlock,
+  travelHeader: TravelHeaderBlock,
+  travelHero: TravelHeroBlock,
+  travelNewsletter: TravelNewsletterBlock,
+  travelOffers: TravelOffersBlock,
+  travelTripPlans: TravelTripPlansBlock,
   typishCta: TypishCtaBlock,
   typishFooter: TypishFooterBlock,
   typishHero: TypishHeroBlock,
@@ -47,6 +66,9 @@ const themeOverrides: { [T in LandingPageTheme]?: Partial<typeof blockComponents
   realEstate: {
     feature: RealEstateFeatureBlock,
     testimonial: RealEstateTestimonialBlock,
+  },
+  travel: {
+    testimonial: TravelTestimonialBlock,
   },
 }
 

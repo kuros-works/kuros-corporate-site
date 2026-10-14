@@ -587,6 +587,16 @@ export interface Form {
             blockName?: string | null;
             blockType: 'textarea';
           }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            defaultValue?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'date';
+          }
       )[]
     | null;
   submitButtonLabel?: string | null;
@@ -758,11 +768,22 @@ export interface Work {
 export interface LandingPage {
   id: number;
   title: string;
-  header?: (LedgerlyHeaderBlock | RealEstateHeaderBlock)[] | null;
-  hero?: (TypishHeroBlock | LedgerlyHeroBlock | RealEstateHeroBlock)[] | null;
-  layout: (FeatureBlock | TestimonialBlock | PricingBlock | LedgerlyFeaturesBlock | PropertyListingsBlock)[];
-  closingCta?: (TypishCtaBlock | LedgerlyCtaBlock | RealEstateCtaBlock)[] | null;
-  footer?: (TypishFooterBlock | LedgerlyFooterBlock | RealEstateFooterBlock)[] | null;
+  header?: (LedgerlyHeaderBlock | RealEstateHeaderBlock | TravelHeaderBlock)[] | null;
+  hero?: (TypishHeroBlock | LedgerlyHeroBlock | RealEstateHeroBlock | TravelHeroBlock)[] | null;
+  layout: (
+    | FeatureBlock
+    | TestimonialBlock
+    | PricingBlock
+    | LedgerlyFeaturesBlock
+    | PropertyListingsBlock
+    | TravelDestinationsBlock
+    | TravelOffersBlock
+    | TravelBlogBlock
+    | TravelTripPlansBlock
+    | TravelGalleryBlock
+  )[];
+  closingCta?: (TypishCtaBlock | LedgerlyCtaBlock | RealEstateCtaBlock | TravelNewsletterBlock)[] | null;
+  footer?: (TypishFooterBlock | LedgerlyFooterBlock | RealEstateFooterBlock | TravelFooterBlock)[] | null;
   /**
    * 公開URL: /lp/[slug]
    */
@@ -813,6 +834,31 @@ export interface RealEstateHeaderBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'realEstateHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelHeaderBlock".
+ */
+export interface TravelHeaderBlock {
+  logoText: string;
+  nav?:
+    | {
+        label: string;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * リンクなしのダミーです。空欄なら非表示。
+   */
+  loginLabel?: string | null;
+  /**
+   * リンクなしのダミーです。空欄なら非表示。
+   */
+  signUpLabel?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelHeader';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -922,6 +968,25 @@ export interface RealEstateHeroBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'realEstateHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelHeroBlock".
+ */
+export interface TravelHeroBlock {
+  backgroundImage: number | Media;
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  lead?: string | null;
+  /**
+   * 欄のラベルと送信ボタンの文言は、フォーム側の設定を使います。空欄ならフォームを表示しません。
+   */
+  form?: (number | null) | Form;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelHero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1104,6 +1169,137 @@ export interface Property {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelDestinationsBlock".
+ */
+export interface TravelDestinationsBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  items?:
+    | {
+        image: number | Media;
+        title: string;
+        location?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelDestinations';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelOffersBlock".
+ */
+export interface TravelOffersBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  pricePrefix?: string | null;
+  /**
+   * リンクなしのダミーです。空欄なら非表示。
+   */
+  detailsLabel?: string | null;
+  items?:
+    | {
+        image: number | Media;
+        title: string;
+        description?: string | null;
+        /**
+         * 例: €500
+         */
+        price?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelOffers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelBlogBlock".
+ */
+export interface TravelBlogBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  image: number | Media;
+  postTitle: string;
+  postBody?: string | null;
+  /**
+   * リンクなしのダミーです。空欄なら非表示。
+   */
+  readMoreLabel?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelBlog';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelTripPlansBlock".
+ */
+export interface TravelTripPlansBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  /**
+   * リンクなしのダミーです。空欄なら非表示。
+   */
+  buttonLabel?: string | null;
+  items?:
+    | {
+        image: number | Media;
+        /**
+         * 例: Guided Tour
+         */
+        category?: string | null;
+        /**
+         * 例: €99/Day
+         */
+        price?: string | null;
+        title: string;
+        /**
+         * 例: 7 Days tour
+         */
+        duration?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelTripPlans';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelGalleryBlock".
+ */
+export interface TravelGalleryBlock {
+  heading: string;
+  /**
+   * 任意。空欄なら非表示。
+   */
+  description?: string | null;
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelGallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TypishCtaBlock".
  */
 export interface TypishCtaBlock {
@@ -1184,6 +1380,21 @@ export interface RealEstateCtaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'realEstateCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelNewsletterBlock".
+ */
+export interface TravelNewsletterBlock {
+  heading: string;
+  /**
+   * 欄のラベルと送信ボタンの文言は、フォーム側の設定を使います。空欄ならフォームを表示しません。
+   */
+  form?: (number | null) | Form;
+  placeholder?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelNewsletter';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1290,6 +1501,42 @@ export interface RealEstateFooterBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'realEstateFooter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelFooterBlock".
+ */
+export interface TravelFooterBlock {
+  logoText: string;
+  copyright?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * デモ用のダミーです。実在の連絡先は入れません。
+   */
+  contact?: {
+    title?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    address?: string | null;
+  };
+  social?: {
+    title?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelFooter';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1823,6 +2070,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
     | {
         ledgerlyHeader?: T | LedgerlyHeaderBlockSelect<T>;
         realEstateHeader?: T | RealEstateHeaderBlockSelect<T>;
+        travelHeader?: T | TravelHeaderBlockSelect<T>;
       };
   hero?:
     | T
@@ -1830,6 +2078,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
         typishHero?: T | TypishHeroBlockSelect<T>;
         ledgerlyHero?: T | LedgerlyHeroBlockSelect<T>;
         realEstateHero?: T | RealEstateHeroBlockSelect<T>;
+        travelHero?: T | TravelHeroBlockSelect<T>;
       };
   layout?:
     | T
@@ -1839,6 +2088,11 @@ export interface LandingPagesSelect<T extends boolean = true> {
         pricing?: T | PricingBlockSelect<T>;
         ledgerlyFeatures?: T | LedgerlyFeaturesBlockSelect<T>;
         propertyListings?: T | PropertyListingsBlockSelect<T>;
+        travelDestinations?: T | TravelDestinationsBlockSelect<T>;
+        travelOffers?: T | TravelOffersBlockSelect<T>;
+        travelBlog?: T | TravelBlogBlockSelect<T>;
+        travelTripPlans?: T | TravelTripPlansBlockSelect<T>;
+        travelGallery?: T | TravelGalleryBlockSelect<T>;
       };
   closingCta?:
     | T
@@ -1846,6 +2100,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
         typishCta?: T | TypishCtaBlockSelect<T>;
         ledgerlyCta?: T | LedgerlyCtaBlockSelect<T>;
         realEstateCta?: T | RealEstateCtaBlockSelect<T>;
+        travelNewsletter?: T | TravelNewsletterBlockSelect<T>;
       };
   footer?:
     | T
@@ -1853,6 +2108,7 @@ export interface LandingPagesSelect<T extends boolean = true> {
         typishFooter?: T | TypishFooterBlockSelect<T>;
         ledgerlyFooter?: T | LedgerlyFooterBlockSelect<T>;
         realEstateFooter?: T | RealEstateFooterBlockSelect<T>;
+        travelFooter?: T | TravelFooterBlockSelect<T>;
       };
   slug?: T;
   updatedAt?: T;
@@ -1896,6 +2152,24 @@ export interface RealEstateHeaderBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelHeaderBlock_select".
+ */
+export interface TravelHeaderBlockSelect<T extends boolean = true> {
+  logoText?: T;
+  nav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  loginLabel?: T;
+  signUpLabel?: T;
   id?: T;
   blockName?: T;
 }
@@ -1991,6 +2265,18 @@ export interface RealEstateHeroBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelHeroBlock_select".
+ */
+export interface TravelHeroBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  heading?: T;
+  lead?: T;
+  form?: T;
   id?: T;
   blockName?: T;
 }
@@ -2110,6 +2396,96 @@ export interface PropertyListingsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelDestinationsBlock_select".
+ */
+export interface TravelDestinationsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        location?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelOffersBlock_select".
+ */
+export interface TravelOffersBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  pricePrefix?: T;
+  detailsLabel?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        price?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelBlogBlock_select".
+ */
+export interface TravelBlogBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  image?: T;
+  postTitle?: T;
+  postBody?: T;
+  readMoreLabel?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelTripPlansBlock_select".
+ */
+export interface TravelTripPlansBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  buttonLabel?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        category?: T;
+        price?: T;
+        title?: T;
+        duration?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelGalleryBlock_select".
+ */
+export interface TravelGalleryBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TypishCtaBlock_select".
  */
 export interface TypishCtaBlockSelect<T extends boolean = true> {
@@ -2167,6 +2543,17 @@ export interface RealEstateCtaBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelNewsletterBlock_select".
+ */
+export interface TravelNewsletterBlockSelect<T extends boolean = true> {
+  heading?: T;
+  form?: T;
+  placeholder?: T;
   id?: T;
   blockName?: T;
 }
@@ -2264,6 +2651,42 @@ export interface RealEstateFooterBlockSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelFooterBlock_select".
+ */
+export interface TravelFooterBlockSelect<T extends boolean = true> {
+  logoText?: T;
+  copyright?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        phone?: T;
+        email?: T;
+        address?: T;
+      };
+  social?:
+    | T
+    | {
+        title?: T;
       };
   id?: T;
   blockName?: T;
@@ -2550,6 +2973,17 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        date?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              defaultValue?: T;
               id?: T;
               blockName?: T;
             };

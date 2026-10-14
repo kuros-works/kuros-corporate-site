@@ -55,7 +55,13 @@ export default async function Page({ params: paramsPromise }: Args) {
   // The real-estate nav is transparent with white text, made to sit on the
   // hero photo (Figma 0:111 over 0:110). Without that hero it gets a black strip.
   const realEstateHeader = header?.[0]?.blockType === 'realEstateHeader'
-  const overlayHeader = realEstateHeader && hero?.[0]?.blockType === 'realEstateHero'
+  // The travel header is transparent with white text too (Figma 3:58 over
+  // 3:57). Without that hero it gets a #172432 strip.
+  const travelHeader = header?.[0]?.blockType === 'travelHeader'
+
+  const overlayHeader =
+    (realEstateHeader && hero?.[0]?.blockType === 'realEstateHero') ||
+    (travelHeader && hero?.[0]?.blockType === 'travelHero')
 
   // The real-estate CTA sits inside the footer in Figma (0:63 in 0:24), sharing
   // its backdrop with a divider between them. Each one alone still gets the backdrop.
@@ -67,7 +73,14 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     // Real-estate blocks are light-only, so pin the colors instead of following
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
-    <article className={cn(theme === 'realEstate' && 'flex-1 bg-white text-black')}>
+    <article
+      className={cn(
+        theme === 'realEstate' && 'flex-1 bg-white text-black',
+        // Travel blocks are light-only as well. Chrome ignores preflight's
+        // -webkit-text-size-adjust, so its text autosizing is turned off here.
+        theme === 'travel' && 'flex-1 bg-white text-[#172432] [text-size-adjust:100%]',
+      )}
+    >
       {draft && <LivePreviewListener />}
 
       {overlayHeader ? (
@@ -83,6 +96,10 @@ export default async function Page({ params: paramsPromise }: Args) {
             <div className="bg-black pb-8">
               <RenderLandingPageBlocks blocks={header || []} />
             </div>
+          ) : travelHeader ? (
+            <div className="bg-[#172432]">
+              <RenderLandingPageBlocks blocks={header || []} />
+            </div>
           ) : (
             <RenderLandingPageBlocks blocks={header || []} />
           )}
@@ -91,8 +108,15 @@ export default async function Page({ params: paramsPromise }: Args) {
         </>
       )}
 
-      <div className={cn('pt-16 pb-16', theme === 'ledgerly' && 'bg-[#1d1c20] px-4')}>
-        <RenderLandingPageBlocks blocks={layout || []} spaced theme={theme} />
+      {/* Travel sections carry their own vertical padding and start right under
+          the hero (Figma 6:120 under 3:57), so they get no extra spacing here. */}
+      <div
+        className={cn(
+          theme !== 'travel' && 'pt-16 pb-16',
+          theme === 'ledgerly' && 'bg-[#1d1c20] px-4',
+        )}
+      >
+        <RenderLandingPageBlocks blocks={layout || []} spaced={theme !== 'travel'} theme={theme} />
       </div>
 
       {realEstateCta && realEstateFooter ? (

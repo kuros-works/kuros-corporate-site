@@ -10,6 +10,45 @@ Kuro's Works の公式コーポレートサイトです。
 
 ---
 
+## Landing page demo — Tidewalk Journeys (travel agency)
+
+![Tidewalk Journeys landing page on desktop](docs/screenshots/travel/desktop.jpg)
+
+| Tablet | Mobile |
+|---|---|
+| ![Tidewalk Journeys landing page on a tablet](docs/screenshots/travel/tablet.jpg) | ![Tidewalk Journeys landing page on a phone](docs/screenshots/travel/mobile.jpg) |
+
+A responsive travel-agency landing page built from a Figma design. Every section is a Payload CMS block, so the text, photos and forms are edited in the admin panel without touching code.
+
+### Highlights
+
+- 10 sections: header, hero with a booking form, destinations, special offers, blog, trip planners, gallery, testimonials, newsletter and footer
+- Responsive from 320px to 1920px
+- Carousels use the browser's own scroll snap, with arrow buttons and keyboard scrolling
+- The booking and newsletter forms are Payload form-builder forms, and submissions are saved in the CMS
+
+### Tech
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Payload CMS 3 · PostgreSQL (Supabase) · Vercel
+
+### Run locally
+
+1. Follow the setup steps in [セットアップ手順](#セットアップ手順) below (`pnpm install`, environment variables, `pnpm dev`).
+2. Open `/admin`, create a Landing Page and add the Travel blocks (header, hero, sections, newsletter and footer).
+3. Open `/lp/<slug>` with the slug you gave the page.
+
+The photos are not part of this repository. They are uploaded in the admin panel.
+
+### Demo notice
+
+This is a demo site. No bookings are accepted and no newsletters are sent. The contact details in the footer are placeholders.
+
+### Credit
+
+Design based on ["Travellian - Travel Agency Landing Page"](https://www.figma.com/community/file/1166671197078391550/travellian-travel-agency-landing-page) by Al Razi Siam (Figma Community), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified.
+
+---
+
 ## プロジェクト概要
 
 本サイトは Payload CMS をヘッドレスCMSとして採用し、Next.js + Supabase(PostgreSQL) + Vercel の構成で構築しています。
@@ -23,7 +62,7 @@ Kuro's Works の公式コーポレートサイトです。
 
 | 分類 | 技術 |
 |---|---|
-| CMS | Payload CMS 3.88.0 |
+| CMS | Payload CMS 3.90.2 |
 | フロントエンド | Next.js / React 19 |
 | データベース | Supabase (PostgreSQL, 東京リージョン) |
 | ホスティング | Vercel |
@@ -131,5 +170,19 @@ Ledgerly LP（`/lp/[slug]`）のデザインは、以下の Figma テンプレ�
 
 - 元テンプレート："SaaS Landing Page - Bento UI" by sahin Alom（Figma Community）
   https://www.figma.com/community/file/1360683197038417365/saas-landing-page-bento-ui
+- ライセンス：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- 改変：あり
+
+不動産LP（`/lp/[slug]`）のデザインは、以下の Figma テンプレートをもとに改変して制作しています。
+
+- 元テンプレート："Real Estate Template by Flowbase.co" by Flowbase（Figma Community）
+  https://www.figma.com/community/file/877745249867825511/real-estate-template-by-flowbase-co
+- ライセンス：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- 改変：あり
+
+旅行LP「Tidewalk Journeys」（`/lp/[slug]`）のデザインは、以下の Figma テンプレートをもとに改変して制作しています。
+
+- 元テンプレート："Travellian - Travel Agency Landing Page" by Al Razi Siam（Figma Community）
+  https://www.figma.com/community/file/1166671197078391550/travellian-travel-agency-landing-page
 - ライセンス：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - 改変：あり

@@ -19,10 +19,19 @@ import { RealEstateCta } from './realEstateCta/config'
 import { RealEstateFooter } from './realEstateFooter/config'
 import { RealEstateHeader } from './realEstateHeader/config'
 import { RealEstateHero } from './realEstateHero/config'
+import { TravelBlog } from './travelBlog/config'
+import { TravelDestinations } from './travelDestinations/config'
+import { TravelFooter } from './travelFooter/config'
+import { TravelGallery } from './travelGallery/config'
+import { TravelHeader } from './travelHeader/config'
+import { TravelHero } from './travelHero/config'
+import { TravelNewsletter } from './travelNewsletter/config'
+import { TravelOffers } from './travelOffers/config'
+import { TravelTripPlans } from './travelTripPlans/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 
 // A section that holds at most one block, so each LP picks its own design
-// (Typish / Ledgerly / Real Estate) for the header, hero, closing CTA and footer.
+// (Typish / Ledgerly / Real Estate / Travel) for the header, hero, closing CTA and footer.
 const singleBlock = (name: string, blocks: Block[]): Field => ({
   name,
   type: 'blocks',
@@ -71,11 +80,11 @@ export const LandingPages: CollectionConfig = {
         {
           label: 'Header',
           description: 'Typish LPではヘッダーを使わないため空のままで構いません。',
-          fields: [singleBlock('header', [LedgerlyHeader, RealEstateHeader])],
+          fields: [singleBlock('header', [LedgerlyHeader, RealEstateHeader, TravelHeader])],
         },
         {
           label: 'Hero',
-          fields: [singleBlock('hero', [TypishHero, LedgerlyHero, RealEstateHero])],
+          fields: [singleBlock('hero', [TypishHero, LedgerlyHero, RealEstateHero, TravelHero])],
         },
         {
           label: '特徴セクション',
@@ -83,7 +92,18 @@ export const LandingPages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Feature, Testimonial, Pricing, LedgerlyFeatures, PropertyListings],
+              blocks: [
+                Feature,
+                Testimonial,
+                Pricing,
+                LedgerlyFeatures,
+                PropertyListings,
+                TravelDestinations,
+                TravelOffers,
+                TravelBlog,
+                TravelTripPlans,
+                TravelGallery,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,
@@ -93,11 +113,15 @@ export const LandingPages: CollectionConfig = {
         },
         {
           label: 'クロージングCTA',
-          fields: [singleBlock('closingCta', [TypishCta, LedgerlyCta, RealEstateCta])],
+          fields: [
+            singleBlock('closingCta', [TypishCta, LedgerlyCta, RealEstateCta, TravelNewsletter]),
+          ],
         },
         {
           label: 'Footer',
-          fields: [singleBlock('footer', [TypishFooter, LedgerlyFooter, RealEstateFooter])],
+          fields: [
+            singleBlock('footer', [TypishFooter, LedgerlyFooter, RealEstateFooter, TravelFooter]),
+          ],
         },
       ],
     },
