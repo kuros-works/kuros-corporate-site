@@ -42,7 +42,7 @@ export const SaasHeader: React.FC<Props> = ({
         className,
       )}
     >
-      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between gap-6">
+      <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between gap-3 sm:gap-6">
         <a className="flex shrink-0 items-center gap-2" href="#">
           <img alt="" height={18} src={asset('logo.svg')} width={18} />
           <span className={cn(inter.className, 'text-xl leading-[16.2px] font-semibold text-[#fbfbfb]')}>
@@ -70,8 +70,10 @@ export const SaasHeader: React.FC<Props> = ({
           </ul>
         </nav>
 
+        {/* min-w-0: with enlarged text the label wraps inside the pill rather
+            than pushing it past the right edge. */}
         <a
-          className="shrink-0 rounded-[64px] bg-[#1f1f1f] px-5 py-3 text-base leading-[19.2px] font-medium text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset transition-colors hover:bg-[#262626] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:px-6 md:py-4"
+          className="min-w-0 rounded-[64px] bg-[#1f1f1f] px-4 py-3 text-center text-base leading-[19.2px] font-medium text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset transition-colors hover:bg-[#262626] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-5 md:px-6 md:py-4"
           href={ctaHref}
         >
           {ctaLabel}
