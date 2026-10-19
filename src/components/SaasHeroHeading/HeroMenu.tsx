@@ -33,13 +33,15 @@ export const HeroMenu: React.FC<Props> = ({ className, items = defaultItems }) =
       className={cn(
         dmSans.className,
         dmSansOpsz,
-        'flex max-w-full items-start justify-center rounded-[48px] border border-white bg-white/20 px-1.5 py-1.5 backdrop-blur-[32.65px] sm:px-2',
+        // flex-wrap: on narrow phones (or with enlarged text) items wrap to a
+        // second line instead of widening the page.
+        'flex max-w-full flex-wrap items-start justify-center rounded-[28px] border border-white bg-white/20 px-1.5 py-1.5 backdrop-blur-[32.65px] sm:rounded-[48px] sm:px-2',
         className,
       )}
     >
       {items.map(({ active, href, label }) => {
         const classes = cn(
-          'flex items-center justify-center rounded-[40px] px-2.5 py-2 text-[13px] leading-[normal] font-medium whitespace-nowrap sm:px-4 sm:py-2.5 sm:text-base md:px-[22px] md:py-3 md:text-lg',
+          'flex items-center justify-center rounded-[40px] px-2 py-2 text-[13px] leading-[normal] font-medium whitespace-nowrap sm:px-4 sm:py-2.5 sm:text-base md:px-[22px] md:py-3 md:text-lg',
           active ? 'bg-white text-[#1d1c20]' : 'text-white',
         )
 
