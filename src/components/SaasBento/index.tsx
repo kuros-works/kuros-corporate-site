@@ -32,7 +32,8 @@ const invoices = [
   { icon: 'icon-pdf-lime.svg', name: 'invoice-john-smith.pdf', bar: 'w-[132px]', dots: 'mt-[9px]' },
 ]
 
-const timeLabels = ['01:00PM', '02:00PM', '03:00PM', '04:00PM', '05:00PM']
+// "1 PM" style rather than Figma's "01:00PM".
+const timeLabels = ['1 PM', '2 PM', '3 PM', '4 PM', '5 PM']
 
 const SmallFeature: React.FC<{
   children: React.ReactNode
@@ -127,7 +128,7 @@ export const SaasBento: React.FC<Props> = ({
             <div
               className={cn(
                 inter.className,
-                'absolute top-[80.26%] left-[4.28%] flex w-[88.49%] justify-between text-[8px] leading-5 font-medium text-[#828282]',
+                'absolute top-[80.26%] left-[4.28%] flex w-[88.49%] justify-between text-[8px] leading-5 font-medium whitespace-nowrap text-[#828282]',
               )}
             >
               {timeLabels.map((label) => (

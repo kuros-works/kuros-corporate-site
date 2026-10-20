@@ -148,7 +148,7 @@ export const SaasTestimonials: React.FC<Props> = ({
         id="testimonials-heading"
         label="Testimonials"
         lead="Real teams, real results. Here's what finance leaders are saying about Ledgerly."
-        title="What are people saying"
+        title="What people are saying"
       />
 
       {/* Full-bleed track: cancels the page gutter and starts at the 1536px

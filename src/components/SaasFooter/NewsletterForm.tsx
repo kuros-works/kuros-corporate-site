@@ -21,7 +21,7 @@ export const NewsletterForm: React.FC<Props> = ({
   buttonLabel = 'Join',
   className,
   onSubmit,
-  placeholder = 'Enter email address',
+  placeholder = 'Enter your email',
 }) => {
   const id = React.useId()
 
