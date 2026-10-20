@@ -178,12 +178,12 @@ export const BookingForm: React.FC<Props> = ({ className, form }) => {
       <button
         className={cn(
           playfair.className,
-          'flex w-full shrink-0 items-center gap-3 rounded-b-2xl bg-[#ff7757] px-5 py-10 text-left text-[36px] leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[170px] md:rounded-l-none md:rounded-r-[20px] md:py-[60px]',
+          'flex w-full shrink-0 items-center gap-3 rounded-b-2xl bg-[#ff7757] px-5 py-10 text-left text-[36px] leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[170px] xl:w-auto xl:min-w-[170px] md:rounded-l-none md:rounded-r-[20px] md:py-[60px]',
         )}
         disabled={submitting}
         type="submit"
       >
-        <span className="min-w-0 flex-1">{form.submitButtonLabel || 'Submit'}</span>
+        <span className="min-w-0 flex-1 xl:whitespace-nowrap">{form.submitButtonLabel || 'Submit'}</span>
         <img alt="" className="shrink-0" height={14.7279} src={asset('arrow-right.svg')} width={22} />
       </button>
     </form>
