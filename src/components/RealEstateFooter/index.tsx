@@ -124,27 +124,30 @@ export const RealEstateFooter: React.FC<Props> = ({
         )}
       </div>
 
-      <p className="text-[13px] leading-5 tracking-normal text-[#979797]">
-        Design based on{' '}
-        <a
-          className="underline underline-offset-2 transition-colors hover:text-white"
-          href="https://www.figma.com/community/file/877745249867825511/real-estate-template-by-flowbase-co"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          &quot;Real Estate Template by Flowbase.co&quot; by Flowbase (Figma Community)
-        </a>
-        , licensed under{' '}
-        <a
-          className="underline underline-offset-2 transition-colors hover:text-white"
-          href="https://creativecommons.org/licenses/by/4.0/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          CC BY 4.0
-        </a>
-        . Modified.
-      </p>
+      <div className="flex flex-col gap-1 text-[13px] leading-5 tracking-normal text-[#979797]">
+        <p>
+          Design based on{' '}
+          <a
+            className="underline underline-offset-2 transition-colors hover:text-white"
+            href="https://www.figma.com/community/file/877745249867825511/real-estate-template-by-flowbase-co"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            &quot;Real Estate Template by Flowbase.co&quot; by Flowbase (Figma Community)
+          </a>
+          , licensed under{' '}
+          <a
+            className="underline underline-offset-2 transition-colors hover:text-white"
+            href="https://creativecommons.org/licenses/by/4.0/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            CC BY 4.0
+          </a>
+          . Modified.
+        </p>
+        <p>This is a fictional demo for portfolio purposes. The company and properties are not real.</p>
+      </div>
     </footer>
   )
 }
