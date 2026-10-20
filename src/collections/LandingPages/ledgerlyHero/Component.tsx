@@ -11,7 +11,9 @@ import { HeroReview } from '@/components/SaasHeroHeading/HeroReview'
 
 import { mediaSrc } from '../mediaSrc'
 
-// Same composition and spacing as the static /lp/ledgerly hero.
+// Same composition and spacing as the static /lp/ledgerly hero, except the
+// bottom: page.tsx already adds 128px (layout pt-16 + block my-16) before the
+// bento, so only xl adds 21px to reach the static page's 149px.
 export const LedgerlyHeroBlock: React.FC<LedgerlyHeroBlockProps> = ({
   badge,
   dashboard,
@@ -36,7 +38,7 @@ export const LedgerlyHeroBlock: React.FC<LedgerlyHeroBlockProps> = ({
   }))
 
   return (
-    <section className="bg-[#1d1c20] px-4 pt-10 pb-16 md:pt-20 md:pb-24 xl:pt-[108px]">
+    <section className="bg-[#1d1c20] px-4 pt-10 md:pt-20 xl:pt-[108px] xl:pb-[21px]">
       {badge?.label && (
         <div className="mb-[14px] flex justify-center">
           <HeroBadge href={badge.href || undefined} label={badge.label} tag={badge.tag || ''} />

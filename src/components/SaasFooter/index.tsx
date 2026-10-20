@@ -9,6 +9,7 @@ import { NewsletterForm } from './NewsletterForm'
 // Figma: SaaS LP ポートフォリオ用 / node 9:1374 (footer)
 // Full-bleed band: brand + socials, two link columns and the newsletter form,
 // then the copyright / template credit / fictional-product notice.
+// The band's top padding (Figma 98px) is dropped so the divider sits closer to the CTA.
 
 const asset = (name: string) => `/figma/saas-footer/${name}`
 
@@ -78,7 +79,7 @@ export const SaasFooter: React.FC<Props> = ({
       className={cn(
         dmSans.className,
         dmSansOpsz,
-        'bg-[#0f0f0f] px-4 pt-12 md:pt-[98px]',
+        'bg-[#0f0f0f] px-4',
         className,
       )}
     >
