@@ -25,6 +25,9 @@ export const Properties: CollectionConfig = {
     bedrooms: true,
     bathrooms: true,
     size: true,
+    location: true,
+    price: true,
+    listingType: true,
   },
   admin: {
     defaultColumns: ['title', 'listingType', 'propertyType', 'price', 'updatedAt'],

@@ -22,15 +22,20 @@ export const PropertyListingsBlock: React.FC<PropertyListingsBlockProps> = ({
     <RealEstateListings
       description={description}
       heading={heading}
-      properties={populated.map(({ id, title, image, bedrooms, bathrooms, size }) => ({
-        bathrooms,
-        bedrooms,
-        id,
-        imageAlt: image && typeof image === 'object' ? image.alt : null,
-        imageSrc: mediaSrc(image),
-        size,
-        title,
-      }))}
+      properties={populated.map(
+        ({ id, title, image, bedrooms, bathrooms, size, location, price, listingType }) => ({
+          bathrooms,
+          bedrooms,
+          id,
+          imageAlt: image && typeof image === 'object' ? image.alt : null,
+          imageSrc: mediaSrc(image),
+          listingType,
+          location,
+          price,
+          size,
+          title,
+        }),
+      )}
     />
   )
 }
