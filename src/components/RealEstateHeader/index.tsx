@@ -22,6 +22,8 @@ type Props = {
   ctaLabel: string
   logoAlt?: string | null
   logoSrc?: string | null
+  // Shown in place of the logo when logoSrc is empty.
+  logoText?: string
   nav?: RealEstateNavItem[]
 }
 
@@ -31,11 +33,19 @@ export const RealEstateHeader: React.FC<Props> = ({
   ctaLabel,
   logoAlt,
   logoSrc,
+  logoText,
   nav = [],
 }) => (
   <header className={cn(dmSans.className, 'pt-8 text-white', className)}>
     <div className="mx-auto flex h-[50px] w-full max-w-[1101px] items-center px-4">
-      {logoSrc && <img alt={logoAlt || ''} className="h-[34px] w-auto" src={logoSrc} />}
+      {logoSrc ? (
+        <img alt={logoAlt || ''} className="h-[34px] w-auto" src={logoSrc} />
+      ) : (
+        logoText && (
+          // Same type as the nav links so it reads over the hero photo.
+          <span className="text-[15px] font-bold tracking-[-0.025em]">{logoText}</span>
+        )
+      )}
 
       {nav.length > 0 && (
         <nav className="ml-auto hidden lg:block">

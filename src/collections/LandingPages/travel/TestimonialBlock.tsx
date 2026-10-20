@@ -6,9 +6,10 @@ import { TravelTestimonials, type TravelTestimonial } from '@/components/TravelL
 import { mediaSrc } from '../mediaSrc'
 
 // The shared Testimonial block has no heading fields, so the travel design's
-// heading and description (Figma 9:547 / 9:549) are fixed here.
-const heading = 'Traveler’s Experiences'
-const description = 'Here is some awesome feedback from our travelers'
+// heading and description (Figma 9:547 / 9:549) are fixed here. The copy
+// differs from Figma after review.
+const heading = 'Travelers’ Experiences'
+const description = 'Hear from travelers who booked with us'
 
 // The shared Testimonial block's data, drawn with the travel design. Swapped
 // in by RenderLandingPageBlocks only when the LP's theme is travel.
