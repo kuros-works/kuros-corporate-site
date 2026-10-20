@@ -16,24 +16,40 @@ export type PropertyCardData = {
   id: number | string
   imageAlt?: string | null
   imageSrc?: string | null
+  location?: string | null
+  price?: number | null
   size?: number | null
   title: string
 }
 
-const Spec: React.FC<{ icon: React.ReactNode; label: string; value?: number | null }> = ({
-  icon,
-  label,
-  value,
-}) => (
+// "$450,000": thousands separators, no cents.
+const priceFormat = new Intl.NumberFormat('en-US', {
+  currency: 'USD',
+  maximumFractionDigits: 0,
+  minimumFractionDigits: 0,
+  style: 'currency',
+})
+
+const Spec: React.FC<{
+  icon: React.ReactNode
+  label: string
+  unit?: string
+  value?: number | null
+}> = ({ icon, label, unit, value }) => (
   <li className="flex h-[60px] items-center justify-center gap-2.5" title={label}>
     <span aria-hidden="true">{icon}</span>
     <span className="sr-only">{label}</span>
-    <span className="text-[17px] font-bold tracking-[-0.025em]">{value ?? '—'}</span>
+    <span className="text-[17px] font-bold tracking-[-0.025em]">
+      {value == null ? '—' : unit ? `${value} ${unit}` : value}
+    </span>
   </li>
 )
 
 export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ property }) => {
-  const { bathrooms, bedrooms, imageAlt, imageSrc, size, title } = property
+  const { bathrooms, bedrooms, imageAlt, imageSrc, location, price, size, title } = property
+  // 0 or empty is treated as "not set" so the card never shows "$0" or a blank line.
+  const priceLabel = price ? priceFormat.format(price) : null
+  const locationLabel = location?.trim()
 
   return (
     <article
@@ -47,11 +63,17 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
           <img alt={imageAlt || title} className="absolute inset-0 size-full object-cover" src={imageSrc} />
         )}
       </div>
-      <h3 className="p-[30px] text-2xl font-bold tracking-[-0.025em]">{title}</h3>
+      <div className="flex flex-col gap-2 p-[30px]">
+        <h3 className="text-2xl font-bold tracking-[-0.025em]">{title}</h3>
+        {locationLabel && (
+          <p className="text-[15px] tracking-[-0.025em] text-neutral-600">{locationLabel}</p>
+        )}
+        {priceLabel && <p className="text-xl font-bold tracking-[-0.025em]">{priceLabel}</p>}
+      </div>
       <ul className="grid grid-cols-3 divide-x divide-[#e4e4e4] border-t border-[#e4e4e4]">
         <Spec icon={<BedSingle className="size-3.5" />} label="Bedrooms" value={bedrooms} />
         <Spec icon={<Bath className="size-3.5" />} label="Bathrooms" value={bathrooms} />
-        <Spec icon={<Frame className="size-3.5" />} label="Size" value={size} />
+        <Spec icon={<Frame className="size-3.5" />} label="Size" unit="m²" value={size} />
       </ul>
     </article>
   )
