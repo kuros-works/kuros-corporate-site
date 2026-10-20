@@ -4,6 +4,7 @@ import type { RealEstateHeaderBlock as RealEstateHeaderBlockProps } from '@/payl
 
 import { RealEstateHeader } from '@/components/RealEstateHeader'
 import { mediaSrc } from '../mediaSrc'
+import { realEstateBrandName } from '../realEstate/brand'
 
 export const RealEstateHeaderBlock: React.FC<RealEstateHeaderBlockProps> = ({ cta, logo, nav }) => (
   <RealEstateHeader
@@ -11,6 +12,7 @@ export const RealEstateHeaderBlock: React.FC<RealEstateHeaderBlockProps> = ({ ct
     ctaLabel={cta.label}
     logoAlt={logo && typeof logo === 'object' ? logo.alt : null}
     logoSrc={mediaSrc(logo)}
+    logoText={realEstateBrandName}
     nav={(nav ?? []).map(({ href, label }) => ({ href: href || undefined, label }))}
   />
 )

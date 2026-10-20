@@ -30,6 +30,8 @@ type Props = {
   columns?: RealEstateFooterColumn[]
   logoAlt?: string | null
   logoSrc?: string | null
+  // Shown with a copyright line in place of the logo when logoSrc is empty.
+  logoText?: string
   socialLinks?: RealEstateSocialLinks
 }
 
@@ -77,6 +79,7 @@ export const RealEstateFooter: React.FC<Props> = ({
   columns = [],
   logoAlt,
   logoSrc,
+  logoText,
   socialLinks,
 }) => {
   const socials = socialIcons.filter(({ key }) => socialLinks?.[key])
@@ -91,8 +94,17 @@ export const RealEstateFooter: React.FC<Props> = ({
     >
       <div className="flex flex-col gap-12 md:flex-row md:justify-between">
         <div className="flex flex-col gap-[30px]">
-          {logoSrc && (
+          {logoSrc ? (
             <img alt={logoAlt || ''} className="h-[34px] w-auto self-start" src={logoSrc} />
+          ) : (
+            logoText && (
+              <div className="flex flex-col gap-2 leading-5">
+                <span className="font-bold">{logoText}</span>
+                <span className="text-[13px] tracking-normal text-[#979797]">
+                  © 2026 {logoText}. All rights reserved.
+                </span>
+              </div>
+            )
           )}
           {socials.length > 0 && (
             <ul className="flex h-[22px] items-center gap-10">

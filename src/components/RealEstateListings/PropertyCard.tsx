@@ -31,6 +31,12 @@ const priceFormat = new Intl.NumberFormat('en-US', {
   style: 'currency',
 })
 
+// Badge on the photo. Sale uses the LP's yellow CTA colors, rent the inverse black.
+const listingBadge = {
+  rent: { className: 'bg-black text-white', label: 'For Rent' },
+  sale: { className: 'bg-[#ffac12] text-black', label: 'For Sale' },
+} as const
+
 const Spec: React.FC<{
   icon: React.ReactNode
   label: string
@@ -52,6 +58,7 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
   // 0 or empty is treated as "not set" so the card never shows "$0" or a blank line.
   const priceLabel = price ? priceFormat.format(price) : null
   const locationLabel = location?.trim()
+  const badge = listingType ? listingBadge[listingType] : null
 
   return (
     <article
@@ -63,6 +70,16 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
       <div className="relative aspect-[336/266] overflow-hidden bg-neutral-100">
         {imageSrc && (
           <img alt={imageAlt || title} className="absolute inset-0 size-full object-cover" src={imageSrc} />
+        )}
+        {badge && (
+          <span
+            className={cn(
+              'absolute top-5 left-5 rounded-tr-[10px] px-3 py-1 text-[13px] font-bold tracking-[-0.025em]',
+              badge.className,
+            )}
+          >
+            {badge.label}
+          </span>
         )}
       </div>
       <div className="flex flex-col gap-2 p-[30px]">

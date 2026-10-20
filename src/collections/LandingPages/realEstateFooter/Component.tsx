@@ -4,6 +4,7 @@ import type { RealEstateFooterBlock as RealEstateFooterBlockProps } from '@/payl
 
 import { RealEstateFooter } from '@/components/RealEstateFooter'
 import { mediaSrc } from '../mediaSrc'
+import { realEstateBrandName } from '../realEstate/brand'
 
 export const RealEstateFooterBlock: React.FC<RealEstateFooterBlockProps> = ({
   columns,
@@ -17,6 +18,7 @@ export const RealEstateFooterBlock: React.FC<RealEstateFooterBlockProps> = ({
     }))}
     logoAlt={logo && typeof logo === 'object' ? logo.alt : null}
     logoSrc={mediaSrc(logo)}
+    logoText={realEstateBrandName}
     socialLinks={socialLinks ?? undefined}
   />
 )
