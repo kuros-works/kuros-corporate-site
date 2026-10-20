@@ -16,6 +16,7 @@ export type PropertyCardData = {
   id: number | string
   imageAlt?: string | null
   imageSrc?: string | null
+  listingType?: 'rent' | 'sale' | null
   location?: string | null
   price?: number | null
   size?: number | null
@@ -46,7 +47,8 @@ const Spec: React.FC<{
 )
 
 export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ property }) => {
-  const { bathrooms, bedrooms, imageAlt, imageSrc, location, price, size, title } = property
+  const { bathrooms, bedrooms, imageAlt, imageSrc, listingType, location, price, size, title } =
+    property
   // 0 or empty is treated as "not set" so the card never shows "$0" or a blank line.
   const priceLabel = price ? priceFormat.format(price) : null
   const locationLabel = location?.trim()
@@ -68,7 +70,13 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
         {locationLabel && (
           <p className="text-[15px] tracking-[-0.025em] text-neutral-600">{locationLabel}</p>
         )}
-        {priceLabel && <p className="text-xl font-bold tracking-[-0.025em]">{priceLabel}</p>}
+        {priceLabel && (
+          <p className="text-xl font-bold tracking-[-0.025em]">
+            {priceLabel}
+            {/* Rent prices are monthly; sale prices are shown as-is. */}
+            {listingType === 'rent' && <span className="text-[15px] font-normal"> /mo</span>}
+          </p>
+        )}
       </div>
       <ul className="grid grid-cols-3 divide-x divide-[#e4e4e4] border-t border-[#e4e4e4]">
         <Spec icon={<BedSingle className="size-3.5" />} label="Bedrooms" value={bedrooms} />
