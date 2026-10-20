@@ -9,6 +9,8 @@ import { type BentoCards, defaultCards } from './defaultCards'
 // Figma: SaaS LP ポートフォリオ用 / node 9:465 (bento-style)
 // The mock UI inside each card (charts, invoices, avatars) is illustration —
 // only the "Explore more" CTA is interactive.
+// The invoice and receipt copy is tidied from Figma (spacing, file names,
+// "receipt", 2-decimal amounts).
 
 const asset = (name: string) => `/figma/saas-bento/${name}`
 
@@ -25,9 +27,9 @@ const team = [
 ]
 
 const invoices = [
-  { icon: 'icon-pdf-pink.svg', name: 'John Client_download.Pdf', bar: 'w-full', dots: '' },
-  { icon: 'icon-pdf-blue.svg', name: 'Michele Leos_download.Pdf', bar: 'w-full', dots: '' },
-  { icon: 'icon-pdf-lime.svg', name: 'John Smith_download.Pdf', bar: 'w-[132px]', dots: 'mt-[9px]' },
+  { icon: 'icon-pdf-pink.svg', name: 'invoice-john-carter.pdf', bar: 'w-full', dots: '' },
+  { icon: 'icon-pdf-blue.svg', name: 'invoice-michele-leos.pdf', bar: 'w-full', dots: '' },
+  { icon: 'icon-pdf-lime.svg', name: 'invoice-john-smith.pdf', bar: 'w-[132px]', dots: 'mt-[9px]' },
 ]
 
 const timeLabels = ['01:00PM', '02:00PM', '03:00PM', '04:00PM', '05:00PM']
@@ -180,7 +182,7 @@ export const SaasBento: React.FC<Props> = ({
           >
             {/* invoice list */}
             <div className="flex w-full min-w-0 flex-col gap-[21px] rounded-[16px] bg-[#1a1a1a] px-[21px] py-[19px] md:mr-[12.5px] md:mb-[39px] md:max-w-[311px]">
-              <p className="text-lg leading-5 font-medium text-white">MonthlyInvoice</p>
+              <p className="text-lg leading-5 font-medium text-white">Monthly Invoice</p>
               {invoices.map(({ bar, dots, icon, name }) => (
                 <div className="flex items-start justify-between gap-3" key={name}>
                   <div className="flex min-w-0 items-start gap-3">
@@ -204,7 +206,7 @@ export const SaasBento: React.FC<Props> = ({
             {/* receipt — runs off the card's bottom edge, as in the design */}
             <div className="relative h-[185px] w-full min-w-0 shrink-0 overflow-hidden rounded-t-[16px] bg-[#1a1a1a] md:max-w-[303px] md:shrink">
               <p className="absolute top-[27px] left-[22px] text-[30px] leading-10 font-bold whitespace-nowrap text-white">
-                $3453.00
+                $3,453.00
               </p>
               <img
                 alt=""
@@ -250,7 +252,7 @@ export const SaasBento: React.FC<Props> = ({
                 width={44}
               />
               <p className="absolute top-[328px] left-[80px] text-sm leading-[14px] whitespace-nowrap text-white">
-                finance recipt_download.Pdf
+                finance-receipt.pdf
               </p>
               <div className="absolute top-[353px] left-[80px] h-2 w-[132px] rounded-full bg-[#333]" />
             </div>
