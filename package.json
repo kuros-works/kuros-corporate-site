@@ -2,7 +2,8 @@
   "name": "website",
   "version": "1.0.0",
   "description": "Website template for Payload",
-  "license": "MIT",
+  "license": "UNLICENSED",
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
