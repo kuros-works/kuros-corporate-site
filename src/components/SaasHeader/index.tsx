@@ -20,6 +20,10 @@ const defaultNav: NavItem[] = [
   { label: 'Pricing' },
 ]
 
+const navItem = 'flex items-center gap-1 p-2 text-lg leading-[22.4px] text-[#9b9ca1]'
+const ctaButton =
+  'min-w-0 rounded-[64px] bg-[#1f1f1f] px-4 py-3 text-center text-base leading-[19.2px] font-medium text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset sm:px-5 md:px-6 md:py-4'
+
 type Props = {
   className?: string
   ctaHref?: string
@@ -30,7 +34,7 @@ type Props = {
 
 export const SaasHeader: React.FC<Props> = ({
   className,
-  ctaHref = '#',
+  ctaHref,
   ctaLabel = 'Get started',
   logoHref = '#top',
   nav = defaultNav,
@@ -54,32 +58,48 @@ export const SaasHeader: React.FC<Props> = ({
 
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-2 p-1">
-            {nav.map(({ dropdown, href = '#', label }) => (
-              <li key={label}>
-                <a
-                  className="flex items-center gap-1 p-2 text-lg leading-[22.4px] text-[#9b9ca1] transition-colors hover:text-white"
-                  href={href}
-                >
+            {nav.map(({ dropdown, href, label }) => {
+              const content = (
+                <>
                   {label}
                   {dropdown && (
                     <span className="flex size-4 items-center justify-center">
                       <img alt="" height={6.50377} src={asset('chevron-down.svg')} width={11.5039} />
                     </span>
                   )}
-                </a>
-              </li>
-            ))}
+                </>
+              )
+
+              return (
+                <li key={label}>
+                  {href ? (
+                    <a className={cn(navItem, 'transition-colors hover:text-white')} href={href}>
+                      {content}
+                    </a>
+                  ) : (
+                    <span className={navItem}>{content}</span>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </nav>
 
         {/* min-w-0: with enlarged text the label wraps inside the pill rather
             than pushing it past the right edge. */}
-        <a
-          className="min-w-0 rounded-[64px] bg-[#1f1f1f] px-4 py-3 text-center text-base leading-[19.2px] font-medium text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset transition-colors hover:bg-[#262626] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-5 md:px-6 md:py-4"
-          href={ctaHref}
-        >
-          {ctaLabel}
-        </a>
+        {ctaHref ? (
+          <a
+            className={cn(
+              ctaButton,
+              'transition-colors hover:bg-[#262626] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
+            )}
+            href={ctaHref}
+          >
+            {ctaLabel}
+          </a>
+        ) : (
+          <span className={ctaButton}>{ctaLabel}</span>
+        )}
       </div>
     </header>
   )

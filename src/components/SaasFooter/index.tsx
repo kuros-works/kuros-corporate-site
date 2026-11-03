@@ -148,11 +148,15 @@ export const SaasFooter: React.FC<Props> = ({
             <nav aria-label={title} className="flex shrink-0 flex-col gap-8" key={title}>
               <p className="text-xl leading-none font-bold whitespace-nowrap text-[#fafafa]">{title}</p>
               <ul className="flex flex-col gap-6 text-base leading-none text-[#b9b3b3]">
-                {links.map(({ href = '#', label }) => (
+                {links.map(({ href, label }) => (
                   <li key={label}>
-                    <a className="transition-colors hover:text-white" href={href}>
-                      {label}
-                    </a>
+                    {href ? (
+                      <a className="transition-colors hover:text-white" href={href}>
+                        {label}
+                      </a>
+                    ) : (
+                      <span>{label}</span>
+                    )}
                   </li>
                 ))}
               </ul>
