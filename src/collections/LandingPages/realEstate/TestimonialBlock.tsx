@@ -12,7 +12,7 @@ import { mediaSrc } from '../mediaSrc'
 // in by RenderLandingPageBlocks only when the LP's theme is realEstate.
 export const RealEstateTestimonialBlock: React.FC<TestimonialBlockProps> = ({ testimonials }) => {
   const items = (testimonials ?? []).flatMap<RealEstateTestimonial>(({ avatar, name, quote, role }) => {
-    const avatarSrc = mediaSrc(avatar)
+    const avatarSrc = mediaSrc(avatar, 'thumbnail')
     // Same rule as TestimonialBlock: an unpopulated or deleted avatar skips the card.
     if (!avatarSrc) return []
 

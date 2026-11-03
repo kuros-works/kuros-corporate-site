@@ -51,12 +51,22 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote, role })
 
     <figcaption className="mt-auto flex items-start gap-[10px] pt-8 pr-20">
       <div className="relative mt-px size-[60px] shrink-0">
-        <img alt="" className="absolute inset-0 size-full" height={60} src={avatarSrc(avatar)} width={60} />
+        <img
+          alt=""
+          className="absolute inset-0 size-full"
+          decoding="async"
+          height={60}
+          loading="lazy"
+          src={avatarSrc(avatar)}
+          width={60}
+        />
         {avatarCover && (
           <img
             alt=""
             className="absolute top-[-5.5px] left-[-4.5px] max-w-none"
+            decoding="async"
             height={69}
+            loading="lazy"
             src={avatarSrc(avatarCover)}
             width={69}
           />
@@ -88,7 +98,9 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote, role })
         <img
           alt=""
           className="absolute top-0 h-[48.067px] w-[32.044px] max-w-none rotate-180 object-cover opacity-20 brightness-0 invert"
+          decoding="async"
           key={left}
+          loading="lazy"
           src={asset('quote.png')}
           style={{ left }}
         />

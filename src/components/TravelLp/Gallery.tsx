@@ -65,6 +65,8 @@ export const TravelGallery: React.FC<Props> = ({ className, description, heading
             <img
               alt={imageAlt || ''}
               className="absolute inset-0 size-full object-cover"
+              decoding="async"
+              loading="lazy"
               src={imageSrc}
             />
             <div aria-hidden className="absolute inset-0 bg-black/20" />

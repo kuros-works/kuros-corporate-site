@@ -25,9 +25,10 @@ export const LedgerlyHeroBlock: React.FC<LedgerlyHeroBlockProps> = ({
 }) => {
   // An unpopulated or deleted avatar would render a broken <img>, so skip it.
   const avatars = (review?.avatars ?? []).flatMap(({ avatar, avatarCover }) => {
-    const base = mediaSrc(avatar)
+    // Avatars render at 32px, so the 300px thumbnail is plenty.
+    const base = mediaSrc(avatar, 'thumbnail')
     if (!base) return []
-    const cover = mediaSrc(avatarCover)
+    const cover = mediaSrc(avatarCover, 'thumbnail')
     return [cover ? [base, cover] : [base]]
   })
   const dashboardSrc = mediaSrc(dashboard)

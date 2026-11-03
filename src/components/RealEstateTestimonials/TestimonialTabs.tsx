@@ -92,7 +92,13 @@ export const TestimonialTabs: React.FC<{ testimonials: RealEstateTestimonial[] }
             >
               <span className="relative size-[49px] shrink-0 overflow-hidden rounded-full bg-neutral-200">
                 {avatarSrc && (
-                  <img alt="" className="absolute inset-0 size-full object-cover" src={avatarSrc} />
+                  <img
+                    alt=""
+                    className="absolute inset-0 size-full object-cover"
+                    decoding="async"
+                    loading="lazy"
+                    src={avatarSrc}
+                  />
                 )}
               </span>
               <span className="flex min-w-0 flex-col gap-1">

@@ -44,6 +44,9 @@ export const RealEstateHero: React.FC<Props> = ({
         <img
           alt={backgroundAlt || ''}
           className="absolute inset-0 size-full object-cover"
+          decoding="async"
+          fetchPriority="high"
+          loading="eager"
           src={backgroundSrc}
         />
       )}

@@ -28,7 +28,10 @@ export const HeroDashboard: React.FC<Props> = ({
         alt={alt}
         className="h-auto w-full"
         decoding="async"
+        // Likely the page's LCP image: fetch it first instead of lazily.
+        fetchPriority="high"
         height={height}
+        loading="eager"
         src={src}
         width={width}
       />

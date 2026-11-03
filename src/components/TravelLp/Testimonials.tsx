@@ -74,6 +74,8 @@ export const TravelTestimonials: React.FC<Props> = ({
             <img
               alt=""
               className="absolute -top-[65px] left-5 size-[100px] rounded-full object-cover md:left-10"
+              decoding="async"
+              loading="lazy"
               src={avatarSrc}
             />
             <blockquote className="text-lg leading-[23px]">{quote}</blockquote>

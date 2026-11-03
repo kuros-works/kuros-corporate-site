@@ -95,6 +95,8 @@ export const SaasBento: React.FC<Props> = ({
             <img
               alt=""
               className="absolute inset-x-0 top-[63px] bottom-0 h-[calc(100%-63px)] w-full"
+              decoding="async"
+              loading="lazy"
               src={asset('analytics.png')}
             />
             <div className="relative flex items-center gap-2 px-[31px] pt-[31px]">
@@ -152,13 +154,15 @@ export const SaasBento: React.FC<Props> = ({
               {team.map(([base, ...covers]) => (
                 <div className="relative -mr-[23px] size-12 last:mr-0" key={base}>
                   <div className="absolute inset-0 overflow-hidden rounded-full">
-                    <img alt="" className="size-full" src={asset(base)} />
+                    <img alt="" className="size-full" decoding="async" loading="lazy" src={asset(base)} />
                   </div>
                   {covers.map((cover) => (
                     <img
                       alt=""
                       className="absolute inset-0 size-full rounded-full object-cover"
+                      decoding="async"
                       key={cover}
+                      loading="lazy"
                       src={asset(cover)}
                     />
                   ))}
@@ -230,7 +234,9 @@ export const SaasBento: React.FC<Props> = ({
               <img
                 alt=""
                 className="absolute top-[191.2px] left-[20.2px] max-w-none"
+                decoding="async"
                 height={53.6}
+                loading="lazy"
                 src={asset('avatar.png')}
                 width={53.6}
               />

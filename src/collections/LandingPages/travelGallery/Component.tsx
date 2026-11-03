@@ -11,7 +11,7 @@ export const TravelGalleryBlock: React.FC<TravelGalleryBlockProps> = ({
   images,
 }) => {
   const items = (images ?? []).flatMap<TravelGalleryImage>(({ image }) => {
-    const imageSrc = mediaSrc(image)
+    const imageSrc = mediaSrc(image, 'medium')
     // A photo is all a slide has, so an unpopulated or deleted one is skipped.
     if (!imageSrc) return []
 

@@ -19,7 +19,7 @@ export const TravelTripPlansBlock: React.FC<TravelTripPlansBlockProps> = ({
       category,
       duration,
       imageAlt: image && typeof image === 'object' ? image.alt : null,
-      imageSrc: mediaSrc(image),
+      imageSrc: mediaSrc(image, 'medium'),
       price,
       title,
     }))}

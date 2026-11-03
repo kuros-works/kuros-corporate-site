@@ -15,7 +15,7 @@ export const RealEstateHeroBlock: React.FC<RealEstateHeroBlockProps> = ({
     backgroundAlt={
       backgroundImage && typeof backgroundImage === 'object' ? backgroundImage.alt : null
     }
-    backgroundSrc={mediaSrc(backgroundImage)}
+    backgroundSrc={mediaSrc(backgroundImage, ['xlarge', 'large'])}
     heading={heading}
     lead={lead}
     listingsHref={listingsLink.href || undefined}
