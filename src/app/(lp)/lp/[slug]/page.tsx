@@ -10,6 +10,8 @@ import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks
 import { getLandingPageTheme } from '@/collections/LandingPages/theme'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RealEstateFooterDivider, RealEstateFooterFrame } from '@/components/RealEstateFooter'
+import type { Media } from '@/payload-types'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { cn } from '@/utilities/ui'
 
 export async function generateStaticParams() {
@@ -74,6 +76,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     // Real-estate blocks are light-only, so pin the colors instead of following
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
     <article
+      id="top"
       className={cn(
         theme === 'realEstate' && 'flex-1 bg-white text-black',
         // Travel blocks are light-only as well. Chrome ignores preflight's
@@ -143,13 +146,59 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
+const DESCRIPTION_MAX = 160
+
+// Collapse whitespace, cut at 160 chars, and append "…" when the text was longer.
+const toDescription = (text?: string | null) => {
+  const flat = (text ?? '').replace(/\s+/g, ' ').trim()
+  if (!flat) return undefined
+  return flat.length > DESCRIPTION_MAX ? `${flat.slice(0, DESCRIPTION_MAX - 1)}…` : flat
+}
+
+// Prefers the `og` size when the Media doc has one, otherwise the original file.
+const toOgImageUrl = (media: unknown) => {
+  if (!media || typeof media !== 'object') return undefined
+  const m = media as Media
+  const url = m.sizes?.og?.url || m.url
+  return url ? getMediaUrl(url, m.updatedAt) : undefined
+}
+
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = '' } = await paramsPromise
   const decodedSlug = decodeURIComponent(slug)
   const landingPage = await queryLandingPageBySlug({ slug: decodedSlug })
 
+  const title = landingPage?.title || 'Landing Page'
+  const hero = landingPage?.hero?.[0]
+
+  let lead: string | null | undefined
+  let image: unknown
+  if (hero?.blockType === 'ledgerlyHero') {
+    lead = hero.lead
+    image = hero.dashboard
+  } else if (hero?.blockType === 'travelHero' || hero?.blockType === 'realEstateHero') {
+    lead = hero.lead
+    image = hero.backgroundImage
+  }
+
+  const description = toDescription(lead)
+  const imageUrl = toOgImageUrl(image)
+
   return {
-    title: landingPage?.title || 'Landing Page',
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      ...(imageUrl ? { images: [{ url: imageUrl }] } : {}),
+    },
+    twitter: {
+      card: imageUrl ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      ...(imageUrl ? { images: [imageUrl] } : {}),
+    },
   }
 }
 

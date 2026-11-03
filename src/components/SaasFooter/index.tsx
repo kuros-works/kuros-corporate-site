@@ -50,6 +50,7 @@ type Props = {
   copyright?: string
   description?: string
   disclaimer?: string
+  logoHref?: string
   logoSrc?: string
   logoText?: string
   newsletterHeading?: string
@@ -63,6 +64,7 @@ export const SaasFooter: React.FC<Props> = ({
   copyright = '© Copyright 2026, All Reserved by Ledgerly',
   description = 'Financial clarity for growing teams — track spend, automate approvals, and close the books faster.',
   disclaimer = 'This page is a fictional product demo built to showcase a Payload CMS implementation. It is not affiliated with any real company or service.',
+  logoHref = '#top',
   logoSrc = asset('logo.svg'),
   logoText = 'Ledgerly',
   newsletterHeading = 'Subscribe to Newsletter',
@@ -97,7 +99,7 @@ export const SaasFooter: React.FC<Props> = ({
         <div className="grid w-full grid-cols-2 gap-x-6 gap-y-12 lg:flex lg:items-start lg:justify-between lg:gap-x-8">
           {/* brand */}
           <div className="col-span-2 flex min-w-0 flex-col gap-8 lg:max-w-[496px] lg:shrink">
-            <a className="flex items-center gap-2" href="#">
+            <a className="flex items-center gap-2" href={logoHref}>
               <img alt="" height={24} src={logoSrc} width={24} />
               <span
                 className={cn(inter.className, 'text-2xl leading-[16.2px] font-semibold text-[#fbfbfb]')}
