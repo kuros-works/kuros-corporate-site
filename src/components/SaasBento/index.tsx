@@ -19,11 +19,17 @@ const card = 'overflow-hidden rounded-[30px] border border-[#333] bg-[#161616]'
 // Each avatar is a stack of layers exactly as in Figma: a base image clipped
 // to the circle, then cover images on top.
 const team = [
-  ['team-1a.png', 'team-1b.jpg'],
-  ['team-2a.png', 'team-2b.jpg', 'team-2c.jpg', 'team-2d.jpg', 'team-2e.jpg'],
-  ['team-3a.png', 'team-3b.jpg', 'team-3c.jpg'],
-  ['team-4a.png', 'team-4b.jpg', 'team-4c.jpg'],
-  ['team-5a.png', 'team-5b.jpg'],
+  ['team-1a-192.webp', 'team-1b-192.webp'],
+  [
+    'team-2a-192.webp',
+    'team-2b-192.webp',
+    'team-2c-192.webp',
+    'team-2d-192.webp',
+    'team-2e-192.webp',
+  ],
+  ['team-3a-192.webp', 'team-3b-192.webp', 'team-3c-192.webp'],
+  ['team-4a-192.webp', 'team-4b-192.webp', 'team-4c-192.webp'],
+  ['team-5a-192.webp', 'team-5b-192.webp'],
 ]
 
 const invoices = [
@@ -97,7 +103,7 @@ export const SaasBento: React.FC<Props> = ({
               className="absolute inset-x-0 top-[63px] bottom-0 h-[calc(100%-63px)] w-full"
               decoding="async"
               loading="lazy"
-              src={asset('analytics.png')}
+              src={asset('analytics.webp')}
             />
             <div className="relative flex items-center gap-2 px-[31px] pt-[31px]">
               <span className="flex size-6 items-center justify-center rounded-full border border-[#236456] bg-[#112220]">
@@ -237,7 +243,7 @@ export const SaasBento: React.FC<Props> = ({
                 decoding="async"
                 height={53.6}
                 loading="lazy"
-                src={asset('avatar.png')}
+                src={asset('avatar.webp')}
                 width={53.6}
               />
               <p className="absolute top-[195px] left-[80px] text-xl tracking-[-0.5px] whitespace-nowrap text-white">

@@ -101,7 +101,7 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote, role })
           decoding="async"
           key={left}
           loading="lazy"
-          src={asset('quote.png')}
+          src={asset('quote-64x96.webp')}
           style={{ left }}
         />
       ))}
