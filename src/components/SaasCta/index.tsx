@@ -20,15 +20,32 @@ type Props = {
 }
 
 const button =
-  'flex h-[60px] w-full items-center justify-center rounded-full text-lg font-medium text-[#1d1c20] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:w-[240px]'
+  'flex h-[60px] w-full items-center justify-center rounded-full text-lg font-medium text-[#1d1c20] sm:w-[240px]'
+
+// Hover / focus feedback is only for real links; without an href the button is a plain <span>.
+const linkFeedback =
+  'transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+
+const CtaButton: React.FC<{ children: React.ReactNode; className: string; href?: string }> = ({
+  children,
+  className,
+  href,
+}) =>
+  href ? (
+    <a className={cn(button, linkFeedback, className)} href={href}>
+      {children}
+    </a>
+  ) : (
+    <span className={cn(button, className)}>{children}</span>
+  )
 
 export const SaasCta: React.FC<Props> = ({
   className,
-  demoHref = '#',
+  demoHref,
   demoLabel = 'Request Demo',
   heading = "Let's bring clarity to your finances with Ledgerly",
   lead,
-  videoHref = '#',
+  videoHref,
   videoLabel = 'Watch Video',
 }) => {
   return (
@@ -54,12 +71,12 @@ export const SaasCta: React.FC<Props> = ({
           </p>
         )}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-[22px] xl:mt-14">
-          <a className={cn(button, 'bg-[#a3dc2f]')} href={demoHref}>
+          <CtaButton className="bg-[#a3dc2f]" href={demoHref}>
             {demoLabel}
-          </a>
-          <a className={cn(button, 'bg-white')} href={videoHref}>
+          </CtaButton>
+          <CtaButton className="bg-white" href={videoHref}>
             {videoLabel}
-          </a>
+          </CtaButton>
         </div>
       </div>
 

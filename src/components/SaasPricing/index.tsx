@@ -65,14 +65,24 @@ const defaultPlans: Plan[] = [
 ]
 
 const ctaStyles: Record<Plan['variant'], string> = {
-  basic: 'bg-[#1f1f1f] text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset hover:bg-[#262626]',
-  enterprise: 'bg-[#a3dc2f] text-[#1d1c20] hover:opacity-90',
-  pro: 'bg-[#fbfbfb] text-[#0f0f0f] hover:opacity-90',
+  basic: 'bg-[#1f1f1f] text-[#fbfbfb] ring-1 ring-[#3b3b3b] ring-inset',
+  enterprise: 'bg-[#a3dc2f] text-[#1d1c20]',
+  pro: 'bg-[#fbfbfb] text-[#0f0f0f]',
 }
+
+// Hover / focus feedback is only for real links.
+const ctaLinkStyles: Record<Plan['variant'], string> = {
+  basic: 'hover:bg-[#262626]',
+  enterprise: 'hover:opacity-90',
+  pro: 'hover:opacity-90',
+}
+
+const ctaBase =
+  'flex w-full items-center justify-center rounded-[64px] py-5 text-base leading-[19.2px] font-medium'
 
 const PlanCard: React.FC<Plan> = ({
   cta,
-  ctaHref = '#',
+  ctaHref,
   description,
   features,
   name,
@@ -128,15 +138,21 @@ const PlanCard: React.FC<Plan> = ({
     </ul>
 
     <div className="mt-auto w-full pt-12">
-      <a
-        className={cn(
-          'flex w-full items-center justify-center rounded-[64px] py-5 text-base leading-[19.2px] font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
-          ctaStyles[variant],
-        )}
-        href={ctaHref}
-      >
-        {cta}
-      </a>
+      {ctaHref ? (
+        <a
+          className={cn(
+            ctaBase,
+            'transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
+            ctaStyles[variant],
+            ctaLinkStyles[variant],
+          )}
+          href={ctaHref}
+        >
+          {cta}
+        </a>
+      ) : (
+        <span className={cn(ctaBase, ctaStyles[variant])}>{cta}</span>
+      )}
     </div>
   </article>
 )
@@ -150,6 +166,7 @@ export const SaasPricing: React.FC<Props> = ({ className, plans = defaultPlans }
   return (
     <section
       aria-labelledby="pricing-heading"
+      id="pricing"
       className={cn(dmSans.className, dmSansOpsz, 'flex flex-col items-center', className)}
     >
       <SectionHeading

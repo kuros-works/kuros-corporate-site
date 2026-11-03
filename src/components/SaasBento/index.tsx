@@ -55,6 +55,11 @@ const SmallFeature: React.FC<{
   </div>
 )
 
+const ctaButton = cn(
+  inter.className,
+  'mt-8 inline-flex h-[60px] w-[200px] items-center justify-center rounded-full bg-white text-lg font-semibold text-[#1d1c20] md:mt-16',
+)
+
 type Props = {
   cards?: BentoCards
   className?: string
@@ -65,13 +70,14 @@ type Props = {
 export const SaasBento: React.FC<Props> = ({
   cards = defaultCards,
   className,
-  ctaHref = '#',
+  ctaHref,
   ctaLabel = 'Explore more',
 }) => {
   const [spendCard, teamCard, collaborationCard, accountingCard, optimiseCard] = cards
 
   return (
     <div
+      id="features"
       className={cn(
         dmSans.className,
         dmSansOpsz,
@@ -274,15 +280,19 @@ export const SaasBento: React.FC<Props> = ({
               {optimiseCard.description}
             </p>
           )}
-          <a
-            className={cn(
-              inter.className,
-              'mt-8 inline-flex h-[60px] w-[200px] items-center justify-center rounded-full bg-white text-lg font-semibold text-[#1d1c20] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:mt-16',
-            )}
-            href={ctaHref}
-          >
-            {ctaLabel}
-          </a>
+          {ctaHref ? (
+            <a
+              className={cn(
+                ctaButton,
+                'transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
+              )}
+              href={ctaHref}
+            >
+              {ctaLabel}
+            </a>
+          ) : (
+            <span className={ctaButton}>{ctaLabel}</span>
+          )}
         </div>
       </div>
     </div>
