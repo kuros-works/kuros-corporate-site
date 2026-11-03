@@ -35,7 +35,7 @@ export const RealEstateFeatureBlock: React.FC<FeatureBlockProps> = ({
       buttonLabel={button?.label}
       heading={heading}
       imageAlt={image && typeof image === 'object' ? image.alt : null}
-      imageSrc={mediaSrc(image)}
+      imageSrc={mediaSrc(image, 'large')}
       variant={variant}
     />
   )

@@ -15,7 +15,7 @@ const description = 'Hear from travelers who booked with us'
 // in by RenderLandingPageBlocks only when the LP's theme is travel.
 export const TravelTestimonialBlock: React.FC<TestimonialBlockProps> = ({ testimonials }) => {
   const items = (testimonials ?? []).flatMap<TravelTestimonial>(({ avatar, name, quote, role }) => {
-    const avatarSrc = mediaSrc(avatar)
+    const avatarSrc = mediaSrc(avatar, 'thumbnail')
     // Same rule as TestimonialBlock: an unpopulated or deleted avatar skips the card.
     if (!avatarSrc) return []
 

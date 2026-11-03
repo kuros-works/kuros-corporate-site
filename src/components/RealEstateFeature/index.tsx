@@ -121,7 +121,7 @@ export const RealEstateFeature: React.FC<Props> = ({
         )}
       >
         {imageSrc && (
-          <img alt={imageAlt || ''} className="absolute inset-0 size-full object-cover" src={imageSrc} />
+          <img alt={imageAlt || ''} className="absolute inset-0 size-full object-cover" decoding="async" loading="lazy" src={imageSrc} />
         )}
       </div>
       <div className="flex max-w-[474px] flex-col">

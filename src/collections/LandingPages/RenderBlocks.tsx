@@ -100,7 +100,8 @@ export const RenderLandingPageBlocks: React.FC<{
         const rendered = <Block {...block} />
 
         return spaced ? (
-          <div className="my-16" key={index}>
+          // Ledgerly: smaller below xl (see page.tsx); xl and other themes stay my-16.
+          <div className={theme === 'ledgerly' ? 'my-8 md:my-12 xl:my-16' : 'my-16'} key={index}>
             {rendered}
           </div>
         ) : (

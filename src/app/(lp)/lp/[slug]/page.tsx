@@ -118,7 +118,11 @@ export default async function Page({ params: paramsPromise }: Args) {
           the hero (Figma 6:120 under 3:57), so they get no extra spacing here. */}
       <div
         className={cn(
-          theme !== 'travel' && 'pt-16 pb-16',
+          // Ledgerly's 128px (this + each block's my-16) is the xl design value;
+          // below xl it shrinks so the gap under the hero pill nav isn't huge.
+          theme === 'ledgerly'
+            ? 'pt-8 pb-8 md:pt-12 md:pb-12 xl:pt-16 xl:pb-16'
+            : theme !== 'travel' && 'pt-16 pb-16',
           theme === 'ledgerly' && 'bg-[#1d1c20] px-4',
         )}
       >

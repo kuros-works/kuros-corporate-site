@@ -15,7 +15,7 @@ export const TravelDestinationsBlock: React.FC<TravelDestinationsBlockProps> = (
     heading={heading}
     items={(items ?? []).map(({ image, location, title }) => ({
       imageAlt: image && typeof image === 'object' ? image.alt : null,
-      imageSrc: mediaSrc(image),
+      imageSrc: mediaSrc(image, 'large'),
       location,
       title,
     }))}

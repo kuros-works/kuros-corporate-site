@@ -28,7 +28,7 @@ export const PropertyListingsBlock: React.FC<PropertyListingsBlockProps> = ({
           bedrooms,
           id,
           imageAlt: image && typeof image === 'object' ? image.alt : null,
-          imageSrc: mediaSrc(image),
+          imageSrc: mediaSrc(image, 'medium'),
           listingType,
           location,
           price,

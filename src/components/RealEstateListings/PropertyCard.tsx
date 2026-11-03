@@ -69,7 +69,7 @@ export const PropertyCard: React.FC<{ property: PropertyCardData }> = ({ propert
     >
       <div className="relative aspect-[336/266] overflow-hidden bg-neutral-100">
         {imageSrc && (
-          <img alt={imageAlt || title} className="absolute inset-0 size-full object-cover" src={imageSrc} />
+          <img alt={imageAlt || title} className="absolute inset-0 size-full object-cover" decoding="async" loading="lazy" src={imageSrc} />
         )}
         {badge && (
           <span

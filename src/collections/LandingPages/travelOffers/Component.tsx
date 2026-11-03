@@ -19,7 +19,7 @@ export const TravelOffersBlock: React.FC<TravelOffersBlockProps> = ({
     items={(items ?? []).map(({ description, image, price, title }) => ({
       description,
       imageAlt: image && typeof image === 'object' ? image.alt : null,
-      imageSrc: mediaSrc(image),
+      imageSrc: mediaSrc(image, 'medium'),
       price,
       title,
     }))}

@@ -17,7 +17,7 @@ export const TravelBlogBlock: React.FC<TravelBlogBlockProps> = ({
     description={description}
     heading={heading}
     imageAlt={image && typeof image === 'object' ? image.alt : null}
-    imageSrc={mediaSrc(image)}
+    imageSrc={mediaSrc(image, 'medium')}
     postBody={postBody}
     postTitle={postTitle}
     readMoreLabel={readMoreLabel}

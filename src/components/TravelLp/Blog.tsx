@@ -61,6 +61,8 @@ export const TravelBlog: React.FC<Props> = ({
             <img
               alt={imageAlt || ''}
               className="absolute inset-0 size-full object-cover"
+              decoding="async"
+              loading="lazy"
               src={imageSrc}
             />
           )}
