@@ -16,7 +16,7 @@ import '../(frontend)/globals.css'
 // landing pages are self-contained and not part of the corporate site nav.
 export default async function LandingPageLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="ja" suppressHydrationWarning>
+    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

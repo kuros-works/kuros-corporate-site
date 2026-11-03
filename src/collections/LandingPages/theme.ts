@@ -17,3 +17,7 @@ export const getLandingPageTheme = (
 
   return 'default'
 }
+
+// The LP layout declares <html lang="en">; only the Typish LP (Setagaya) is Japanese.
+export const getLandingPageLang = (landingPage: Pick<LandingPage, 'hero'>): 'en' | 'ja' =>
+  landingPage.hero?.[0]?.blockType === 'typishHero' ? 'ja' : 'en'

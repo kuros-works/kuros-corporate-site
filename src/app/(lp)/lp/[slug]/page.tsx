@@ -7,7 +7,7 @@ import { getPayload } from 'payload'
 import React, { cache } from 'react'
 
 import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks'
-import { getLandingPageTheme } from '@/collections/LandingPages/theme'
+import { getLandingPageLang, getLandingPageTheme } from '@/collections/LandingPages/theme'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RealEstateFooterDivider, RealEstateFooterFrame } from '@/components/RealEstateFooter'
 import type { Media } from '@/payload-types'
@@ -53,6 +53,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   // Ledgerly blocks assume the static /lp/ledgerly <main>'s dark background and
   // 16px gutter (SaasTestimonials' -mx-4 track cancels it), so mirror them here.
   const theme = getLandingPageTheme(landingPage)
+  // <html> is lang="en"; mark the Japanese (Typish) LP on its own root element.
+  const lang = getLandingPageLang(landingPage)
 
   // The real-estate nav is transparent with white text, made to sit on the
   // hero photo (Figma 0:111 over 0:110). Without that hero it gets a black strip.
@@ -77,6 +79,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
     <article
       id="top"
+      lang={lang === 'ja' ? 'ja' : undefined}
       className={cn(
         theme === 'realEstate' && 'flex-1 bg-white text-black',
         // Travel blocks are light-only as well. Chrome ignores preflight's
