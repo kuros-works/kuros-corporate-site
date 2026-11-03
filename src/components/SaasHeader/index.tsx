@@ -24,6 +24,7 @@ type Props = {
   className?: string
   ctaHref?: string
   ctaLabel?: string
+  logoHref?: string
   nav?: NavItem[]
 }
 
@@ -31,6 +32,7 @@ export const SaasHeader: React.FC<Props> = ({
   className,
   ctaHref = '#',
   ctaLabel = 'Get started',
+  logoHref = '#top',
   nav = defaultNav,
 }) => {
   return (
@@ -43,7 +45,7 @@ export const SaasHeader: React.FC<Props> = ({
       )}
     >
       <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between gap-3 sm:gap-6">
-        <a className="flex shrink-0 items-center gap-2" href="#">
+        <a className="flex shrink-0 items-center gap-2" href={logoHref}>
           <img alt="" height={18} src={asset('logo.svg')} width={18} />
           <span className={cn(inter.className, 'text-xl leading-[16.2px] font-semibold text-[#fbfbfb]')}>
             Ledgerly
