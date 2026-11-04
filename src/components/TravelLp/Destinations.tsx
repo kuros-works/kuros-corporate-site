@@ -48,6 +48,7 @@ export const TravelDestinations: React.FC<Props> = ({
         'overflow-x-clip py-20 xl:py-[min(7.292vw,140px)]',
         className,
       )}
+      id="destinations"
     >
       <TravelCarousel
         heading={
