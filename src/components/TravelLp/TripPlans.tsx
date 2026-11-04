@@ -58,6 +58,7 @@ export const TravelTripPlans: React.FC<Props> = ({
         'overflow-x-clip py-20 xl:py-[min(7.292vw,140px)]',
         className,
       )}
+      id="trip-plans"
     >
       <div className="flex flex-col gap-20 px-4 md:px-5 xl:flex-row xl:items-center xl:gap-[min(4.896vw,94px)] xl:pr-0 xl:pl-[min(9.479vw,182px)]">
         {/* 6px wider than the Figma's 394px (and the gap 6px narrower) so the

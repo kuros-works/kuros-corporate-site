@@ -46,6 +46,7 @@ export const TravelBlog: React.FC<Props> = ({
         'flex flex-col gap-[100px] overflow-x-clip px-4 py-20 md:px-5 xl:gap-[min(5.208vw,100px)] xl:px-[min(9.479vw,182px)] xl:py-[min(7.292vw,140px)]',
         className,
       )}
+      id="blog"
     >
       <TravelSectionHeading
         description={description}
