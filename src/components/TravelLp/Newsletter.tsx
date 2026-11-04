@@ -60,7 +60,7 @@ export const TravelNewsletter: React.FC<Props> = ({ className, form, heading, pl
         className,
       )}
     >
-      <div className="flex flex-col gap-[60px] rounded-[20px] bg-white px-5 py-10 text-[#767e86] drop-shadow-[0px_0px_2px_rgba(0,0,0,0.3)] md:rounded-[26px] md:px-10 xl:mx-auto xl:w-[min(65.729vw,1262px)] xl:flex-row xl:items-start xl:gap-[min(5.208vw,100px)] xl:px-[min(4.167vw,80px)] xl:py-[min(3.125vw,60px)]">
+      <div className="flex flex-col gap-[60px] rounded-[20px] bg-white px-5 py-10 text-[#656d75] drop-shadow-[0px_0px_2px_rgba(0,0,0,0.3)] md:rounded-[26px] md:px-10 xl:mx-auto xl:w-[min(65.729vw,1262px)] xl:flex-row xl:items-start xl:gap-[min(5.208vw,100px)] xl:px-[min(4.167vw,80px)] xl:py-[min(3.125vw,60px)]">
         <h2
           className={cn(
             playfair.className,
@@ -123,7 +123,7 @@ export const TravelNewsletter: React.FC<Props> = ({ className, form, heading, pl
               </div>
 
               <button
-                className="h-[73px] w-full shrink-0 rounded-[12px] bg-[#ff7757] px-5 text-xl leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[163px] xl:w-[clamp(130px,8.49vw,163px)]"
+                className="h-[73px] w-full shrink-0 rounded-[12px] bg-[#d63f1f] px-5 text-xl leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[163px] xl:w-[clamp(130px,8.49vw,163px)]"
                 disabled={submitting}
                 type="submit"
               >

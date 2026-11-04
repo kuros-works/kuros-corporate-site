@@ -110,7 +110,7 @@ export const BookingForm: React.FC<Props> = ({ className, form }) => {
             return (
               <div className="flex min-w-0 flex-col gap-3" key={field.name}>
                 <label
-                  className="text-sm leading-[normal] whitespace-nowrap text-[#767e86] uppercase md:text-base"
+                  className="text-sm leading-[normal] whitespace-nowrap text-[#656d75] uppercase md:text-base"
                   htmlFor={fieldId}
                 >
                   {field.label || field.name}
@@ -165,7 +165,7 @@ export const BookingForm: React.FC<Props> = ({ className, form }) => {
           })}
         </div>
 
-        <p className="mt-6 text-sm leading-[normal] text-[#767e86]">
+        <p className="mt-6 text-sm leading-[normal] text-[#656d75]">
           This is a demo site. No bookings are accepted.
         </p>
         {error && (
@@ -178,7 +178,7 @@ export const BookingForm: React.FC<Props> = ({ className, form }) => {
       <button
         className={cn(
           playfair.className,
-          'flex w-full shrink-0 items-center gap-3 rounded-b-2xl bg-[#ff7757] px-5 py-10 text-left text-[36px] leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[170px] xl:w-auto xl:min-w-[170px] md:rounded-l-none md:rounded-r-[20px] md:py-[60px]',
+          'flex w-full shrink-0 items-center gap-3 rounded-b-2xl bg-[#d63f1f] px-5 py-10 text-left text-[36px] leading-[normal] text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#172432] disabled:opacity-70 md:w-[170px] xl:w-auto xl:min-w-[170px] md:rounded-l-none md:rounded-r-[20px] md:py-[60px]',
         )}
         disabled={submitting}
         type="submit"

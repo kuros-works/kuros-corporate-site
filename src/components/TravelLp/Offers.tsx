@@ -90,7 +90,7 @@ export const TravelOffers: React.FC<Props> = ({
                 <h3
                   className={cn(
                     mulish.className,
-                    'text-[28px] leading-[normal] font-normal text-[#767e86] xl:text-[clamp(22px,1.458vw,28px)]',
+                    'text-[28px] leading-[normal] font-normal text-[#656d75] xl:text-[clamp(22px,1.458vw,28px)]',
                   )}
                 >
                   {item.title}
@@ -110,17 +110,17 @@ export const TravelOffers: React.FC<Props> = ({
                   {item.price && (
                     <p className="flex flex-wrap items-center gap-x-2 leading-[normal]">
                       {pricePrefix && (
-                        <span className="text-lg text-[#767e86] xl:text-[clamp(16px,1.042vw,20px)]">
+                        <span className="text-lg text-[#656d75] xl:text-[clamp(16px,1.042vw,20px)]">
                           {pricePrefix}
                         </span>
                       )}
-                      <span className="text-[32px] text-[#ff7757] xl:text-[clamp(28px,2.083vw,40px)]">
+                      <span className="text-[32px] text-[#c8381a] xl:text-[clamp(28px,2.083vw,40px)]">
                         {item.price}
                       </span>
                     </p>
                   )}
                   {detailsLabel && (
-                    <span className="rounded-[12px] bg-[#ff7654] px-6 py-4 text-xl leading-[normal] text-white uppercase md:ml-auto xl:px-[clamp(24px,2.083vw,40px)] xl:py-[clamp(16px,1.042vw,20px)]">
+                    <span className="rounded-[12px] bg-[#d63f1f] px-6 py-4 text-xl leading-[normal] text-white uppercase md:ml-auto xl:px-[clamp(24px,2.083vw,40px)] xl:py-[clamp(16px,1.042vw,20px)]">
                       {detailsLabel}
                     </span>
                   )}

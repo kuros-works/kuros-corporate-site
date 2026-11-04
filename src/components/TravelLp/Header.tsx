@@ -19,7 +19,7 @@ const asset = (name: string) => `/figma/travel/${name}`
 // 182px at 1920px, shrinking with the viewport down to xl.
 const desktopGutter = 'xl:px-[min(9.479vw,182px)]'
 
-const signUpButton = 'rounded-[12px] bg-[#ff7757] px-8 py-5 leading-[normal] text-white'
+const signUpButton = 'rounded-[12px] bg-[#d63f1f] px-8 py-5 leading-[normal] text-white'
 
 export type TravelNavItem = {
   href?: string
@@ -62,12 +62,16 @@ export const TravelHeader: React.FC<Props> = ({
             <ul className="flex items-center gap-8 text-lg leading-[normal] min-[1920px]:text-xl">
               {nav.map(({ href, label }, index) => (
                 <li className="relative" key={index}>
-                  <a
-                    className={cn('transition-opacity hover:opacity-70', index === 0 && 'font-medium')}
-                    href={href}
-                  >
-                    {label}
-                  </a>
+                  {href ? (
+                    <a
+                      className={cn('transition-opacity hover:opacity-70', index === 0 && 'font-medium')}
+                      href={href}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <span className={cn(index === 0 && 'font-medium')}>{label}</span>
+                  )}
                   {index === 0 && (
                     <img
                       alt=""
@@ -114,9 +118,13 @@ export const TravelHeader: React.FC<Props> = ({
               <ul className="flex flex-col text-xl leading-[normal]">
                 {nav.map(({ href, label }, index) => (
                   <li key={index}>
-                    <a className="block py-3" href={href} onClick={() => setOpen(false)}>
-                      {label}
-                    </a>
+                    {href ? (
+                      <a className="block py-3" href={href} onClick={() => setOpen(false)}>
+                        {label}
+                      </a>
+                    ) : (
+                      <span className="block py-3">{label}</span>
+                    )}
                   </li>
                 ))}
               </ul>

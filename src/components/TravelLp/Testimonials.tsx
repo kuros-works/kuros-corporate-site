@@ -68,7 +68,7 @@ export const TravelTestimonials: React.FC<Props> = ({
       >
         {testimonials.map(({ avatarSrc, name, quote, role }, index) => (
           <li
-            className="relative flex w-full shrink-0 snap-start flex-col items-start gap-5 rounded-[12px] bg-[#f5f6f7] px-5 pt-[60px] pb-8 text-[#767e86] md:w-[500px] md:max-w-full md:px-10 md:pb-10 xl:w-[min(34.531vw,663px)]"
+            className="relative flex w-full shrink-0 snap-start flex-col items-start gap-5 rounded-[12px] bg-[#f5f6f7] px-5 pt-[60px] pb-8 text-[#656d75] md:w-[500px] md:max-w-full md:px-10 md:pb-10 xl:w-[min(34.531vw,663px)]"
             key={index}
           >
             <img
