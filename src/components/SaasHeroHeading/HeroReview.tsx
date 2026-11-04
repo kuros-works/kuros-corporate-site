@@ -42,7 +42,7 @@ export const HeroReview: React.FC<Props> = ({
         {avatars.map(([base, ...covers], i) => (
           <div className="relative -mr-3 size-8 last:mr-0" key={i}>
             <div className="absolute inset-0 overflow-hidden rounded-full">
-              <img alt="" className="size-full" src={layerSrc(base)} />
+              <img alt="" className="size-full object-cover" src={layerSrc(base)} />
             </div>
             {covers.map((cover) => (
               <img

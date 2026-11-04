@@ -50,7 +50,7 @@ export const NewsletterForm: React.FC<Props> = ({
         type="email"
       />
       <Button
-        className="h-full w-[120px] shrink-0 rounded-none rounded-r-[8px] bg-[#a3dc2f] text-base leading-7 font-bold text-[#fafafa] shadow-none hover:bg-[#b1e64a] focus-visible:ring-white/40 sm:w-[175.551px]"
+        className="h-full w-[120px] shrink-0 rounded-none rounded-r-[8px] bg-[#a3dc2f] text-base leading-7 font-bold text-[#1d1c20] shadow-none hover:bg-[#b1e64a] focus-visible:ring-white/40 sm:w-[175.551px]"
         size="clear"
         type="submit"
       >

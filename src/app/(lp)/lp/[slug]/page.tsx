@@ -77,7 +77,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     // Real-estate blocks are light-only, so pin the colors instead of following
     // the viewer's dark mode; flex-1 fills body's min-height so no dark strip shows.
-    <article
+    <main
       id="top"
       lang={lang === 'ja' ? 'ja' : undefined}
       className={cn(
@@ -149,7 +149,7 @@ export default async function Page({ params: paramsPromise }: Args) {
           )}
         </>
       )}
-    </article>
+    </main>
   )
 }
 
