@@ -107,7 +107,13 @@ export const SaasBento: React.FC<Props> = ({
             />
             <div className="relative flex items-center gap-2 px-[31px] pt-[31px]">
               <span className="flex size-6 items-center justify-center rounded-full border border-[#236456] bg-[#112220]">
-                <img alt="" height={9.37685} src={asset('arrow-up.svg')} width={7.87736} />
+                <img
+                  alt=""
+                  height={9.37685}
+                  loading="lazy"
+                  src={asset('arrow-up.svg')}
+                  width={7.87736}
+                />
               </span>
               <span className="text-sm leading-[19.6px] font-medium text-[#33c6ab]">14.12%</span>
             </div>
@@ -136,6 +142,7 @@ export const SaasBento: React.FC<Props> = ({
               alt=""
               className="absolute top-[8.55%] left-[3.96%] h-[65.46%] w-[91.75%]"
               height={199}
+              loading="lazy"
               src={asset('graph.svg')}
               width={605.553}
             />
@@ -203,7 +210,14 @@ export const SaasBento: React.FC<Props> = ({
               {invoices.map(({ bar, dots, icon, name }) => (
                 <div className="flex items-start justify-between gap-3" key={name}>
                   <div className="flex min-w-0 items-start gap-3">
-                    <img alt="" className="shrink-0" height={44} src={asset(icon)} width={44} />
+                    <img
+                      alt=""
+                      className="shrink-0"
+                      height={44}
+                      loading="lazy"
+                      src={asset(icon)}
+                      width={44}
+                    />
                     <div className="flex h-[42px] min-w-0 flex-col justify-end gap-[11px]">
                       <p className="truncate text-sm leading-[14px] text-white">{name}</p>
                       <div className={cn('h-2 max-w-full rounded-full bg-[#333]', bar)} />
@@ -213,6 +227,7 @@ export const SaasBento: React.FC<Props> = ({
                     alt=""
                     className={cn('shrink-0', dots)}
                     height={12.5794}
+                    loading="lazy"
                     src={asset('vector-more.svg')}
                     width={2.79542}
                   />
@@ -229,6 +244,7 @@ export const SaasBento: React.FC<Props> = ({
                 alt=""
                 className="absolute top-[88px] left-[24px] max-w-none"
                 height={1}
+                loading="lazy"
                 src={asset('line.svg')}
                 width={303}
               />
@@ -253,6 +269,7 @@ export const SaasBento: React.FC<Props> = ({
                 alt=""
                 className="absolute top-[227px] left-[79.88px] max-w-none"
                 height={10}
+                loading="lazy"
                 src={asset('stars.svg')}
                 width={80.6789}
               />
@@ -267,6 +284,7 @@ export const SaasBento: React.FC<Props> = ({
                 alt=""
                 className="absolute top-[322px] left-[24px]"
                 height={44}
+                loading="lazy"
                 src={asset('icon-pdf-receipt.svg')}
                 width={44}
               />

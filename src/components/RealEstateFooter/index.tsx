@@ -38,12 +38,17 @@ type Props = {
 // Sizes are the SVGs' own (0:52, 0:54, 0:58); the row is 22px tall and centers them.
 const socialIcons: { icon: React.ReactNode; key: keyof RealEstateSocialLinks; label: string }[] = [
   {
-    icon: <img alt="" className="h-[19.845px] w-[9.92331px]" src={asset('facebook.svg')} />,
+    icon: <img
+      alt=""
+      className="h-[19.845px] w-[9.92331px]"
+      loading="lazy"
+      src={asset('facebook.svg')}
+    />,
     key: 'facebook',
     label: 'Facebook',
   },
   {
-    icon: <img alt="" className="h-[17.875px] w-[22px]" src={asset('twitter.svg')} />,
+    icon: <img alt="" className="h-[17.875px] w-[22px]" loading="lazy" src={asset('twitter.svg')} />,
     key: 'twitter',
     label: 'Twitter',
   },
@@ -55,16 +60,19 @@ const socialIcons: { icon: React.ReactNode; key: keyof RealEstateSocialLinks; la
         <img
           alt=""
           className="absolute top-0 left-0 size-[22px]"
+          loading="lazy"
           src={asset('instagram-frame.svg')}
         />
         <img
           alt=""
           className="absolute top-[5.5px] left-[5.5px] size-[11px]"
+          loading="lazy"
           src={asset('instagram-lens.svg')}
         />
         <img
           alt=""
           className="absolute top-[4.35px] left-[16.18px] size-[1.46575px]"
+          loading="lazy"
           src={asset('instagram-dot.svg')}
         />
       </span>
@@ -95,7 +103,12 @@ export const RealEstateFooter: React.FC<Props> = ({
       <div className="flex flex-col gap-12 md:flex-row md:justify-between">
         <div className="flex flex-col gap-[30px]">
           {logoSrc ? (
-            <img alt={logoAlt || ''} className="h-[34px] w-auto self-start" src={logoSrc} />
+            <img
+              alt={logoAlt || ''}
+              className="h-[34px] w-auto self-start"
+              loading="lazy"
+              src={logoSrc}
+            />
           ) : (
             logoText && (
               <div className="flex flex-col gap-2 leading-5">

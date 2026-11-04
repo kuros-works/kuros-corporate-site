@@ -90,6 +90,7 @@ export const TravelBlog: React.FC<Props> = ({
                 alt=""
                 className="shrink-0"
                 height={14.7279}
+                loading="lazy"
                 src={asset('arrow-right-coral.svg')}
                 width={28}
               />

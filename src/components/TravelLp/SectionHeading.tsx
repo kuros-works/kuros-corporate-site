@@ -64,6 +64,7 @@ export const TravelSectionHeading: React.FC<Props> = ({
           underlineClassName,
         )}
         height={3}
+        loading="lazy"
         src={asset('underline.svg')}
         width={57}
       />

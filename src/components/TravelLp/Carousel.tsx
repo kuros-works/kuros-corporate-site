@@ -131,6 +131,7 @@ export const TravelCarousel: React.FC<Props> = ({
               alt=""
               className="max-w-none rotate-90"
               height={66}
+              loading="lazy"
               src={asset('carousel-prev.svg')}
               width={60}
             />
@@ -146,6 +147,7 @@ export const TravelCarousel: React.FC<Props> = ({
               alt=""
               className="max-w-none -rotate-90"
               height={66}
+              loading="lazy"
               src={asset('carousel-next.svg')}
               width={60}
             />
