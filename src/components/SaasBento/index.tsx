@@ -53,7 +53,7 @@ const SmallFeature: React.FC<{
   <div className={cn(card, 'flex items-center justify-center px-6 py-8 xl:min-h-[496px]')}>
     <div className="flex w-full max-w-[298.68px] flex-col gap-8">
       <div className="flex flex-col items-center gap-[10px] text-center">
-        <h3 className="text-[17.859px] leading-[25.2px] font-bold text-[#fbfbfb]">{title}</h3>
+        <h2 className="text-[17.859px] leading-[25.2px] font-bold text-[#fbfbfb]">{title}</h2>
         {lead && <p className="text-base leading-[22.4px] text-[#9b9ca1]">{lead}</p>}
       </div>
       {children}
@@ -100,10 +100,10 @@ export const SaasBento: React.FC<Props> = ({
           >
             <img
               alt=""
-              className="absolute inset-x-0 top-[63px] bottom-0 h-[calc(100%-63px)] w-full"
+              className="absolute inset-x-0 top-[63px] bottom-0 h-[calc(100%-63px)] w-full object-cover"
               decoding="async"
               loading="lazy"
-              src={asset('analytics.webp')}
+              src={asset('analytics-512x345.webp')}
             />
             <div className="relative flex items-center gap-2 px-[31px] pt-[31px]">
               <span className="flex size-6 items-center justify-center rounded-full border border-[#236456] bg-[#112220]">
@@ -121,7 +121,7 @@ export const SaasBento: React.FC<Props> = ({
           )}
         >
           <div className="flex flex-col items-center gap-[10px] text-center">
-            <h3 className="text-[28px] leading-[42px] font-bold text-white">{teamCard.heading}</h3>
+            <h2 className="text-[28px] leading-[42px] font-bold text-white">{teamCard.heading}</h2>
             {teamCard.description && (
               <p className="max-w-[495px] text-xl leading-[36px] text-[#828282]">
                 {teamCard.description}
@@ -183,9 +183,9 @@ export const SaasBento: React.FC<Props> = ({
       <div className="grid gap-[30px] xl:grid-cols-2">
         <div className={cn(card, 'flex flex-col px-6 pt-8 md:px-[36px] md:pt-[36px] xl:h-[496px]')}>
           <div className="flex flex-col gap-[10px]">
-            <h3 className="text-[28px] leading-[42px] font-bold text-white">
+            <h2 className="text-[28px] leading-[42px] font-bold text-white">
               {accountingCard.heading}
-            </h3>
+            </h2>
             {accountingCard.description && (
               <p className="max-w-[660px] text-xl leading-[36px] text-[#828282]">
                 {accountingCard.description}
@@ -284,9 +284,9 @@ export const SaasBento: React.FC<Props> = ({
             'flex flex-col items-start px-6 py-8 md:px-[51px] md:pt-[47px] md:pb-[48px] xl:h-[496px]',
           )}
         >
-          <h3 className="text-[32px] leading-[44px] font-bold text-white md:text-5xl md:leading-[72px]">
+          <h2 className="text-[32px] leading-[44px] font-bold text-white md:text-5xl md:leading-[72px]">
             {optimiseCard.heading}
-          </h3>
+          </h2>
           {optimiseCard.description && (
             <p className="mt-6 max-w-[631px] text-lg leading-[30px] text-[#828282] md:text-[22px] md:leading-[36px] xl:mt-auto">
               {optimiseCard.description}
