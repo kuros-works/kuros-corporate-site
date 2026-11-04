@@ -71,7 +71,7 @@ export const TravelSectionHeading: React.FC<Props> = ({
     {description && (
       <p
         className={cn(
-          'text-lg leading-[normal] text-[#767e86] md:text-xl xl:text-[clamp(20px,1.25vw,24px)]',
+          'text-lg leading-[normal] text-[#656d75] md:text-xl xl:text-[clamp(20px,1.25vw,24px)]',
           descriptionClassName,
         )}
       >

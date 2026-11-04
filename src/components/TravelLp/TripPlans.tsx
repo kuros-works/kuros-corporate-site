@@ -75,7 +75,7 @@ export const TravelTripPlans: React.FC<Props> = ({
             <div className="relative max-w-full pt-[14.5px] pr-[18px] pb-4 pl-[14px] xl:ml-[26px]">
               <span aria-hidden className="absolute top-0 left-0 size-[43px] bg-[#172432]" />
               <span aria-hidden className="absolute right-0 bottom-0 size-[43px] bg-[#767e86]" />
-              <span className="relative block rounded-[12px] bg-[#ff7757] p-5 text-lg leading-[normal] text-white">
+              <span className="relative block rounded-[12px] bg-[#d63f1f] p-5 text-lg leading-[normal] text-white">
                 {buttonLabel}
               </span>
             </div>

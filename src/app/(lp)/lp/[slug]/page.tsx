@@ -179,16 +179,20 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const hero = landingPage?.hero?.[0]
 
   let lead: string | null | undefined
+  let heading: string | null | undefined
   let image: unknown
   if (hero?.blockType === 'ledgerlyHero') {
     lead = hero.lead
     image = hero.dashboard
   } else if (hero?.blockType === 'travelHero' || hero?.blockType === 'realEstateHero') {
     lead = hero.lead
+    heading = hero.heading
     image = hero.backgroundImage
   }
 
-  const description = toDescription(lead)
+  // Without a lead, fall back to "title: hero heading" so the page never ships
+  // without a meta description (Lighthouse seo / meta-description).
+  const description = toDescription(lead) ?? toDescription(heading ? `${title}: ${heading}` : undefined)
   const imageUrl = toOgImageUrl(image)
 
   return {

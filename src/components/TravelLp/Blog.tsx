@@ -84,7 +84,7 @@ export const TravelBlog: React.FC<Props> = ({
             </p>
           )}
           {readMoreLabel && (
-            <p className="flex items-center gap-5 text-2xl leading-[52px] text-[#ff7757]">
+            <p className="flex items-center gap-5 text-2xl leading-[52px] text-[#c8381a]">
               <span className="min-w-0">{readMoreLabel}</span>
               <img
                 alt=""
