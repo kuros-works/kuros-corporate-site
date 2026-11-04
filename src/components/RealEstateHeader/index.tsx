@@ -35,45 +35,60 @@ export const RealEstateHeader: React.FC<Props> = ({
   logoSrc,
   logoText,
   nav = [],
-}) => (
-  <header className={cn(dmSans.className, 'pt-8 text-white', className)}>
-    <div className="mx-auto flex h-[50px] w-full max-w-[1101px] items-center px-4">
-      {logoSrc ? (
-        <img alt={logoAlt || ''} className="h-[34px] w-auto" src={logoSrc} />
-      ) : (
-        logoText && (
-          // Same type as the nav links so it reads over the hero photo.
-          <span className="text-[15px] font-bold tracking-[-0.025em]">{logoText}</span>
-        )
-      )}
+}) => {
+  const ctaClass = cn(
+    'ml-auto flex h-11 shrink-0 items-center justify-center gap-[9px] rounded-tr-[18px] bg-[#ffac12] px-6 text-[17px] font-bold tracking-[-0.025em] text-black lg:h-[50px] lg:w-[211px] lg:px-0',
+    ctaHref && 'transition-opacity hover:opacity-90',
+    nav.length > 0 && 'lg:ml-[60px]',
+  )
+  const ctaContent = (
+    <>
+      {ctaLabel}
+      <img alt="" height={10} src={asset('arrow-black.svg')} width={20} />
+    </>
+  )
 
-      {nav.length > 0 && (
-        <nav className="ml-auto hidden lg:block">
-          <ul className="flex gap-[60px]">
-            {nav.map(({ href, label }, index) => (
-              <li key={index}>
-                <a
-                  className="text-[15px] font-bold tracking-[-0.025em] transition-opacity hover:opacity-70"
-                  href={href}
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
-
-      <a
-        className={cn(
-          'ml-auto flex h-11 shrink-0 items-center justify-center gap-[9px] rounded-tr-[18px] bg-[#ffac12] px-6 text-[17px] font-bold tracking-[-0.025em] text-black transition-opacity hover:opacity-90 lg:h-[50px] lg:w-[211px] lg:px-0',
-          nav.length > 0 && 'lg:ml-[60px]',
+  return (
+    <header className={cn(dmSans.className, 'pt-8 text-white', className)}>
+      <div className="mx-auto flex h-[50px] w-full max-w-[1101px] items-center px-4">
+        {logoSrc ? (
+          <img alt={logoAlt || ''} className="h-[34px] w-auto" src={logoSrc} />
+        ) : (
+          logoText && (
+            // Same type as the nav links so it reads over the hero photo.
+            <span className="text-[15px] font-bold tracking-[-0.025em]">{logoText}</span>
+          )
         )}
-        href={ctaHref}
-      >
-        {ctaLabel}
-        <img alt="" height={10} src={asset('arrow-black.svg')} width={20} />
-      </a>
-    </div>
-  </header>
-)
+
+        {nav.length > 0 && (
+          <nav className="ml-auto hidden lg:block">
+            <ul className="flex gap-[60px]">
+              {nav.map(({ href, label }, index) => (
+                <li key={index}>
+                  {href ? (
+                    <a
+                      className="text-[15px] font-bold tracking-[-0.025em] transition-opacity hover:opacity-70"
+                      href={href}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <span className="text-[15px] font-bold tracking-[-0.025em]">{label}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        {ctaHref ? (
+          <a className={ctaClass} href={ctaHref}>
+            {ctaContent}
+          </a>
+        ) : (
+          <span className={ctaClass}>{ctaContent}</span>
+        )}
+      </div>
+    </header>
+  )
+}
