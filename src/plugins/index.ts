@@ -29,7 +29,7 @@ export const plugins: Plugin[] = [
   // and Media falls back to local disk storage (see Media.ts `upload.staticDir`).
   vercelBlobStorage({
     collections: {
-      media: true,
+      media: { disablePayloadAccessControl: true },
     },
     token: process.env.BLOB_READ_WRITE_TOKEN,
   }),
