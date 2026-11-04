@@ -11,7 +11,9 @@ type Props = {
   alt?: string
   className?: string
   height?: number
+  sizes?: string
   src?: string
+  srcSet?: string
   width?: number
 }
 
@@ -19,7 +21,9 @@ export const HeroDashboard: React.FC<Props> = ({
   alt = '',
   className,
   height = 747,
+  sizes,
   src = '/figma/saas-hero/dashboard.png',
+  srcSet,
   width = 1536,
 }) => {
   return (
@@ -32,7 +36,9 @@ export const HeroDashboard: React.FC<Props> = ({
         fetchPriority="high"
         height={height}
         loading="eager"
+        sizes={srcSet ? sizes : undefined}
         src={src}
+        srcSet={srcSet || undefined}
         width={width}
       />
     </div>

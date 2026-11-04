@@ -9,7 +9,7 @@ import { HeroEmailForm } from '@/components/SaasHeroHeading/HeroEmailForm'
 import { HeroMenu } from '@/components/SaasHeroHeading/HeroMenu'
 import { HeroReview } from '@/components/SaasHeroHeading/HeroReview'
 
-import { mediaSrc } from '../mediaSrc'
+import { mediaSrc, mediaSrcSet } from '../mediaSrc'
 
 // Same composition and spacing as the static /lp/ledgerly hero, except the
 // bottom: page.tsx already adds 128px (layout pt-16 + block my-16) before the
@@ -32,6 +32,7 @@ export const LedgerlyHeroBlock: React.FC<LedgerlyHeroBlockProps> = ({
     return [cover ? [base, cover] : [base]]
   })
   const dashboardSrc = mediaSrc(dashboard)
+  const dashboardSrcSet = mediaSrcSet(dashboard)
   const menuItems = (pillNav ?? []).map(({ active, href, label }) => ({
     active: Boolean(active),
     href: href || undefined,
@@ -64,7 +65,10 @@ export const LedgerlyHeroBlock: React.FC<LedgerlyHeroBlockProps> = ({
           alt={dashboard?.alt ?? ''}
           className="mx-auto mt-8 md:mt-12 xl:mt-[63px]"
           height={dashboard?.height ?? undefined}
+          // The image fills the section minus its px-4 gutters, up to max-w-[1536px].
+          sizes="(min-width: 1568px) 1536px, calc(100vw - 32px)"
           src={dashboardSrc}
+          srcSet={dashboardSrcSet}
           width={dashboard?.width ?? undefined}
         />
       )}
