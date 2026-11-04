@@ -35,41 +35,56 @@ export const RealEstateHero: React.FC<Props> = ({
   lead,
   listingsHref,
   listingsLabel,
-}) => (
-  <section
-    className={cn(dmSans.className, 'relative overflow-hidden bg-black text-white lg:h-[850px]', className)}
-  >
-    <div className="absolute inset-x-0 top-0 aspect-[1440/982] min-h-full">
-      {backgroundSrc && (
-        <img
-          alt={backgroundAlt || ''}
-          className="absolute inset-0 size-full object-cover"
-          decoding="async"
-          fetchPriority="high"
-          loading="eager"
-          src={backgroundSrc}
-        />
-      )}
-      <div className="absolute inset-0" style={{ backgroundImage: photoGradient }} />
-    </div>
+}) => {
+  const listingsClass =
+    'mt-16 flex h-[100px] shrink-0 items-center gap-[15px] bg-white px-10 text-xl font-bold tracking-[-0.025em] text-black lg:mt-auto'
+  const listingsContent = (
+    <>
+      {listingsLabel}
+      <img alt="" height={12} src={asset('arrow-yellow.svg')} width={24} />
+    </>
+  )
 
-    <div className="relative mx-auto flex h-full w-full max-w-[1101px] flex-col px-4 pt-36 lg:pt-[200px]">
-      <h1 className="max-w-[519px] text-5xl leading-none font-bold tracking-[-0.025em] md:text-[80px] md:leading-[80px]">
-        {heading}
-      </h1>
-      {lead && (
-        <p className="mt-[22px] max-w-[428px] text-xl leading-7 tracking-[-0.025em] text-white/60">
-          {lead}
-        </p>
+  return (
+    <section
+      className={cn(
+        dmSans.className,
+        'relative overflow-hidden bg-black text-white lg:h-[850px]',
+        className,
       )}
+    >
+      <div className="absolute inset-x-0 top-0 aspect-[1440/982] min-h-full">
+        {backgroundSrc && (
+          <img
+            alt={backgroundAlt || ''}
+            className="absolute inset-0 size-full object-cover"
+            decoding="async"
+            fetchPriority="high"
+            loading="eager"
+            src={backgroundSrc}
+          />
+        )}
+        <div className="absolute inset-0" style={{ backgroundImage: photoGradient }} />
+      </div>
 
-      <a
-        className="mt-16 flex h-[100px] shrink-0 items-center gap-[15px] bg-white px-10 text-xl font-bold tracking-[-0.025em] text-black lg:mt-auto"
-        href={listingsHref}
-      >
-        {listingsLabel}
-        <img alt="" height={12} src={asset('arrow-yellow.svg')} width={24} />
-      </a>
-    </div>
-  </section>
-)
+      <div className="relative mx-auto flex h-full w-full max-w-[1101px] flex-col px-4 pt-36 lg:pt-[200px]">
+        <h1 className="max-w-[519px] text-5xl leading-none font-bold tracking-[-0.025em] md:text-[80px] md:leading-[80px]">
+          {heading}
+        </h1>
+        {lead && (
+          <p className="mt-[22px] max-w-[428px] text-xl leading-7 tracking-[-0.025em] text-white/60">
+            {lead}
+          </p>
+        )}
+
+        {listingsHref ? (
+          <a className={listingsClass} href={listingsHref}>
+            {listingsContent}
+          </a>
+        ) : (
+          <span className={listingsClass}>{listingsContent}</span>
+        )}
+      </div>
+    </section>
+  )
+}

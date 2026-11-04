@@ -125,11 +125,17 @@ export const RealEstateFooter: React.FC<Props> = ({
               // 0:75–0:79: 20px lines, 10px apart.
               <div className="flex flex-col gap-2.5 leading-5" key={index}>
                 <span className="font-bold">{title}</span>
-                {links.map(({ href, label }, linkIndex) => (
-                  <a className="text-[#979797]" href={href} key={linkIndex}>
-                    {label}
-                  </a>
-                ))}
+                {links.map(({ href, label }, linkIndex) =>
+                  href ? (
+                    <a className="text-[#979797]" href={href} key={linkIndex}>
+                      {label}
+                    </a>
+                  ) : (
+                    <span className="text-[#979797]" key={linkIndex}>
+                      {label}
+                    </span>
+                  ),
+                )}
               </div>
             ))}
           </div>
@@ -158,7 +164,9 @@ export const RealEstateFooter: React.FC<Props> = ({
           </a>
           . Modified.
         </p>
-        <p>This is a fictional demo for portfolio purposes. The company and properties are not real.</p>
+        <p>
+          This is a fictional demo for portfolio purposes. The company and properties are not real.
+        </p>
       </div>
     </footer>
   )
