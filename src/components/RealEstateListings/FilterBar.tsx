@@ -25,14 +25,20 @@ export const FilterBar: React.FC<{ className?: string }> = ({ className }) => (
     {labels.map((label) => (
       <div className="flex h-16 flex-1 items-center gap-[9px] px-[30px] md:h-auto" key={label}>
         <span className="text-[17px] font-bold tracking-[-0.025em] text-black">{label}</span>
-        <img alt="" height={8} src="/figma/real-estate/arrow-down.svg" width={12} />
+        <img alt="" height={8} loading="lazy" src="/figma/real-estate/arrow-down.svg" width={12} />
       </div>
     ))}
     {/* Matches the CTA button (RealEstateCta): #ffac12, 70px tall, top-right corner 18px. */}
     <div className="flex items-center p-4 md:px-[25px] md:py-0">
       <span className="flex h-[70px] w-full items-center justify-center gap-[9px] rounded-tr-[18px] bg-[#ffac12] px-10 text-[17px] font-bold tracking-[-0.025em] text-black md:w-auto">
         Search
-        <img alt="" height={10} src="/figma/real-estate/arrow-black.svg" width={20} />
+        <img
+          alt=""
+          height={10}
+          loading="lazy"
+          src="/figma/real-estate/arrow-black.svg"
+          width={20}
+        />
       </span>
     </div>
   </div>

@@ -120,7 +120,7 @@ export const TravelFooter: React.FC<Props> = ({
                 )}
                 key={file}
               >
-                <img alt={label} height={32} src={asset(file)} width={32} />
+                <img alt={label} height={32} loading="lazy" src={asset(file)} width={32} />
               </li>
             ))}
           </ul>

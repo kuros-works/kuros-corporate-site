@@ -57,6 +57,7 @@ const FeatureButton: React.FC<{ href?: string | null; label: string; onDark: boo
     <img
       alt=""
       height={10}
+      loading="lazy"
       src={asset(onDark ? 'arrow-white.svg' : 'arrow-yellow-small.svg')}
       width={20}
     />

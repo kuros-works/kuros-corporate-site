@@ -91,6 +91,7 @@ export const SaasFooter: React.FC<Props> = ({
             alt=""
             className="absolute inset-x-0 -top-px h-px w-full max-w-none"
             height={1}
+            loading="lazy"
             src={asset('line.svg')}
             width={1637}
           />
@@ -100,7 +101,7 @@ export const SaasFooter: React.FC<Props> = ({
           {/* brand */}
           <div className="col-span-2 flex min-w-0 flex-col gap-8 lg:max-w-[496px] lg:shrink">
             <a className="flex items-center gap-2" href={logoHref}>
-              <img alt="" height={24} src={logoSrc} width={24} />
+              <img alt="" height={24} loading="lazy" src={logoSrc} width={24} />
               <span
                 className={cn(inter.className, 'text-2xl leading-[16.2px] font-semibold text-[#fbfbfb]')}
               >
@@ -121,11 +122,19 @@ export const SaasFooter: React.FC<Props> = ({
                       className="group relative block size-9 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                       href={href}
                     >
-                      <img alt="" className="absolute inset-0" height={36} src={asset('social-bg.svg')} width={36} />
+                      <img
+                        alt=""
+                        className="absolute inset-0"
+                        height={36}
+                        loading="lazy"
+                        src={asset('social-bg.svg')}
+                        width={36}
+                      />
                       <img
                         alt=""
                         className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
                         height={36}
+                        loading="lazy"
                         src={asset('social-bg-active.svg')}
                         width={36}
                       />
@@ -133,6 +142,7 @@ export const SaasFooter: React.FC<Props> = ({
                         alt=""
                         className="absolute max-w-none"
                         height={h}
+                        loading="lazy"
                         src={asset(icon)}
                         style={{ left, top }}
                         width={w}

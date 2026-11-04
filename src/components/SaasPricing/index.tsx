@@ -95,7 +95,7 @@ const PlanCard: React.FC<Plan> = ({
     {popular && (
       <span className="absolute top-[24.5px] right-[23.5px] inline-flex items-center gap-1 rounded-[32px] bg-[#112220] px-3 py-2 text-sm leading-[16.8px] font-medium text-[#33c6ab] ring-1 ring-[#236456] ring-inset">
         <span className="flex h-[16.8px] w-4 shrink-0 items-center justify-center">
-          <img alt="" height={15.4056} src={asset('sparkle.svg')} width={14.4994} />
+          <img alt="" height={15.4056} loading="lazy" src={asset('sparkle.svg')} width={14.4994} />
         </span>
         Popular
       </span>
@@ -128,6 +128,7 @@ const PlanCard: React.FC<Plan> = ({
               alt=""
               className="absolute top-[3.75px] left-[1.75px]"
               height={9.50189}
+              loading="lazy"
               src={asset('check.svg')}
               width={13.0039}
             />
@@ -170,7 +171,14 @@ export const SaasPricing: React.FC<Props> = ({ className, plans = defaultPlans }
       className={cn(dmSans.className, dmSansOpsz, 'flex flex-col items-center', className)}
     >
       <SectionHeading
-        icon={<img alt="" className="absolute inset-0" height={16} src={asset('tag.svg')} width={16} />}
+        icon={<img
+          alt=""
+          className="absolute inset-0"
+          height={16}
+          loading="lazy"
+          src={asset('tag.svg')}
+          width={16}
+        />}
         id="pricing-heading"
         label="Pricing"
         lead="Simple, transparent pricing that scales with your team. No hidden fees, no surprises."

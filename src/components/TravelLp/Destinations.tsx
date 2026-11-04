@@ -92,7 +92,13 @@ export const TravelDestinations: React.FC<Props> = ({
               {location && (
                 <p className="flex items-center gap-4 text-lg leading-[normal] md:text-2xl xl:text-[clamp(18px,1.25vw,24px)]">
                   <span className="flex size-6 shrink-0 items-center justify-center">
-                    <img alt="" height={24} src={asset('location.svg')} width={16.875} />
+                    <img
+                      alt=""
+                      height={24}
+                      loading="lazy"
+                      src={asset('location.svg')}
+                      width={16.875}
+                    />
                   </span>
                   <span className="min-w-0 flex-1">{location}</span>
                 </p>

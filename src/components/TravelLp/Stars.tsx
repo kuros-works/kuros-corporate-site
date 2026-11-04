@@ -12,7 +12,7 @@ const asset = (name: string) => `/figma/travel/${name}`
 export const TravelStars: React.FC<{ className?: string }> = ({ className }) => (
   <div aria-hidden className={cn('flex shrink-0 gap-1', className)}>
     {Array.from({ length: 5 }, (_, index) => (
-      <img alt="" height={24} key={index} src={asset('star.svg')} width={24} />
+      <img alt="" height={24} key={index} loading="lazy" src={asset('star.svg')} width={24} />
     ))}
   </div>
 )

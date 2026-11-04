@@ -81,6 +81,7 @@ const Card: React.FC<Testimonial> = ({ avatar, avatarCover, name, quote, role })
           alt="5 out of 5 stars"
           className="mt-[6.81px]"
           height={14.6306}
+          loading="lazy"
           src={asset('stars.svg')}
           width={85.4383}
         />
@@ -115,7 +116,13 @@ const Arrow: React.FC<{ direction: 'left' | 'right'; href?: string }> = ({ direc
     direction === 'left' ? 'bg-[#222629]' : 'bg-[#a3dc2f]',
     href && 'transition-opacity hover:opacity-90',
   )
-  const icon = <img alt="" height={24} src={asset(`arrow-${direction}.svg`)} width={24} />
+  const icon = <img
+    alt=""
+    height={24}
+    loading="lazy"
+    src={asset(`arrow-${direction}.svg`)}
+    width={24}
+  />
   const label = direction === 'left' ? 'Previous testimonial' : 'Next testimonial'
 
   return href ? (
@@ -153,6 +160,7 @@ export const SaasTestimonials: React.FC<Props> = ({
             alt=""
             className="absolute top-[2.75px] left-[1.25px]"
             height={12.5}
+            loading="lazy"
             src={asset('chat.svg')}
             width={13.5}
           />

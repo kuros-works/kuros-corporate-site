@@ -32,7 +32,7 @@ export const RealEstateCta: React.FC<Props> = ({
   const buttonContent = (
     <>
       {buttonLabel}
-      <img alt="" height={10} src="/figma/real-estate/arrow-white.svg" width={20} />
+      <img alt="" height={10} loading="lazy" src="/figma/real-estate/arrow-white.svg" width={20} />
     </>
   )
 
