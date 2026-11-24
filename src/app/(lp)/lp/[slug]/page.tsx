@@ -10,6 +10,10 @@ import { RenderLandingPageBlocks } from '@/collections/LandingPages/RenderBlocks
 import { getLandingPageLang, getLandingPageTheme } from '@/collections/LandingPages/theme'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RealEstateFooterDivider, RealEstateFooterFrame } from '@/components/RealEstateFooter'
+import {
+  RealEstateViewingForm,
+  type RealEstateViewingFormData,
+} from '@/components/RealEstateViewingForm'
 import type { Media } from '@/payload-types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 import { cn } from '@/utilities/ui'
@@ -71,6 +75,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   // its backdrop with a divider between them. Each one alone still gets the backdrop.
   const realEstateCta = closingCta?.[0]?.blockType === 'realEstateCta'
   const realEstateFooter = footer?.[0]?.blockType === 'realEstateFooter'
+  // "Book a viewing" form: only on real-estate LPs, and only when the env var
+  // points at an existing Forms doc. Otherwise nothing is rendered.
+  const viewingForm = theme === 'realEstate' ? await queryViewingForm() : null
   const closingCtaBlocks = <RenderLandingPageBlocks blocks={closingCta || []} />
   const footerBlocks = <RenderLandingPageBlocks blocks={footer || []} />
 
@@ -128,6 +135,8 @@ export default async function Page({ params: paramsPromise }: Args) {
       >
         <RenderLandingPageBlocks blocks={layout || []} spaced={theme !== 'travel'} theme={theme} />
       </div>
+
+      {viewingForm && <RealEstateViewingForm className="pb-16" form={viewingForm} />}
 
       {realEstateCta && realEstateFooter ? (
         <RealEstateFooterFrame>
@@ -212,6 +221,40 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
     },
   }
 }
+
+// Loads the Forms doc named by REAL_ESTATE_VIEWING_FORM_ID (IDs differ per DB:
+// prod / Preview / local). Returns null when the var is unset or the form is
+// missing, so the page still renders. Only the fields the client needs are
+// passed on — never `emails` (notification recipients).
+const queryViewingForm = cache(async (): Promise<RealEstateViewingFormData | null> => {
+  const rawID = process.env.REAL_ESTATE_VIEWING_FORM_ID?.trim()
+  if (!rawID) return null
+  // Postgres IDs are numbers; env vars are strings.
+  const formID = /^\d+$/.test(rawID) ? Number(rawID) : rawID
+
+  try {
+    const payload = await getPayload({ config: configPromise })
+
+    const form = await payload.findByID({
+      collection: 'forms',
+      id: formID,
+      depth: 0,
+      disableErrors: true,
+      overrideAccess: false,
+    })
+
+    if (!form) return null
+
+    const { id, fields, submitButtonLabel, confirmationType, confirmationMessage, redirect } =
+      form as unknown as RealEstateViewingFormData
+
+    return { id, fields, submitButtonLabel, confirmationType, confirmationMessage, redirect }
+  } catch (err) {
+    // e.g. a non-numeric ID; the LP must not fail because of the form.
+    console.warn('Could not load the viewing form:', err)
+    return null
+  }
+})
 
 const queryLandingPageBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
