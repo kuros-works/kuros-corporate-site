@@ -14,6 +14,10 @@ import type { CollectionAfterChangeHook } from 'payload'
  * Config via env:
  *   CONTACT_FORM_ID              - "forms" collection ID of the contact form
  *   N8N_WEBHOOK_URL_CONTACT_FORM - webhook URL for the contact form
+ *   REAL_ESTATE_VIEWING_FORM_ID  - "forms" collection ID of the real-estate LP
+ *                                  "Book a viewing" form (also read by
+ *                                  /lp/[slug] to render the form)
+ *   N8N_WEBHOOK_URL_VIEWING_FORM - webhook URL for the viewing form
  *   N8N_WEBHOOK_SECRET           - optional; sent as `X-Webhook-Secret` for
  *                                  every webhook below (n8n Header Auth check)
  */
@@ -21,6 +25,7 @@ import type { CollectionAfterChangeHook } from 'payload'
 // Add one entry per form as new notification destinations are needed.
 const FORM_WEBHOOKS: { formID?: string; url?: string }[] = [
   { formID: process.env.CONTACT_FORM_ID, url: process.env.N8N_WEBHOOK_URL_CONTACT_FORM },
+  { formID: process.env.REAL_ESTATE_VIEWING_FORM_ID, url: process.env.N8N_WEBHOOK_URL_VIEWING_FORM },
 ]
 
 const getWebhookUrlForForm = (formID: string | number): string | undefined =>

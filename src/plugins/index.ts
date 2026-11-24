@@ -2,6 +2,7 @@ import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { revalidatePath } from 'next/cache'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -94,6 +95,18 @@ export const plugins: Plugin[] = [
       },
     },
     formOverrides: {
+      hooks: {
+        // Landing pages are statically rendered with a Form baked in (the
+        // real-estate "Book a viewing" form), so editing a form refreshes them.
+        afterChange: [
+          ({ doc, req: { context } }) => {
+            if (!context.disableRevalidate) {
+              revalidatePath('/lp/[slug]', 'page')
+            }
+            return doc
+          },
+        ],
+      },
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
           if ('name' in field && field.name === 'confirmationMessage') {
