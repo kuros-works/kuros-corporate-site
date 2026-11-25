@@ -19,7 +19,11 @@ const photoGradient =
 
 type Props = {
   backgroundAlt?: string | null
+  backgroundHeight?: number
+  backgroundSizes?: string
   backgroundSrc?: string | null
+  backgroundSrcSet?: string
+  backgroundWidth?: number
   className?: string
   heading: string
   lead?: string | null
@@ -29,7 +33,11 @@ type Props = {
 
 export const RealEstateHero: React.FC<Props> = ({
   backgroundAlt,
+  backgroundHeight,
+  backgroundSizes,
   backgroundSrc,
+  backgroundSrcSet,
+  backgroundWidth,
   className,
   heading,
   lead,
@@ -60,8 +68,12 @@ export const RealEstateHero: React.FC<Props> = ({
             className="absolute inset-0 size-full object-cover"
             decoding="async"
             fetchPriority="high"
+            height={backgroundHeight}
             loading="eager"
+            sizes={backgroundSrcSet ? backgroundSizes : undefined}
             src={backgroundSrc}
+            srcSet={backgroundSrcSet || undefined}
+            width={backgroundWidth}
           />
         )}
         <div className="absolute inset-0" style={{ backgroundImage: photoGradient }} />
